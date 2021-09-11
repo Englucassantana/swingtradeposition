@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swing Trade ou Position</title>
+    <link href="./CSS/reset.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+    <form>
+        <label for="pair">Pair:</label>
+        <input id="pair" type="text" name="pair"> <br/>
+        <label for="chart-link chartLink">Chart Link:</label>
+        <input id="chart-link chartLink" type="text" name="chart-link"> <br/>
+        <fieldset>
+            <legend>Zonas de Compra</legend>
+            <label for="zona-minima-de-compra buyZoneMin">Zona mínima de compra</label>
+            <input id="zona-minima-de-compra buyZoneMin" type="number" name="zona-minima-de-compra" type="number">
+            <label for="zona-maxima-de-compra buyZoneMax">Zona máxima de compra</label>
+            <input id="zona-maxima-de-compra buyZoneMax" type="number" name="zona-maxima-de-compra" type="number">
+        </fieldset>
+        <fieldset>
+            <legend>Recompras</legend>
+            <label for="recompra-minima reBuyMin"">Recompra mínima</label>
+            <input id="recompra-minima reBuyMin" type="number">
+            <label for="recompra-maxima reBuyMax">Recompra máxima</label>
+            <input id="recompra-maxima reBuyMax" type="number">
+        </fieldset>        
+        <fieldset>
+            <legend>Alvos</legend>
+            <label for="alvo-1 target1">Alvo 1</label>
+            <input id="alvo-1 target1" class="alvo targets" type="number"><br/>
+            <label for="alvo-2 target2">Alvo 2</label>
+            <input id="alvo-2 target2" class="alvo targets" type="number"><br/>
+            <label for="alvo-3 target3">Alvo 3</label>
+            <input id="alvo-3 target3" class="alvo targets" type="number"><br/>
+            <label for="alvo-4 target4">Alvo 4</label>
+            <input id="alvo-4 target4" class="alvo targets" type="number"><br/>
+            <input type="button" name="adicionar_alvo" value="Adicionar alvo">
+        </fieldset>
+        <label for="stop-loss stoploss">Stoploss</label>
+        <input id="stop-loss stoploss" type="number" name="stop-loss"><br/>
+        <label for="nivel-de-risk levelRisk">Nível de Risco</label>
+        <select id="nivel-de-risk levelRisk">
+            <option>Alto</option>
+            <option>Moderado a alto</option>            
+            <option>Moderado</option>
+            <option>Baixo a moderado</option>
+            <option>Baixo</option>
+        </select> <br/>
+        <label for="conselho advice">Conselho</label>
+        <input id="conselho advice" type="text"> <br/>
+        <label for="isStPosition">É <i>Swing trade/ Position</i>?</label>
+        <select id="isStPosition">
+            <option>Sim</option>
+            <option>Não</option>
+        </select> <br/>
+        <label for="exchange">Exchange</label>
+        <input id="exchange"type="text"> <br/>
+        <label for="tradingDuration">Duração do <i>trade</i></label>
+        <select id="tradingDuration">
+            <option>0-ST</option>
+            <option>1-ST/Position</option>
+            <option>2-Position</option>
+        </select> <br/>
+    </form>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./JS/index.js"></script>
+</body>
+</html>
