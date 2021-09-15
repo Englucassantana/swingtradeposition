@@ -1,6 +1,11 @@
 html{
-    background-color: beige;
+    background-color: rgb(234, 248, 248);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
 }
+
+
+
 body{
     display: flex;
     justify-content: space-around;
@@ -13,13 +18,48 @@ body{
 header{
     display: flex;
     justify-content: space-between;
+    padding: 1vh 0vh;
+}
+
+h1{
+    font-size: 300%;
+}
+
+#btn-edicao{
+    background-color: black;
+    border: 1px solid rgb(234, 248, 248);
+    color: white;
+    cursor: pointer;
+}
+
+#btn-edicao:hover{
+    border:1px solid gold;
+    text-shadow:0px 1px 1px white;
 }
 
 #form-box{
     background-color:rgb(209, 255, 209);
     padding: 0.5vh 0.5vw; /*top-bottom right-left*/
     max-width: 960px;
+    -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0);
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.027);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.13);
 }
+
+#pair{
+    width: 140px;
+}
+
+#chartLink{
+    width: calc(100% - 186px - 2vw);
+}
+
+input[type="text"],input[type="search"], select{
+    background-color: rgba(0, 0, 0, 0.103);
+    border: 0 solid black;
+    border-bottom-width: 2px;
+}
+
 .item-group-form{
     background-color:rgb(255, 229, 229);
     padding: 1vh 1vw 1vh 1vw; /*top right bottom left*/
@@ -29,14 +69,19 @@ header{
 }
 input[type="number"]{
     width: 100px;
+    background-color: rgba(0, 0, 0, 0.103);
+    border: 0 solid black;
+    border-bottom-width: 2px;
 }
 legend{
-    background-color: beige;
     padding: 0.5vh 0.5vh;
+    -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0);
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.027);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.219);
 }
-.label-align, .feedback{   
+.label-align{   
     float: left;
-    width: 180px;
+    width: 186px;
     text-align: right;
     padding-right: 1vw;
     
@@ -64,5 +109,90 @@ legend{
     flex-direction: column;
 }
 .feedback-content{
+    padding-top: 1vh;
     padding-left: calc(180px + 1%);
+}
+
+#gerador-de-comando, #adicionar-alvo{
+    margin-top: 0.5vh;
+    width: 100%;
+    padding: 1vh 0vh;
+}
+
+.remover-alvo{
+    background-color:rgb(250, 181, 181);
+    border: 1px solid rgb(255, 112, 112);
+    border-left: 2px solid rgb(255, 112, 112);
+    border-bottom: 2px solid rgb(255, 112, 112);
+    color: white;
+    text-shadow: 0px 1px 1px black;
+    cursor: pointer;
+}
+.remover-alvo:hover{
+    background-color:rgb(255, 123, 123);
+    border: 1px solid red;
+    border-left: 2px solid red;
+    border-bottom: 2px solid red;
+    font-weight: bold;
+}
+
+.seta, #gerador-de-comando, #adicionar-alvo{
+    background-color: rgb(173, 184, 184);
+    border: 1px solid rgb(135, 145, 145);
+    border-left: 2px solid rgb(135, 145, 145);
+    border-bottom: 2px solid rgb(135, 145, 145);
+    color: white;
+    text-shadow: 0px 1px 1px black;
+    cursor: pointer;
+}
+.seta:hover, #gerador-de-comando:hover, #adicionar-alvo:hover{
+    background-color:rgb(135, 145, 145);
+    border: 1px solid rgb(75, 82, 82);
+    border-left: 2px solid rgb(75, 82, 82);;
+    border-bottom: 2px solid rgb(75, 82, 82);;
+    font-weight: bold;
+}
+.autocomplete {
+    /*the container must be positioned relative:*/
+    position: relative;
+    display: inline-block;
+}
+.autocomplete {
+    /*the container must be positioned relative:*/
+    position: relative;
+    display: inline-block;
+}
+.autocomplete-items {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
+}
+.autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+}
+.autocomplete-items div:hover {
+    /*when hovering an item:*/
+    background-color: #e9e9e9;
+}
+.autocomplete-active {
+    /*when navigating through the items using the arrow keys:*/
+    background-color: DodgerBlue !important;
+    color: #ffffff;
+}
+
+.input-feedback{
+    display: flex;
+    flex-direction: column;
+}
+.feedback{
+    padding-top: 1vh;
 }
