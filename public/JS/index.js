@@ -114,3 +114,70 @@ xhr.onload = function () {
 xhr.open('GET', "https://api.binance.com/api/v3/ticker/price", true);
 // xhr.open('GET',"https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT", true);
 xhr.send(null);
+
+let jsonComando = {
+
+};
+
+function atualizarComando(){
+    let pair = document.getElementById('pair');
+    let chartLink = document.getElementById('chartLink');
+    let buyZoneMin = document.getElementById('buyZoneMin');
+    let buyZoneMax = document.getElementById('buyZoneMax');
+    let reBuyMin = document.getElementById('reBuyMin');
+    let reBuyMax = document.getElementById('reBuyMax');
+    let targets = document.getElementsByClassName('targets');
+    let stoploss = document.getElementById('stoploss');
+    let advice = document.getElementById('advice');
+    let isStPosition = document.getElementById('isStPosition');
+    let exchange = document.getElementById('exchange');
+    let tradingDuration = document.getElementById('tradingDuration');
+
+    let targetArray=[];
+    for (let index = 0; index < targets.length; index++) {
+        targetArray.push(targets[index].value);
+        
+    }
+
+    jsonComando.pair = pair.value;
+    jsonComando.chartLink = chartLink.value;
+    jsonComando.buyZoneMin = buyZoneMin.value;
+    jsonComando.buyZoneMax = buyZoneMax.value;
+    jsonComando.reBuyMin = reBuyMin.value;
+    jsonComando.reBuyMax = reBuyMax.value;
+    jsonComando.targets = targetArray;
+    jsonComando.stoploss = stoploss.value;
+    jsonComando.advice = advice.value;
+    jsonComando.isStPosition = isStPosition.value;
+    jsonComando.exchange = exchange.value;
+    jsonComando.tradingDuration = tradingDuration.value;
+}
+atualizarComando();
+
+function validarComando(){
+    let chaves = Object.keys(jsonComando);
+    for(let i = 0; i <=chaves.length; i++){
+        if(jsonComando[chaves[i]] == 0 || jsonComando[chaves[i]] == ''){
+            console.log(jsonComando[chaves[i]]);
+            return false;
+        }
+    }
+    return true;
+}
+
+function copiarComandoParaAreaDeTransferencia(){
+    let comando = document.getElementById('comando');
+    comando.innerText = JSON.stringify(jsonComando);
+    navigator.clipboard.writeText(JSON.stringify(jsonComando));
+    alert("Comando copiado para a área de transferência");
+}
+
+let geradorDeComando = document.getElementById('gerador-de-comando')
+geradorDeComando.addEventListener('click', function(){
+    event.preventDefault();
+    atualizarComando();
+    if(validarComando()){        
+        copiarComandoParaAreaDeTransferencia();
+    }
+    console.log(validarComando());
+}, false);

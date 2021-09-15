@@ -6,66 +6,181 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Swing Trade ou Position</title>
     <link href="./CSS/reset.css" type="text/css" rel="stylesheet"/>
+    <link href="./CSS/index.css" type="text/css" rel="stylesheet"/>
 </head>
-<body>
-    <form>
-        <label for="pair">Pair:</label>
-        <input id="pair" type="text" name="pair"> <br/>
-        <label for="chart-link chartLink">Chart Link:</label>
-        <input id="chart-link chartLink" type="text" name="chart-link"> <br/>
-        <fieldset>
-            <legend>Zonas de Compra</legend>
-            <label for="zona-minima-de-compra buyZoneMin">Zona mínima de compra</label>
-            <input id="zona-minima-de-compra buyZoneMin" type="number" name="zona-minima-de-compra" type="number">
-            <label for="zona-maxima-de-compra buyZoneMax">Zona máxima de compra</label>
-            <input id="zona-maxima-de-compra buyZoneMax" type="number" name="zona-maxima-de-compra" type="number">
-        </fieldset>
-        <fieldset>
-            <legend>Recompras</legend>
-            <label for="recompra-minima reBuyMin"">Recompra mínima</label>
-            <input id="recompra-minima reBuyMin" type="number">
-            <label for="recompra-maxima reBuyMax">Recompra máxima</label>
-            <input id="recompra-maxima reBuyMax" type="number">
-        </fieldset>        
-        <fieldset>
-            <legend>Alvos</legend>
-            <label for="alvo-1 target1">Alvo 1</label>
-            <input id="alvo-1 target1" class="alvo targets" type="number"><br/>
-            <label for="alvo-2 target2">Alvo 2</label>
-            <input id="alvo-2 target2" class="alvo targets" type="number"><br/>
-            <label for="alvo-3 target3">Alvo 3</label>
-            <input id="alvo-3 target3" class="alvo targets" type="number"><br/>
-            <label for="alvo-4 target4">Alvo 4</label>
-            <input id="alvo-4 target4" class="alvo targets" type="number"><br/>
-            <input type="button" name="adicionar_alvo" value="Adicionar alvo">
-        </fieldset>
-        <label for="stop-loss stoploss">Stoploss</label>
-        <input id="stop-loss stoploss" type="number" name="stop-loss"><br/>
-        <label for="nivel-de-risk levelRisk">Nível de Risco</label>
-        <select id="nivel-de-risk levelRisk">
-            <option>Alto</option>
-            <option>Moderado a alto</option>            
-            <option>Moderado</option>
-            <option>Baixo a moderado</option>
-            <option>Baixo</option>
-        </select> <br/>
-        <label for="conselho advice">Conselho</label>
-        <input id="conselho advice" type="text"> <br/>
-        <label for="isStPosition">É <i>Swing trade/ Position</i>?</label>
-        <select id="isStPosition">
-            <option>Sim</option>
-            <option>Não</option>
-        </select> <br/>
-        <label for="exchange">Exchange</label>
-        <input id="exchange"type="text"> <br/>
-        <label for="tradingDuration">Duração do <i>trade</i></label>
-        <select id="tradingDuration">
-            <option>0-ST</option>
-            <option>1-ST/Position</option>
-            <option>2-Position</option>
-        </select> <br/>
-    </form>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="./JS/index.js"></script>
-</body>
+    <body>
+        <div id="page">
+
+            <header>
+                <h1>Swing Trade Position</h1>
+                <input type="button">
+            </header>
+        
+            <div id="form-box">
+                <form>
+                    <div id="pair-box" class="item-group-form">
+                        <label class="label-align" for="pair">Pair:</label>
+                        <input id="pair" type="text" name="pair"><br/>
+                        <span class="feedback"></span>
+                    </div>
+                    <div id="chart-link-box" class="item-group-form">
+                        <label class="label-align" for="chartLink">Chart Link:</label>
+                        <input id="chartLink" type="text" name="chart-link"><br/>
+                        <span class="feedback"></span>
+                    </div>
+                    <div class="item-group-form">
+                        <fieldset id="buy-zone">
+                            <legend>Zonas de Compra</legend>
+                            <div id="buy-zone-input">
+                                <div id="buy-zone-min-content">
+                                    <label class="label-align" for="buyZoneMin">Zona mínima de compra</label>
+                                    <input id="buyZoneMin" type="number" name="zona-minima-de-compra" type="number"><br>
+                                    <span class="feedback">aviso</span>
+                                </div>
+                                <div id="buy-zone-max-content">
+                                    <label class="label-align" for="buyZoneMax">Zona máxima de compra</label>
+                                    <input id="buyZoneMax" type="number" name="zona-maxima-de-compra" type="number"><br>
+                                    <span class="feedback">aviso</span>
+                                </div>  
+                            </div>                                                      
+                        </fieldset>
+                    </div>
+                    <div class="item-group-form">
+                        <fieldset id="rebuy">
+                            <legend>Recompras</legend>
+                            <div id="rebuy-input">
+                                <div id="rebuy-min-content">
+                                    <label class="label-align" for="reBuyMin"">Recompra mínima</label>
+                                    <input id="reBuyMin" type="number">
+                                    <span class="feedback">Aviso</span>
+                                </div>
+                                <div id="rebuy-max-content">
+                                    <label class="label-align" for="reBuyMax">Recompra máxima</label>
+                                    <input id="reBuyMax" type="number">
+                                    <span class="feedback">Aviso</span>
+                                </div>
+                            </div>
+                            
+                            
+                        </fieldset>  
+                    </div>
+                    <div class="item-group-form">
+                        <fieldset>
+                            <legend>Alvos</legend>
+                            <div id="targets-content">
+                                <div class=target-content>
+                                    <div class="target-input-content">
+                                        <label class="label-align" for="target1">Alvo 1</label>
+                                        <input id="target1" class="targets" type="number">
+                                        <button>X</button>
+                                        <button>&#8595</button>
+                                        <button>&#8593</button>
+                                    </div>
+                                    <span class="feedback-content">Aviso</span>
+                                </div>
+                                <div class=target-content>
+                                    <div class="target-input-content">
+                                        <label class="label-align" for="target2">Alvo 2</label>
+                                        <input id="target2" class="targets" type="number">
+                                        <button>X</button>
+                                        <button>&#8595</button>
+                                        <button>&#8593</button>
+                                    </div>                                   
+                                    <span class="feedback-content">Aviso</span>
+                                </div>
+                                <div class=target-content>
+                                    <div class="target-input-content">
+                                        <label class="label-align" for="target3">Alvo 3</label>
+                                        <input id="target3" class="targets" type="number">
+                                        <button>X</button>
+                                        <button>&#8595</button>
+                                        <button>&#8593</button>
+                                    </div>                                   
+                                    <span class="feedback-content">Aviso</span>
+                                </div>
+                                <div class=target-content>
+                                    <div class="target-input-content">
+                                        <label class="label-align" for="target4">Alvo 4</label>
+                                        <input id="target4" class="targets" type="number">
+                                        <button>X</button>
+                                        <button>&#8595</button>
+                                        <button>&#8593</button>
+                                    </div>
+                                    <span class="feedback-content">Lorem ipsum ad maecenas cursus justo sapien donec felis, faucibus suscipit turpis urna gravida nibh justo, semper convallis facilisis hendrerit tellus blandit curabitur.</span>                               
+                                    
+                                </div>                              
+                            </div>                            
+                            <input type="button" name="adicionar_alvo" value="Adicionar alvo">
+                        </fieldset>
+                    </div>      
+                    
+                    <div class="item-group-form">
+                        <label class="label-align" for="stoploss">Stoploss</label>
+                        <input id="stoploss" type="number" name="stop-loss"><br/>
+                        <span class="feedback"></span>
+                    </div>  
+                    
+                    <div class="item-group-form">
+                        <label class="label-align" for="levelRisk">Nível de Risco</label>
+                        <select id="levelRisk">
+                            <option>Alto</option>
+                            <option>Moderado a alto</option>            
+                            <option>Moderado</option>
+                            <option>Baixo a moderado</option>
+                            <option>Baixo</option>
+                        </select> <br/>
+                    </div>  
+                    
+                    <div class="item-group-form">
+                        <label class="label-align" for="advice">Conselho</label>
+                        <input id="advice" type="text"> <br/>
+                        <span class="feedback"></span>
+                    </div>
+                    
+                    <div class="item-group-form">
+                        <label class="label-align" for="isStPosition">É <i>Swing trade/ Position</i>?</label>
+                        <select id="isStPosition">
+                            <option>Sim</option>
+                            <option>Não</option>
+                        </select> <br/>
+                    </div>
+                    
+                    <div class="item-group-form">
+                        <label class="label-align" for="isStPosition">É <i>Swing trade/ Position</i>?</label>
+                        <select id="isStPosition">
+                            <option>Sim</option>
+                            <option>Não</option>
+                        </select> <br/>      
+                    </div>
+                    
+                    <div class="item-group-form">
+                        <label class="label-align" for="exchange">Exchange</label>
+                        <input id="exchange"type="text"> <br/>
+                        <span class="feedback"></span>
+                    </div>
+                    
+                    <div class="item-group-form">
+                        <label class="label-align" for="tradingDuration">Duração do <i>trade</i></label>
+                        <select id="tradingDuration">
+                            <option>0-ST</option>
+                            <option>1-ST/Position</option>
+                            <option>2-Position</option>
+                        </select> <br/>
+                    </div>
+                    <input id="gerador-de-comando"type="button" value="Gerar comando">
+                    <span id="comando"></span>
+                </form>        
+            </div>
+            <footer>
+                <p>
+                    back-end: Ramon
+                </p>
+                <p>front-end: Lucas</p>
+                
+            </footer>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="./JS/index.js"></script>
+    </body>
+
 </html>
