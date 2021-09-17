@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swing Trade ou Position</title>
+    <link href="./CSS/reset.css" type="text/css" rel="stylesheet"/>
+    <link href="./CSS/editar.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+        <div id="sticky-on-top">
+            <header>
+                <a id="btn-new-signal" href="./index.html"><span>Novo Sinal</span></a>
+                <h1 id="titulo">Edição de Sinal</h1>
+            </header>
+            <div id="selection-panel">
+                    
+                <button>&#8592</button>
+    
+                <div id="pair-selection">
+                    <span>BTCUSDD</span>
+                    <span>BTCUSDD</span>
+                    <span>BTCUSDD</span>
+                    <span>BTCUSDD</span>
+                    <span>BTCUSDD</span>
+                    <span>BTCUSDD</span>
+                </div>
+                
+                <button>&#8594</button>
+    
+            </div>
+            <div id="pair-selected">
+                <span>Par Selecionado</span>
+            </div>
+        </div>        
+    
+        <main>
+            
+            <div id="form-box">
+                
+                <div class="field-box-main">
+
+                    <div class="field-box-not-editable">
+                        <span>Chart link</span>
+                        <span class="input-field">0</span>
+                    </div>
+
+                    <div class="field-box-editable">
+                        <label for="chartLink">Chart link</label>
+                        <input id="chartLink" type="text">
+                        <span class="feedback" style="display:none">Lorem ipsum tincidunt leo vehicula bibendum, sapien aenean neque vitae.</span>
+                    </div>
+
+                </div>
+
+                <div class="field-box-main">
+                    
+                    <div class="field-box-not-editable">
+                        <fieldset>
+
+                            <legend>Zona de compra</legend>
+                            
+                            <div class="buy-zone-field">
+
+                                <div class="buy-zone-min-field">
+                                    <span>Zona mínima de compra</span>
+                                    <span class="input-field">0</span>
+                                    
+                                </div>
+
+                                <div class="buy-zone-max-field">
+                                    <span>Zona máxima de compra</span>
+                                    <span class="input-field">0</span>
+
+                                </div>
+
+                            </div>
+
+                        </fieldset>
+
+                    </div>
+
+                    <div class="field-box-editable">
+                        <fieldset>
+
+                            <legend>Zona de compra</legend>
+                            
+                            <div class="buy-zone-field">
+
+                                <div class="buy-zone-min-field">
+                                    <label for="buyZoneMin">Zona mínima de compra</label>
+                                    <input id="buyZoneMin" type="number">
+                                    <span class="feedback" style="display:none">Lorem ipsum tincidunt leo vehicula bibendum, sapien aenean neque vitae.</span>
+                                </div>
+
+                                <div class="buy-zone-max-field">
+                                    <label for="buyZoneMax">Zona máxima de compra</label>
+                                    <input id="buyZoneMax" type="number">
+                                    <span class="feedback" style="display:none">Lorem ipsum tincidunt leo vehicula bibendum, sapien aenean neque vitae.</span>
+
+                                </div>
+
+                            </div>
+
+                        </fieldset>
+                    </div>
+
+                </div>
+
+                <div class="field-box-main">
+                    
+                    <div class="field-box-not-editable">
+                        <fieldset>
+
+                            <legend>Recompra</legend>
+                            
+                            <div class="rebuy-field">
+
+                                <div class="rebuy-min-field">
+                                    <span>Recompra mínima</span>
+                                    <span class="input-field">0</span>
+                                    
+                                </div>
+
+                                <div class="rebuy-max-field">
+                                    <span>Recompra máxima</span>
+                                    <span class="input-field">0</span>
+
+                                </div>
+
+                            </div>
+
+                        </fieldset>
+
+                    </div>
+
+                    <div class="field-box-editable">
+                        <fieldset>
+
+                            <legend>Recompra</legend>
+                            
+                            <div class="rebuy-field">
+
+                                <div class="rebuy-min-field">
+                                    <label for="rebuyMin">Zona mínima de compra</label>
+                                    <input id="rebuyMin" type="number">
+                                    <span class="feedback" style="display:none">Lorem ipsum tincidunt leo vehicula bibendum, sapien aenean neque vitae.</span>
+                                </div>
+
+                                <div class="rebuy-max-field">
+                                    <label for="rebuyMax">Zona máxima de compra</label>
+                                    <input id="rebuyMax" type="number">
+                                    <span class="feedback" style="display:none">Lorem ipsum tincidunt leo vehicula bibendum, sapien aenean neque vitae.</span>
+
+                                </div>
+
+                            </div>
+
+                        </fieldset>
+                    </div>
+
+                </div>
+
+                <div class="field-box-main">
+                    
+                    <div class="field-box-not-editable">
+
+                        <div class="target-input-box">
+                            <div class="label-input-box">
+                                <span>Alvo1</span>
+                                <span class="input-field">0</span>
+                            </div>
+                            <div class="btn-edit-target">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="field-box-editable">  
+
+                        <div class="target-input-box">
+                            <div class="label-input-box">
+                                <label for="target1">Alvo 1:</label>
+                                <input id="target1" class="targets" type="number">
+                            </div>
+                            <div class="btn-edit-target">
+                                <button class="remover-alvo">&#215</button>
+                                <button class="seta">&#8595</button>
+                                <button class="seta">&#8593</button>
+                            </div>
+                        </div>
+                        <span class="feedback" style="display:none">Lorem ipsum tincidunt leo vehicula bibendum, sapien aenean neque vitae.</span>
+                                
+                    </div>
+
+                </div>
+
+                <div class="field-box-main">
+                    
+                    <div class="field-box-not-editable">
+                        <div class="target-input-box">
+                            <div class="label-input-box">
+                                <span>Alvo2</span>
+                                <span class="input-field">0</span>
+                            </div>
+                            <div class="btn-edit-target">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field-box-editable">
+                        <div class="target-input-box">
+                            <div class="label-input-box">
+                                <label for="target2">Alvo 2:</label>
+                                <input id="target2" class="targets" type="number">
+                            </div>
+                            <div class="btn-edit-target">
+                                <button class="remover-alvo">&#215</button>
+                                <button class="seta">&#8595</button>
+                                <button class="seta">&#8593</button>
+                            </div>
+                        </div>
+                        <span class="feedback" style="display:none">Lorem ipsum tincidunt leo vehicula bibendum, sapien aenean neque vitae.</span>
+                    </div>
+
+                </div>
+                
+                <div class="field-box-main">
+                    
+                    <div class="field-box-not-editable">
+                        
+                    </div>
+
+                    <div class="field-box-editable">
+                        <button id="add-new-target"> Adicionar novo alvo</button>
+                    </div>
+
+                </div>
+
+                <div class="field-box-main">
+
+                    <div class="field-box-not-editable">
+                        <span>Stoploss</span>
+                        <span class="input-field">0</span>
+                    </div>
+
+                    <div class="field-box-editable">
+                        <label for="stoploss">Stoploss</label>
+                        <input id="stoploss" type="text">
+                        <span class="feedback" style="display:none">Lorem ipsum tincidunt leo vehicula bibendum, sapien aenean neque vitae.</span>
+                    </div>
+
+                </div>
+
+                <div class="field-box-main">
+
+                    <div class="field-box-not-editable">
+                        <span>Nível de risco</span>
+                        <span class="input-field">0</span>
+                    </div>
+
+                    <div class="field-box-editable">
+                        <label for="riskLevel">Nível de risco</label>
+                        <select id="levelRisk">
+                            <option>Alto</option>
+                            <option>Moderado a alto</option>            
+                            <option>Moderado</option>
+                            <option>Baixo a moderado</option>
+                            <option>Baixo</option>
+                        </select> 
+                        <span class="feedback" style="display:none">Lorem ipsum tincidunt leo vehicula bibendum, sapien aenean neque vitae.</span>
+                    </div>
+                    
+                </div>
+
+                <div class="field-box-main">
+
+                    <div class="field-box-not-editable">
+                        <span>Conselho</span>
+                        <span class="input-field">0</span>
+                    </div>
+
+                    <div class="field-box-editable">
+                        <label for="advice">Conselho</label>
+                        <input id="advice" type="text">
+                        <span class="feedback" style="display:none">Lorem ipsum tincidunt leo vehicula bibendum, sapien aenean neque vitae.</span>
+                    </div>
+
+                </div>                
+                
+                <div class="field-box-main">
+
+                    <div class="field-box-not-editable">
+                        <span>É <i>Swing trade/ Position</i>?</span>
+                        <span class="input-field">0</span>
+                    </div>
+
+                    <div class="field-box-editable">
+                        <label  for="isStPosition">É <i>Swing trade/ Position</i>?</label>
+                        <select id="isStPosition">
+                            <option>Sim</option>
+                            <option>Não</option>
+                        </select> <br/>  
+                    </div>
+
+                </div>
+
+
+                <div class="field-box-main">
+                    
+                    <div class="field-box-not-editable">
+                        <span>Duração do <i>trade</i>:</span>
+                        <span class="input-field">0</span>
+                    </div>
+
+                    <div class="field-box-editable">
+                        <label for="tradingDuration">Duração do <i>trade</i>:</label>
+                        <select id="tradingDuration">
+                            <option>0-ST</option>
+                            <option>1-ST/Position</option>
+                            <option>2-Position</option>
+                        </select> <br/>
+                    </div>
+
+                </div>
+
+                <div class="field-box-main">
+
+                    <div class="field-box-not-editable">
+                        <span>Exchange</span>
+                        <span class="input-field">0</span>
+                    </div>
+
+                    <div class="field-box-editable">
+                        <label for="exchange">Exchange</label>
+                        <input id="exchange" type="text">
+                        <span class="feedback" style="display:none">Lorem ipsum tincidunt leo vehicula bibendum, sapien aenean neque vitae.</span>
+                    </div>
+
+                </div>
+    
+            </div>
+            <div id="confirm-btn-box">
+                <button id="confirm-btn">Confirmar edição de sinal</button>
+            </div>
+        </main>
+        <footer>
+            <p>back-end:Ramon Brito</p>
+            <p>front-end: Lucas Santana</p>
+        </footer>
+
+</body>
+</html>

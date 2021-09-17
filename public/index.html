@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Swing Trade ou Position</title>
+    <title>Swing Trade Position</title>
     <link href="./CSS/reset.css" type="text/css" rel="stylesheet"/>
     <link href="./CSS/index.css" type="text/css" rel="stylesheet"/>
 </head>
@@ -13,11 +13,13 @@
 
             <header>
                 <h1>Swing Trade Position</h1>
-                <input id="btn-edicao"type="button" value="EDITAR">
+                <a id="btn-edicao" href="./editar.html"><span>EDIÇÃO</span></a>
+                
             </header>
         
             <div id="form-box">
                 <form>
+
                     <div id="pair-box" class="item-group-form input-feedback">
                         <div id="pair-input-content">
                             <label class="label-align" for="pair">Pair:</label>
@@ -27,6 +29,7 @@
                         </div>                        
                         <span class="feedback">Lorem ipsum tincidunt leo vehicula bibendum, sapien aenean neque vitae. </span>
                     </div>
+
                     <div id="chart-link-box" class="item-group-form input-feedback">
                         <div id="chart-link-input-content">
                             <label class="label-align" for="chartLink">Chart Link:</label>
@@ -34,9 +37,12 @@
                         </div>                        
                         <span class="feedback">Lorem ipsum tincidunt leo vehicula bibendum, sapien aenean neque vitae.</span>
                     </div>
+
                     <div class="item-group-form">
+
                         <fieldset id="buy-zone">
                             <legend>Zonas de Compra</legend>
+
                             <div id="buy-zone-input">
                                 <div id="buy-zone-min-content" class="input-feedback">
                                     <div id="buy-zone-min-input-content">
@@ -45,20 +51,26 @@
                                     </div>                                    
                                     <span class="feedback">Lorem ipsum tincidunt leo vehicula bibendum, sapien aenean neque vitae.</span>
                                 </div>
+                                
                                 <div id="buy-zone-max-content" class="input-feedback">
                                     <div id="buy-zone-max-input-content" >
                                         <label class="label-align" for="buyZoneMax">Zona máxima de compra:</label>
                                         <input id="buyZoneMax" type="number" name="zona-maxima-de-compra" type="number"><br>
                                     </div>                                    
                                     <span class="feedback">Lorem ipsum tincidunt leo vehicula bibendum, sapien aenean neque vitae.</span>
-                                </div>  
-                            </div>                                                      
+                                </div>
+
+                            </div>
+
                         </fieldset>
                     </div>
-                    <div class="item-group-form">
+
+                    <div class="item-group-form">                        
                         <fieldset id="rebuy">
                             <legend>Recompras</legend>
+
                             <div id="rebuy-input">
+
                                 <div id="rebuy-min-content" class="input-feedback">
                                     <div id="rebuy-min-input-content">
                                         <label class="label-align" for="reBuyMin"">Recompra mínima:</label>
@@ -66,6 +78,7 @@
                                     </div>                                    
                                     <span class="feedback">Lorem ipsum tincidunt leo vehicula bibendum, sapien aenean neque vitae.</span>
                                 </div>
+
                                 <div id="rebuy-max-content" class="input-feedback">
                                     <div id="rebuy-max-input-content">
                                         <label class="label-align" for="reBuyMax">Recompra máxima:</label>
@@ -73,15 +86,19 @@
                                     </div>                                    
                                     <span class="feedback">Lorem ipsum tincidunt leo vehicula bibendum, sapien aenean neque vitae.</span>
                                 </div>
+
                             </div>
                             
                             
                         </fieldset>  
                     </div>
+
                     <div class="item-group-form">
                         <fieldset>
                             <legend>Alvos</legend>
+
                             <div id="targets-content">
+                                
                                 <div class=target-content>
                                     <div class="target-input-content">
                                         <label class="label-align" for="target1">Alvo 1:</label>
@@ -92,6 +109,7 @@
                                     </div>
                                     <span class="feedback-content">Lorem ipsum tincidunt leo vehicula bibendum, sapien aenean neque vitae.</span>
                                 </div>
+
                                 <div class=target-content>
                                     <div class="target-input-content">
                                         <label class="label-align" for="target2">Alvo 2:</label>
@@ -102,6 +120,7 @@
                                     </div>                                   
                                     <span class="feedback-content">Lorem ipsum tincidunt leo vehicula bibendum, sapien aenean neque vitae.</span>
                                 </div>
+
                                 <div class=target-content>
                                     <div class="target-input-content">
                                         <label class="label-align" for="target3">Alvo 3:</label>
@@ -109,9 +128,10 @@
                                         <button class="remover-alvo">&#215</button>
                                         <button class="seta">&#8595</button>
                                         <button class="seta">&#8593</button>
-                                    </div>                                   
+                                    </div>                                
                                     <span class="feedback-content">Aviso</span>
                                 </div>
+
                                 <div class=target-content>
                                     <div class="target-input-content">
                                         <label class="label-align" for="target4">Alvo 4:</label>
@@ -122,22 +142,25 @@
                                     </div>
                                     <span class="feedback-content">Lorem ipsum ad maecenas cursus justo sapien donec felis, faucibus suscipit turpis urna gravida nibh justo, semper convallis facilisis hendrerit tellus blandit curabitur.</span>                               
                                     
-                                </div>                              
-                            </div>                            
+                                </div>
+
+                            </div>
+
                             <input id="adicionar-alvo"type="button" name="adicionar_alvo" value="Adicionar alvo">
+                        
                         </fieldset>
                     </div>      
                     
                     <div class="item-group-form input-feedback">
                         <div id="stoploss-input-content">
-                            <label class="label-align" for="stoploss">Stoploss</label>
+                            <label class="label-align" for="stoploss">Stoploss:</label>
                             <input id="stoploss" type="number" name="stop-loss"><br/>
                         </div>                        
                         <span class="feedback">Lorem ipsum tincidunt leo vehicula bibendum, sapien aenean neque vitae.</span>
                     </div>  
                     
-                    <div class="item-group-form">
-                        <label class="label-align" for="levelRisk">Nível de Risco</label>
+                    <div id="levelRisk-box"class="item-group-form">
+                        <label class="label-align" for="levelRisk">Nível de Risco:</label>
                         <select id="levelRisk">
                             <option>Alto</option>
                             <option>Moderado a alto</option>            
@@ -149,7 +172,7 @@
                     
                     <div class="item-group-form input-feedback">
                         <div id="advice-input-content">
-                            <label class="label-align" for="advice">Conselho</label>
+                            <label class="label-align" for="advice">Conselho:</label>
                             <input id="advice" type="text"> <br/>
                         </div>                        
                         <span class="feedback">Lorem ipsum tincidunt leo vehicula bibendum, sapien aenean neque vitae.</span>
@@ -163,16 +186,16 @@
                         </select> <br/>      
                     </div>
                     
-                    <div class="item-group-form">
+                    <div class="item-group-form input-feedback">
                         <div id="exchange-input-content">
-                            <label class="label-align" for="exchange">Exchange</label>
+                            <label class="label-align" for="exchange">Exchange:</label>
                             <input id="exchange"type="text"> <br/>
                         </div>                        
                         <span class="feedback"></span>
                     </div>
                     
                     <div class="item-group-form">
-                        <label class="label-align" for="tradingDuration">Duração do <i>trade</i></label>
+                        <label class="label-align" for="tradingDuration">Duração do <i>trade</i>:</label>
                         <select id="tradingDuration">
                             <option>0-ST</option>
                             <option>1-ST/Position</option>
