@@ -181,3 +181,27 @@ geradorDeComando.addEventListener('click', function(){
     }
     console.log(validarComando());
 }, false);
+
+
+//funções
+function carregarValoresMaximoEMinimo(){
+    let myInput = document.getElementById("pair");
+        let precoAtualDoAtivo = 0;
+        for (let i = 0; i < responseObject.length; i++) {
+            if(responseObject[i].symbol == myInput.value){
+                precoAtualDoAtivo = responseObject[i].price;
+                break;
+            }
+        }
+        if(precoAtualDoAtivo > 0){
+            let valorMinimoDeEntrada = document.getElementById("buyZoneMin");
+            valorMinimoDeEntrada.value = precoAtualDoAtivo*0.995;
+            let valorMaximoDeEntrada = document.getElementById("buyZoneMax");
+            valorMaximoDeEntrada.value = precoAtualDoAtivo*1.005;
+            console.log(valorMaximoDeEntrada.value);
+            atualizarAlvos(valorMaximoDeEntrada.value);
+            atualizarStop(valorMaximoDeEntrada.value);
+        }else{
+            alert("Simbolo não relacionado na binance");
+        }
+}

@@ -11,12 +11,12 @@
 <body>
         <div id="sticky-on-top">
             <header>
-                <a id="btn-new-signal" href="./index.html"><span>Novo Sinal</span></a>
+                <a id="btn-new-signal" href="./index.html"></a>
                 <h1 id="titulo">Edição de Sinal</h1>
             </header>
             <div id="selection-panel">
                     
-                <button>&#8592</button>
+                <button class="btn-slide-pair-list">&#8592</button>
     
                 <div id="pair-selection">
                     <span>BTCUSDD</span>
@@ -27,7 +27,7 @@
                     <span>BTCUSDD</span>
                 </div>
                 
-                <button>&#8594</button>
+                <button class="btn-slide-pair-list">&#8594</button>
     
             </div>
             <div id="pair-selected">
@@ -41,12 +41,12 @@
                 
                 <div class="field-box-main">
 
-                    <div class="field-box-not-editable">
+                    <div class="field-box-not-editable group-field">
                         <span>Chart link</span>
                         <span class="input-field">0</span>
                     </div>
 
-                    <div class="field-box-editable">
+                    <div class="field-box-editable group-field">
                         <label for="chartLink">Chart link</label>
                         <input id="chartLink" type="text">
                         <span class="feedback" style="display:none">Lorem ipsum tincidunt leo vehicula bibendum, sapien aenean neque vitae.</span>
@@ -56,7 +56,7 @@
 
                 <div class="field-box-main">
                     
-                    <div class="field-box-not-editable">
+                    <div class="field-box-not-editable group-field">
                         <fieldset>
 
                             <legend>Zona de compra</legend>
@@ -81,7 +81,7 @@
 
                     </div>
 
-                    <div class="field-box-editable">
+                    <div class="field-box-editable group-field">
                         <fieldset>
 
                             <legend>Zona de compra</legend>
@@ -110,7 +110,7 @@
 
                 <div class="field-box-main">
                     
-                    <div class="field-box-not-editable">
+                    <div class="field-box-not-editable group-field">
                         <fieldset>
 
                             <legend>Recompra</legend>
@@ -135,7 +135,7 @@
 
                     </div>
 
-                    <div class="field-box-editable">
+                    <div class="field-box-editable group-field">
                         <fieldset>
 
                             <legend>Recompra</legend>
@@ -233,19 +233,19 @@
                     </div>
 
                     <div class="field-box-editable">
-                        <button id="add-new-target"> Adicionar novo alvo</button>
+                        <button id="adicionar-alvo"> Adicionar novo alvo</button>
                     </div>
 
                 </div>
 
                 <div class="field-box-main">
 
-                    <div class="field-box-not-editable">
+                    <div class="field-box-not-editable group-field">
                         <span>Stoploss</span>
                         <span class="input-field">0</span>
                     </div>
 
-                    <div class="field-box-editable">
+                    <div class="field-box-editable group-field">
                         <label for="stoploss">Stoploss</label>
                         <input id="stoploss" type="text">
                         <span class="feedback" style="display:none">Lorem ipsum tincidunt leo vehicula bibendum, sapien aenean neque vitae.</span>
@@ -255,12 +255,12 @@
 
                 <div class="field-box-main">
 
-                    <div class="field-box-not-editable">
+                    <div class="field-box-not-editable group-field">
                         <span>Nível de risco</span>
                         <span class="input-field">0</span>
                     </div>
 
-                    <div class="field-box-editable">
+                    <div class="field-box-editable group-field">
                         <label for="riskLevel">Nível de risco</label>
                         <select id="levelRisk">
                             <option>Alto</option>
@@ -276,12 +276,12 @@
 
                 <div class="field-box-main">
 
-                    <div class="field-box-not-editable">
+                    <div class="field-box-not-editable group-field">
                         <span>Conselho</span>
                         <span class="input-field">0</span>
                     </div>
 
-                    <div class="field-box-editable">
+                    <div class="field-box-editable group-field">
                         <label for="advice">Conselho</label>
                         <input id="advice" type="text">
                         <span class="feedback" style="display:none">Lorem ipsum tincidunt leo vehicula bibendum, sapien aenean neque vitae.</span>
@@ -291,12 +291,12 @@
                 
                 <div class="field-box-main">
 
-                    <div class="field-box-not-editable">
+                    <div class="field-box-not-editable group-field">
                         <span>É <i>Swing trade/ Position</i>?</span>
                         <span class="input-field">0</span>
                     </div>
 
-                    <div class="field-box-editable">
+                    <div class="field-box-editable group-field">
                         <label  for="isStPosition">É <i>Swing trade/ Position</i>?</label>
                         <select id="isStPosition">
                             <option>Sim</option>
@@ -309,12 +309,12 @@
 
                 <div class="field-box-main">
                     
-                    <div class="field-box-not-editable">
+                    <div class="field-box-not-editable group-field">
                         <span>Duração do <i>trade</i>:</span>
                         <span class="input-field">0</span>
                     </div>
 
-                    <div class="field-box-editable">
+                    <div class="field-box-editable group-field">
                         <label for="tradingDuration">Duração do <i>trade</i>:</label>
                         <select id="tradingDuration">
                             <option>0-ST</option>
@@ -327,12 +327,12 @@
 
                 <div class="field-box-main">
 
-                    <div class="field-box-not-editable">
+                    <div class="field-box-not-editable group-field">
                         <span>Exchange</span>
                         <span class="input-field">0</span>
                     </div>
 
-                    <div class="field-box-editable">
+                    <div class="field-box-editable group-field">
                         <label for="exchange">Exchange</label>
                         <input id="exchange" type="text">
                         <span class="feedback" style="display:none">Lorem ipsum tincidunt leo vehicula bibendum, sapien aenean neque vitae.</span>

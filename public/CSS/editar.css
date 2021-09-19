@@ -27,19 +27,25 @@ header{
 }
 
 #btn-new-signal{
-    background-color: black;
-    border: 1px solid rgb(234, 248, 248);
-    color: white;
+    border: 4px solid gray;
     cursor: pointer;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     text-decoration: none;
+    background-image: url(../assets/new.png);
+    background-color: transparent;
+    background-size:70%;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 48px;
+    height: 48px;
 }
 
 #btn-new-signal:hover{
-    border:1px solid gold;
+    border:4px solid black;
     text-shadow:0px 1px 1px white;
+    background-size:80%;
 }
 
 h1{
@@ -50,7 +56,7 @@ h1{
     display: flex;
     padding: 5px 10px 0px 10px;
     background-color: rgb(249, 249, 249);
-    border-bottom: 1px solid rgb(239, 239, 239);
+    /*border-bottom: 1px solid rgb(239, 239, 239);*/
 }
 
 #pair-selection{
@@ -64,6 +70,14 @@ h1{
     width: 220px;
     padding: 5px 10px 0px 10px;
     text-align: center;
+    border: 1px solid gray;
+    margin: 0px 10px 5px 10px;
+}
+
+#pair-selection span:hover{
+    cursor: pointer;
+    border: 1px solid black;
+    background-color: rgb(173, 184, 184)
 }
 
 #pair-selected{
@@ -86,11 +100,12 @@ main{
     display: flex;
     justify-content: space-between;
 }
+
+
 .field-box-not-editable{
     width: 450px;
     display: flex;
     flex-direction: column;
-    border-right: 1px solid black;
     padding: 5px 10px;
 }
 
@@ -98,9 +113,26 @@ main{
     width: 450px;
     display: flex;
     flex-direction: column;
-    border-left: 1px solid black;
     padding: 5px 10px;
 }
+
+.group-field{
+    margin: 10px 10px;
+}
+
+input[type="text"],input[type="search"], select{
+    background-color: rgba(255, 255, 255, 0.877);
+    border: 0 solid black;
+    border-bottom-width: 2px;
+}
+
+input[type="number"]{
+    width: 100px;
+    background-color: rgba(255, 255, 255, 0.877);
+    border: 0 solid black;
+    border-bottom-width: 2px;
+}
+
 fieldset{
     display: flex;
     flex-direction: column;
@@ -110,7 +142,7 @@ fieldset{
     justify-content: space-between;
 }
 .buy-zone-min-field,.buy-zone-max-field, .rebuy-min-field, .rebuy-max-field{
-    width: 220px;
+    width: 200px;
     display: flex;
     flex-direction: column;
     padding: 5px 0 0 0;
@@ -131,6 +163,42 @@ fieldset{
     background-color: rgb(233, 233, 233);
     
 }
+
+
+.remover-alvo{
+    background-color:rgb(250, 181, 181);
+    border: 1px solid rgb(255, 112, 112);
+    border-left: 2px solid rgb(255, 112, 112);
+    border-bottom: 2px solid rgb(255, 112, 112);
+    color: white;
+    text-shadow: 0px 1px 1px black;
+    cursor: pointer;
+}
+.remover-alvo:hover{
+    background-color:rgb(255, 123, 123);
+    border: 1px solid red;
+    border-left: 2px solid red;
+    border-bottom: 2px solid red;
+    font-weight: bold;
+}
+
+.seta, #gerador-de-comando, #adicionar-alvo, #confirm-btn, .btn-slide-pair-list{
+    background-color: rgb(173, 184, 184);
+    border: 1px solid rgb(135, 145, 145);
+    border-left: 2px solid rgb(135, 145, 145);
+    border-bottom: 2px solid rgb(135, 145, 145);
+    color: white;
+    text-shadow: 0px 1px 1px black;
+    cursor: pointer;
+}
+.seta:hover, #gerador-de-comando:hover, #adicionar-alvo:hover, #confirm-btn:hover, .btn-slide-pair-list:hover{
+    background-color:rgb(135, 145, 145);
+    border: 1px solid rgb(75, 82, 82);
+    border-left: 2px solid rgb(75, 82, 82);;
+    border-bottom: 2px solid rgb(75, 82, 82);;
+    font-weight: bold;
+}
+
 
 #confirm-btn-box{
     padding-top: 5px;
