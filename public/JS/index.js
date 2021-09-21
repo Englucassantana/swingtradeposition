@@ -180,7 +180,7 @@ function atualizarEtiquetaDosAlvos(){
     for (let index = 0; index < targetContent.length; index++) {
         const elementLabel = targetContent[index].getElementsByTagName('label')[0];
         console.log(elementLabel);
-        elementLabel.innerText = `Alvo ${index+1}`;
+        elementLabel.innerText = `Alvo ${index+1}:`;
         elementLabel.htmlFor = `alvo${index+1}`;
 
         const elementInput = targetContent[index].getElementsByTagName('input')[0];

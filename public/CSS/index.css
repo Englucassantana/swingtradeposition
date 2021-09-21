@@ -102,6 +102,8 @@ input[type="number"]{
 
 .feedback{
     padding-top: 0.6vh;
+    color: red;
+    font-size: 10px;
 }
 .feedback-suppression{
     display: none;
@@ -138,6 +140,8 @@ legend{
 .feedback-content{
     padding-top: 0.6vh;
     padding-left: calc(180px + 1%);
+    color: red;
+    font-size: 10px;
 }
 
 #gerador-de-comando, #adicionar-alvo{
