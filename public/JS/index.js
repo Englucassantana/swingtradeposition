@@ -189,6 +189,111 @@ function atualizarEtiquetaDosAlvos(){
     }
 }
 
+function chartLinkFeedback(){
+    let target = event.target;
+    let chartLinkBox = document.getElementById('chart-link-box');
+    let feedback = chartLinkBox.getElementsByClassName('feedback')[0];
+    if(chartLink.value !=''){
+        chartLinkBox.style = 'background-color: rgb(209, 255, 209);';
+        feedback.className = "feedback feedback-suppression";
+        return true;
+    }else{
+        chartLinkBox.style = 'background-color: rgb(255, 229, 229);';
+        feedback.textContent = 'Preencher campo!';
+        feedback.className = "feedback";        
+        return false;
+    }
+}
+
+function buyZoneFeedback(){
+    let buyZoneMax = document.getElementById('buyZoneMax');
+    let buyZoneMin = document.getElementById('buyZoneMin');
+    let buyZoneMinFeedback = document.getElementById('buyZoneMinFeedback');
+    let buyZoneMaxFeedback = document.getElementById('buyZoneMaxFeedback');
+    let buyZoneBox = buyZone.parentNode;
+    if(buyZoneMin.value ==''){
+        buyZoneBox.style = 'background-color: rgb(255, 229, 229);';
+        buyZoneMinFeedback .textContent = 'Preencher campo!';
+        buyZoneMinFeedback .className = "feedback";
+        return false
+    }
+    if(buyZoneMin.value > buyZoneMax.value){
+        buyZoneBox.style = 'background-color: rgb(255, 229, 229);';
+        buyZoneMinFeedback .textContent = 'O valor do campo de zona mínima de compra é maior que o valor de zona de compra máxima';
+        buyZoneMinFeedback .className = "feedback";
+        return false
+    }
+
+    if(buyZoneMax.value ==''){
+        buyZoneBox.style = 'background-color: rgb(255, 229, 229);';
+        buyZoneMaxFeedback .textContent = 'Preencher campo!';
+        buyZoneMaxFeedback .className = "feedback";
+        return false
+    }
+
+    buyZoneBox.style = 'background-color: rgb(209, 255, 209);';
+    buyZoneMinFeedback.className = "feedback feedback-suppression";
+    buyZoneMaxFeedback.className = "feedback feedback-suppression";
+    return true;  
+
+}
+
+function reBuyFeedback(){
+    let reBuyMax = document.getElementById('reBuyMax');
+    let reBuyMin = document.getElementById('reBuyMin');
+    let reBuyMinFeedback = document.getElementById('reBuyMinFeedback');
+    let reBuyMaxFeedback = document.getElementById('reBuyMaxFeedback');
+    let reBuyBox = reBuy.parentNode;
+    if(reBuyMin.value ==''){
+        reBuyBox.style = 'background-color: rgb(255, 229, 229);';
+        reBuyMinFeedback .textContent = 'Preencher campo!';
+        reBuyMinFeedback .className = "feedback";
+        return false
+    }
+    if(reBuyMin.value > reBuyMax.value){
+        reBuyBox.style = 'background-color: rgb(255, 229, 229);';
+        reBuyMinFeedback .textContent = 'O valor do campo de recompra mínima é maior que o valor de recompra máxima';
+        reBuyMinFeedback .className = "feedback";
+        return false
+    }
+
+    if(reBuyMax.value ==''){
+        reBuyBox.style = 'background-color: rgb(255, 229, 229);';
+        reBuyMaxFeedback .textContent = 'Preencher campo!';
+        reBuyMaxFeedback .className = "feedback";
+        return false
+    }
+
+    reBuyBox.style = 'background-color: rgb(209, 255, 209);';
+    reBuyMinFeedback.className = "feedback feedback-suppression";
+    reBuyMaxFeedback.className = "feedback feedback-suppression";
+    return true;  
+
+}
+
+// function buyZoneMinFeedback(event){
+//     let buyZone = document.getElementById('buy-zone');
+//     let feedback = document.getElementById('buy-zone-min-content');
+//     feedback = feedback.getElementsByClassName('feedback')[0];
+//     let buyZoneMax = document.getElementById('buyZoneMax');
+//     if(buyZoneMin.value ==''){
+//         buyZone.style = 'background-color: rgb(255, 229, 229);';
+//         feedback.textContent = 'Preencher campo!';
+//         feedback.className = "feedback";
+//         return false
+//     }
+//     if(buyZoneMin.value > buyZoneMax.value){
+//         buyZone.style = 'background-color: rgb(255, 229, 229);';
+//         feedback.textContent = 'O valor do campo de zona mínima de compra é maior que o valor de zona de compra máxima';
+//         feedback.className = "feedback";
+//         return false
+//     }
+//     buyZone.style = 'background-color: rgb(209, 255, 209);';
+//     feedback.className = "feedback feedback-suppression";
+//     return true;   
+
+// }
+
 //*Main
 let xhr = new XMLHttpRequest();
 let responseObject;
@@ -201,39 +306,6 @@ let jsonComando = {
 atualizarComando();
 
 //*Eventos
-let chartLink = document.getElementById('chartLink');
-chartLink.addEventListener('input',chartLinkFeedback);
-
-function chartLinkFeedback(){
-    let target = event.target;
-    let chartLinkBox = document.getElementById('chart-link-box');
-    let feedback = chartLinkBox.getElementsByClassName('feedback')[0];
-    if(chartLink.value !=''){
-        chartLinkBox.style = 'background-color: rgb(209, 255, 209);';
-        feedback.className = "feedback feedback-suppression";
-    }else{
-        chartLinkBox.style = 'background-color: rgb(255, 229, 229);';
-        feedback.textContent = 'Preencher campo!';
-        feedback.className = "feedback";
-    }
-}
-
-/*
- * *Gerador de comando 
- */
-let geradorDeComando = document.getElementById('gerador-de-comando')
-geradorDeComando.addEventListener('click', function(){
-    event.preventDefault();
-    atualizarComando();
-    if(validarComando()){        
-        copiarComandoParaAreaDeTransferencia();
-    }
-    console.log(validarComando());
-}, false);
-
-/*
- * *Recepção de informações da binance
- */
 xhr.onload = function () {
     if (xhr.status == 200) {
         responseObject = JSON.parse(xhr.responseText);
@@ -248,8 +320,29 @@ xhr.open('GET', "https://api.binance.com/api/v3/ticker/price", true);
 // xhr.open('GET',"https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT", true);
 xhr.send(null);
 
-/**
- * *Adição de novo alvo */ 
+let chartLink = document.getElementById('chartLink');
+chartLink.addEventListener('input',chartLinkFeedback,false);
+
+let buyZone = document.getElementById('buy-zone');
+buyZone.addEventListener('input',buyZoneFeedback,false);
+// let buyZoneMin = document.getElementById('buyZoneMin');
+// buyZoneMin.addEventListener('input',buyZoneMinFeedback, false);
+
+let reBuy = document.getElementById('rebuy');
+reBuy.addEventListener('input',reBuyFeedback,false);
+
+let geradorDeComando = document.getElementById('gerador-de-comando')
+geradorDeComando.addEventListener('click', function(){
+    event.preventDefault();
+    atualizarComando();
+    if(validarComando()){        
+        copiarComandoParaAreaDeTransferencia();
+    }
+    console.log(validarComando());
+}, false);
+
+
+
 let adicionarNovoAlvo = document.getElementById("adicionar-alvo");
 adicionarNovoAlvo.addEventListener("click", ()=>{
     event.preventDefault();
