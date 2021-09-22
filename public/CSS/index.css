@@ -140,8 +140,13 @@ legend{
 .feedback-content{
     padding-top: 0.6vh;
     padding-left: calc(180px + 1%);
-    color: red;
     font-size: 10px;
+}
+.feedback-green{
+    color: green;
+}
+.feedback-red{
+    color: red;
 }
 
 #gerador-de-comando, #adicionar-alvo{

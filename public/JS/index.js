@@ -2,7 +2,7 @@
 
 function autocomplete(inp, arr) {
     /*the autocomplete function takes two arguments,
-    the text field element and an array of possible autocompleted values:*/
+    the text field element and an targets of possible autocompleted values:*/
     var currentFocus;
     /*execute a function when someone writes in the text field:*/
     inp.addEventListener("input", function(e) {
@@ -17,7 +17,7 @@ function autocomplete(inp, arr) {
         a.setAttribute("class", "autocomplete-items");
         /*append the DIV element as a child of the autocomplete container:*/
         this.parentNode.appendChild(a);
-        /*for each item in the array...*/
+        /*for each item in the targets...*/
         for (i = 0; i < arr.length; i++) {
             /*check if the item starts with the same letters as the text field value:*/
             if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
@@ -26,7 +26,7 @@ function autocomplete(inp, arr) {
                 /*make the matching letters bold:*/
                 b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
                 b.innerHTML += arr[i].substr(val.length);
-                /*insert a input field that will hold the current array item's value:*/
+                /*insert a input field that will hold the current targets item's value:*/
                 b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
                 /*execute a function when someone clicks on the item value (DIV element):*/
                 b.addEventListener("click", function(e) {
@@ -114,9 +114,9 @@ function atualizarComando(){
     let exchange = document.getElementById('exchange');
     let tradingDuration = document.getElementById('tradingDuration');
 
-    let targetArray=[];
+    let targettargets=[];
     for (let index = 0; index < targets.length; index++) {
-        targetArray.push(targets[index].value);
+        targettargets.push(targets[index].value);
         
     }
 
@@ -126,7 +126,7 @@ function atualizarComando(){
     jsonComando.buyZoneMax = buyZoneMax.value;
     jsonComando.reBuyMin = reBuyMin.value;
     jsonComando.reBuyMax = reBuyMax.value;
-    jsonComando.targets = targetArray;
+    jsonComando.targets = targettargets;
     jsonComando.stoploss = stoploss.value;
     jsonComando.advice = advice.value;
     jsonComando.isStPosition = isStPosition.value;
@@ -189,6 +189,10 @@ function atualizarEtiquetaDosAlvos(){
     }
 }
 
+function pairFeedback(){
+
+}
+
 function chartLinkFeedback(){
     let target = event.target;
     let chartLinkBox = document.getElementById('chart-link-box');
@@ -206,6 +210,7 @@ function chartLinkFeedback(){
 }
 
 function buyZoneFeedback(){
+    targetsContentFeedback();
     let buyZoneMax = document.getElementById('buyZoneMax');
     let buyZoneMin = document.getElementById('buyZoneMin');
     let buyZoneMinFeedback = document.getElementById('buyZoneMinFeedback');
@@ -271,28 +276,51 @@ function reBuyFeedback(){
 
 }
 
-// function buyZoneMinFeedback(event){
-//     let buyZone = document.getElementById('buy-zone');
-//     let feedback = document.getElementById('buy-zone-min-content');
-//     feedback = feedback.getElementsByClassName('feedback')[0];
-//     let buyZoneMax = document.getElementById('buyZoneMax');
-//     if(buyZoneMin.value ==''){
-//         buyZone.style = 'background-color: rgb(255, 229, 229);';
-//         feedback.textContent = 'Preencher campo!';
-//         feedback.className = "feedback";
-//         return false
-//     }
-//     if(buyZoneMin.value > buyZoneMax.value){
-//         buyZone.style = 'background-color: rgb(255, 229, 229);';
-//         feedback.textContent = 'O valor do campo de zona mínima de compra é maior que o valor de zona de compra máxima';
-//         feedback.className = "feedback";
-//         return false
-//     }
-//     buyZone.style = 'background-color: rgb(209, 255, 209);';
-//     feedback.className = "feedback feedback-suppression";
-//     return true;   
+function targetProfit(target){
+    let buyZoneMax = document.getElementById('buyZoneMax');
+    let profit = target.valueAsNumber * 100 / buyZoneMax.valueAsNumber;
+    return profit;
+}
 
-// }
+function targetsContentFeedback(){
+    let targets = document.getElementsByClassName('targets');
+    let targetsContentBox = targetsContent.parentNode.parentNode;
+    for (let index = 0; index < targets.length; index++) {
+        const target = targets[index];
+        let profit = targetProfit(target);
+        let feedbackContent = target.parentNode.parentNode;
+        feedbackContent = feedbackContent.getElementsByClassName('feedback-content')[0];
+        //TODO: avisar caso não haja campos preenchidos
+        if(target.value == ''){
+            targetsContentBox.style = 'background-color: rgb(255, 229, 229);';
+            feedbackContent.textContent = 'Preencher campo!';
+            feedbackContent.className = "feedback-content feedback-red";
+            return false;
+        }else{
+            feedbackContent.textContent = profit;
+            feedbackContent.className = "feedback-content feedback-green";
+        }
+        
+        let buyZoneMax = document.getElementById('buyZoneMax');        
+        //TODO: avisar caso o valor do alvo seja menor que o valor da zona de compra máxima
+        if(target.valueAsNumber < buyZoneMax.valueAsNumber){
+            targetsContentBox.style = 'background-color: rgb(255, 229, 229);';
+            feedbackContent.textContent = `${profit}%, o alvo tem valor menor que a zona de compra máxima`;
+            feedbackContent.className = "feedback-content feedback-red";
+            return false;
+        }else{
+            feedbackContent.textContent = profit;
+            feedbackContent.className = "feedback-content feedback-green";
+        }
+    }
+    //TODO: avisar se o valor do alvo for menor que o valor do alvo anterior
+    //TODO: avisar a porcentagem em relação a zona máxima de compra
+    //TODO: Caso não haja problemas de preenchimento mudar cor da estrutura para verde
+    targetsContentBox.style = 'background-color: rgb(209, 255, 209);';
+    return true;
+}
+
+
 
 //*Main
 let xhr = new XMLHttpRequest();
@@ -320,16 +348,21 @@ xhr.open('GET', "https://api.binance.com/api/v3/ticker/price", true);
 // xhr.open('GET',"https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT", true);
 xhr.send(null);
 
+let pair = document.getElementById('pair');
+pair.addEventListener('input',pairFeedback,false);
+
 let chartLink = document.getElementById('chartLink');
 chartLink.addEventListener('input',chartLinkFeedback,false);
 
 let buyZone = document.getElementById('buy-zone');
 buyZone.addEventListener('input',buyZoneFeedback,false);
-// let buyZoneMin = document.getElementById('buyZoneMin');
-// buyZoneMin.addEventListener('input',buyZoneMinFeedback, false);
+
 
 let reBuy = document.getElementById('rebuy');
 reBuy.addEventListener('input',reBuyFeedback,false);
+
+let targetsContent = document.getElementById("targets-content");
+targetsContent.addEventListener('input', targetsContentFeedback,false);
 
 let geradorDeComando = document.getElementById('gerador-de-comando')
 geradorDeComando.addEventListener('click', function(){
@@ -340,7 +373,6 @@ geradorDeComando.addEventListener('click', function(){
     }
     console.log(validarComando());
 }, false);
-
 
 
 let adicionarNovoAlvo = document.getElementById("adicionar-alvo");
@@ -368,23 +400,6 @@ adicionarNovoAlvo.addEventListener("click", ()=>{
     removerAlvo = document.getElementsByClassName('remover-alvo');       
 });
 
-// /**
-//  * *Remoção de alvo
-//  */
-
-// let removerAlvo = document.getElementsByClassName('remover-alvo');
-// for (let index = 0; index < removerAlvo.length; index++) {
-//     removerAlvo[index].addEventListener('click', ()=>{
-//         event.preventDefault();
-//         let target = event.target;
-//         target = target.parentNode.parentNode;
-//         fatherTarget = target.parentNode;
-//         fatherTarget.removeChild(target); 
-//         console.log(fatherTarget);
-//     })    
-// }
-
-let targetsContent = document.getElementById("targets-content");
 targetsContent.addEventListener('click', ()=>{
     console.log("Estou nos alvos");
     event.preventDefault();
