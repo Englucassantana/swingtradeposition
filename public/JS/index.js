@@ -136,14 +136,14 @@ function atualizarComando(){
 
 
 function validarComando(){
-    let chaves = Object.keys(jsonComando);
-    for(let i = 0; i <=chaves.length; i++){
-        if(jsonComando[chaves[i]] == 0 || jsonComando[chaves[i]] == ''){
-            console.log(jsonComando[chaves[i]]);
-            return false;
-        }
-    }
-    return true;
+    return pairFeedback() &
+        chartLinkFeedback() &
+        buyZoneFeedback() &
+        reBuyFeedback() &
+        targetsContentFeedback() &
+        stoplossFeedback() &
+        adviceFeedback() &
+        exchangeFeedback();
 }
 
 function copiarComandoParaAreaDeTransferencia(){
@@ -465,6 +465,8 @@ geradorDeComando.addEventListener('click', function(){
     atualizarComando();
     if(validarComando()){        
         copiarComandoParaAreaDeTransferencia();
+    }else{
+        alert("Reveja o preenchimento dos campos");
     }
     console.log(validarComando());
 }, false);
@@ -486,7 +488,7 @@ adicionarNovoAlvo.addEventListener("click", ()=>{
             <button class="seta">&#8595</button>
             <button class="seta">&#8593</button>
         </div>
-        <span class="feedback-content">Lorem ipsum tincidunt leo vehicula bibendum, sapien aenean neque vitae.</span>
+        <span class="feedback-content"></span>
     `
     newTargetContent.innerHTML = newMsg;
        
