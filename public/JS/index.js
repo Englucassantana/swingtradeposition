@@ -282,6 +282,8 @@ function targetProfit(target){
     return profit;
 }
 
+
+
 function targetsContentFeedback(){
     let targets = document.getElementsByClassName('targets');
     let targetsContentBox = targetsContent.parentNode.parentNode;
@@ -297,7 +299,7 @@ function targetsContentFeedback(){
             feedbackContent.className = "feedback-content feedback-red";
             return false;
         }else{
-            feedbackContent.textContent = profit;
+            feedbackContent.textContent = profit + '%';
             feedbackContent.className = "feedback-content feedback-green";
         }
         
@@ -309,11 +311,23 @@ function targetsContentFeedback(){
             feedbackContent.className = "feedback-content feedback-red";
             return false;
         }else{
-            feedbackContent.textContent = profit;
+            feedbackContent.textContent = profit + '%';
             feedbackContent.className = "feedback-content feedback-green";
         }
+        //TODO: avisar se o valor do alvo for menor que o valor do alvo anterior
+        if( index!=0){
+            if(targets[index - 1].valueAsNumber > target.valueAsNumber){
+                targetsContentBox.style = 'background-color: rgb(255, 229, 229);';
+                feedbackContent.textContent = `${profit}%, o alvo anterior maior que esse alvo!`;
+                feedbackContent.className = "feedback-content feedback-red";
+                return false;
+            }else{
+                feedbackContent.textContent = profit + '%';
+                feedbackContent.className = "feedback-content feedback-green";
+            }
+        }
+        
     }
-    //TODO: avisar se o valor do alvo for menor que o valor do alvo anterior
     //TODO: avisar a porcentagem em relação a zona máxima de compra
     //TODO: Caso não haja problemas de preenchimento mudar cor da estrutura para verde
     targetsContentBox.style = 'background-color: rgb(209, 255, 209);';
