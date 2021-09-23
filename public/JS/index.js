@@ -36,7 +36,6 @@ function autocomplete(inp, arr) {
                     /*close the list of autocompleted values,
                     (or any other open lists of autocompleted values:*/
                     closeAllLists();
-                    resetarCampos();
                 });
                 a.appendChild(b);
             }
@@ -96,6 +95,7 @@ function autocomplete(inp, arr) {
     /*execute a function when someone clicks in the document:*/
     document.addEventListener("click", function (e) {
         closeAllLists(e.target);
+        pairFeedback();
     });
   }
   
@@ -116,18 +116,18 @@ function atualizarComando(){
 
     let targettargets=[];
     for (let index = 0; index < targets.length; index++) {
-        targettargets.push(targets[index].value);
+        targettargets.push(targets[index].valueAsNumber);
         
     }
 
     jsonComando.pair = pair.value;
     jsonComando.chartLink = chartLink.value;
-    jsonComando.buyZoneMin = buyZoneMin.value;
-    jsonComando.buyZoneMax = buyZoneMax.value;
-    jsonComando.reBuyMin = reBuyMin.value;
-    jsonComando.reBuyMax = reBuyMax.value;
+    jsonComando.buyZoneMin = buyZoneMin.valueAsNumber;
+    jsonComando.buyZoneMax = buyZoneMax.valueAsNumber;
+    jsonComando.reBuyMin = reBuyMin.valueAsNumber;
+    jsonComando.reBuyMax = reBuyMax.valueAsNumber;
     jsonComando.targets = targettargets;
-    jsonComando.stoploss = stoploss.value;
+    jsonComando.stoploss = stoploss.valueAsNumber;
     jsonComando.advice = advice.value;
     jsonComando.isStPosition = isStPosition.value;
     jsonComando.exchange = exchange.value;
@@ -168,8 +168,6 @@ function carregarValoresMaximoEMinimo(){
             let valorMaximoDeEntrada = document.getElementById("buyZoneMax");
             valorMaximoDeEntrada.value = precoAtualDoAtivo*1.005;
             console.log(valorMaximoDeEntrada.value);
-            atualizarAlvos(valorMaximoDeEntrada.value);
-            atualizarStop(valorMaximoDeEntrada.value);
         }else{
             alert("Simbolo não relacionado na binance");
         }
@@ -190,7 +188,27 @@ function atualizarEtiquetaDosAlvos(){
 }
 
 function pairFeedback(){
-
+    let target = document.getElementById('pair');
+    let pairBox = document.getElementById('pair-box');
+    let feedback = pairBox.getElementsByClassName('feedback')[0];
+    let pairConfirm = false;
+    buyZoneFeedback();
+    //TODO - [ ] Avisar caso o pair não esteja relacionado na binance
+    for (let index = 0; index < listaDeSimbolos.length; index++) {
+        if(target.value.toUpperCase() == listaDeSimbolos[index]){
+            pairConfirm = true;
+        }        
+    }
+    if(!pairConfirm){
+        pairBox.style = 'background-color: rgb(255, 229, 229);';
+        feedback.textContent = 'Pair não relacionado na binance';
+        feedback.className = "feedback";        
+        return false;
+    }
+    //TODO - [ ] Caso não haja problemas de preenchimento mudar cor da estrutura para verde
+    pairBox.style = 'background-color: rgb(209, 255, 209);';
+    feedback.className = "feedback feedback-suppression";
+    return true;
 }
 
 function chartLinkFeedback(){
@@ -282,8 +300,7 @@ function targetProfit(target){
     return profit;
 }
 
-
-
+//TODO: A função abaixo precisa ser refatorada
 function targetsContentFeedback(){
     let targets = document.getElementsByClassName('targets');
     let targetsContentBox = targetsContent.parentNode.parentNode;
@@ -326,15 +343,70 @@ function targetsContentFeedback(){
                 feedbackContent.className = "feedback-content feedback-green";
             }
         }
-        
+
     }
-    //TODO: avisar a porcentagem em relação a zona máxima de compra
     //TODO: Caso não haja problemas de preenchimento mudar cor da estrutura para verde
     targetsContentBox.style = 'background-color: rgb(209, 255, 209);';
     return true;
 }
 
+function stoplossInjure(target){
+    let buyZoneMax = document.getElementById('buyZoneMax');
+    let injure = target.valueAsNumber * 100 / buyZoneMax.valueAsNumber;
+    return injure;
+}
 
+function stoplossFeedback(){
+    let target = event.target;
+    let stoplossBox = target.parentNode.parentNode;
+    let feedback = stoplossBox.getElementsByClassName('feedback')[0];
+    //TODO:avisar caso o valor do stoploss seja maior que o valor da zona de compra máxima.
+    let injure = stoplossInjure(target);
+    if(injure > 100){
+        stoplossBox.style = 'background-color: rgb(255, 229, 229);';
+        feedback.textContent = `${injure}%, o stoploss tem valor maior que a zona de compra máxima`;
+        feedback.className = "feedback feedback-red";
+        return false;
+    }
+    //TODO: Caso não haja problemas de preenchimento mudar cor da estrutura para verde
+    //TODO: avisar a porcentagem em relação a zona máxima de compra.
+    feedback.textContent = injure + '%';
+    feedback.className = "feedback feedback-green";
+    stoplossBox.style = 'background-color: rgb(209, 255, 209);';
+    return true;
+}
+
+function adviceFeedback(){
+    let target = event.target;
+    let adviceBox = target.parentNode.parentNode;
+    let feedback =  adviceBox.getElementsByClassName('feedback')[0];
+    //TODO: avisar caso não haja campos preenchidos;
+    if(target.value == ''){
+        adviceBox.style = 'background-color: rgb(255, 229, 229);';
+        feedback.textContent = 'Preencher campo!';
+        feedback.className = "feedback";
+        return false
+    }
+     //TODO: Caso não haja problemas de preenchimento mudar cor da estrutura para verde
+    adviceBox.style = 'background-color: rgb(209, 255, 209);';
+    feedback.className = "feedback feedback-suppression";
+    return true;   
+}
+
+function exchangeFeedback(){
+    let target = event.target;
+    let exchangeBox = target.parentNode.parentNode;
+    let feedback =  exchangeBox.getElementsByClassName('feedback')[0];
+    if(target.value == ''){
+        exchangeBox.style = 'background-color: rgb(255, 229, 229);';
+        feedback.className = "feedback";
+        return true;
+    }
+     //TODO: Caso não haja problemas de preenchimento mudar cor da estrutura para verde
+    exchangeBox.style = 'background-color: rgb(209, 255, 209);';
+    feedback.className = "feedback feedback-suppression";
+    return true;   
+}
 
 //*Main
 let xhr = new XMLHttpRequest();
@@ -377,6 +449,15 @@ reBuy.addEventListener('input',reBuyFeedback,false);
 
 let targetsContent = document.getElementById("targets-content");
 targetsContent.addEventListener('input', targetsContentFeedback,false);
+
+let stoploss = document.getElementById('stoploss');
+stoploss.addEventListener('input', stoplossFeedback, false);
+
+let advice = document.getElementById('advice');
+advice.addEventListener('input',adviceFeedback, false);
+
+let exchange = document.getElementById('exchange');
+exchange.addEventListener('input',exchangeFeedback,false);
 
 let geradorDeComando = document.getElementById('gerador-de-comando')
 geradorDeComando.addEventListener('click', function(){
