@@ -7,13 +7,19 @@
     <title>Swing Trade Position</title>
     <link href="./CSS/reset.css" type="text/css" rel="stylesheet"/>
     <link href="./CSS/index.css" type="text/css" rel="stylesheet"/>
+
 </head>
     <body>
         <div id="page">
 
             <header>
                 <h1>Novo Sinal</h1>
-                <a id="btn-edicao" href="./editar.html"></a>
+                <a id="btn-edicao" href="./editar.html">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                      </svg>
+                </a>
                 
             </header>
         
@@ -216,6 +222,48 @@
         </div>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="./JS/index.js"></script>
+        <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-analytics.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-firestore.js"
+        // import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore.js'
+
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyC3W6xNeNXJy6yZPL0X5FMuhTBMxJf_O_g",
+          authDomain: "fir-teste-2064e.firebaseapp.com",
+          projectId: "fir-teste-2064e",
+          storageBucket: "fir-teste-2064e.appspot.com",
+          messagingSenderId: "240558157107",
+          appId: "1:240558157107:web:36a89a72ce877eacce6246",
+          measurementId: "G-5B27ER35XS"
+        };
+      
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        //const analytics = getAnalytics(app);
+        var db = firebase.firestore();
+        //const db = getFirestore(app);
+        let collectionName = 'teste;'
+        let documentsIds = [];
+        db.collection(collectionName)
+          .get()
+          .then((querySnapshot) => {
+            querySnapshot.forEach((document) => {
+              documentsIds.push(document);
+            });
+            return buildSuccessDictionary(documentsIds);
+          })
+          .catch((error) => {
+            return buildErrorDictionary(error);
+          });
+        
+      </script>
     </body>
 
 </html>

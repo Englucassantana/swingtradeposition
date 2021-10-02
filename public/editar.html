@@ -7,27 +7,34 @@
     <title>Swing Trade ou Position</title>
     <link href="./CSS/reset.css" type="text/css" rel="stylesheet"/>
     <link href="./CSS/editar.css" type="text/css" rel="stylesheet"/>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 </head>
 <body>
         <div id="sticky-on-top">
             <header>
-                <a id="btn-new-signal" href="./index.html"></a>
+                <a id="btn-new-signal" href="./index.html">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
+                        <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                      </svg>
+                </a>
                 <h1 id="titulo">Edição de Sinal</h1>
             </header>
             <div id="selection-panel">
                     
-                <button class="btn-slide-pair-list">&#8592</button>
+                <button id="previousButtonList" class="btn-slide-pair-list">&#8592</button>
     
                 <div id="pair-selection">
+                    <!-- <span>BTCUSDD</span>
                     <span>BTCUSDD</span>
                     <span>BTCUSDD</span>
                     <span>BTCUSDD</span>
                     <span>BTCUSDD</span>
-                    <span>BTCUSDD</span>
-                    <span>BTCUSDD</span>
+                    <span>BTCUSDD</span> -->
                 </div>
                 
-                <button class="btn-slide-pair-list">&#8594</button>
+                <button id="nextButtonList" class="btn-slide-pair-list">&#8594</button>
     
             </div>
             <div id="pair-selected">
@@ -161,69 +168,70 @@
                     </div>
 
                 </div>
+                <div id="targets-content">
+                    <div class="field-box-main">
+                        
+                        <div class="field-box-not-editable">
 
-                <div class="field-box-main">
-                    
-                    <div class="field-box-not-editable">
+                            <div class="target-input-box">
+                                <div class="label-input-box">
+                                    <span>Alvo1</span>
+                                    <span class="input-field">0</span>
+                                </div>
+                                <div class="btn-edit-target">
+                                </div>
+                            </div>
 
-                        <div class="target-input-box">
-                            <div class="label-input-box">
-                                <span>Alvo1</span>
-                                <span class="input-field">0</span>
+                        </div>
+
+                        <div class="field-box-editable">  
+
+                            <div class="target-input-box editable-target-box">
+                                <div class="label-input-box">
+                                    <label for="target1">Alvo 1:</label>
+                                    <input id="target1" class="targets" type="number">
+                                </div>
+                                <div class="btn-edit-target">
+                                    <button class="remover-alvo">&#215</button>
+                                    <button class="seta">&#8595</button>
+                                    <button class="seta">&#8593</button>
+                                </div>
                             </div>
-                            <div class="btn-edit-target">
-                            </div>
+                            <span class="feedback" style="display:none">Lorem ipsum tincidunt leo vehicula bibendum, sapien aenean neque vitae.</span>
+                                    
                         </div>
 
                     </div>
-
-                    <div class="field-box-editable">  
-
-                        <div class="target-input-box">
-                            <div class="label-input-box">
-                                <label for="target1">Alvo 1:</label>
-                                <input id="target1" class="targets" type="number">
-                            </div>
-                            <div class="btn-edit-target">
-                                <button class="remover-alvo">&#215</button>
-                                <button class="seta">&#8595</button>
-                                <button class="seta">&#8593</button>
-                            </div>
-                        </div>
-                        <span class="feedback" style="display:none">Lorem ipsum tincidunt leo vehicula bibendum, sapien aenean neque vitae.</span>
-                                
-                    </div>
-
-                </div>
-
-                <div class="field-box-main">
-                    
-                    <div class="field-box-not-editable">
-                        <div class="target-input-box">
-                            <div class="label-input-box">
-                                <span>Alvo2</span>
-                                <span class="input-field">0</span>
-                            </div>
-                            <div class="btn-edit-target">
+                
+                    <div class="field-box-main">
+                        
+                        <div class="field-box-not-editable">
+                            <div class="target-input-box">
+                                <div class="label-input-box">
+                                    <span>Alvo2</span>
+                                    <span class="input-field">0</span>
+                                </div>
+                                <div class="btn-edit-target">
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="field-box-editable">
-                        <div class="target-input-box">
-                            <div class="label-input-box">
-                                <label for="target2">Alvo 2:</label>
-                                <input id="target2" class="targets" type="number">
+                        <div class="field-box-editable">
+                            <div class="target-input-box editable-target-box">
+                                <div class="label-input-box">
+                                    <label for="target2">Alvo 2:</label>
+                                    <input id="target2" class="targets" type="number">
+                                </div>
+                                <div class="btn-edit-target">
+                                    <button class="remover-alvo">&#215</button>
+                                    <button class="seta">&#8595</button>
+                                    <button class="seta">&#8593</button>
+                                </div>
                             </div>
-                            <div class="btn-edit-target">
-                                <button class="remover-alvo">&#215</button>
-                                <button class="seta">&#8595</button>
-                                <button class="seta">&#8593</button>
-                            </div>
+                            <span class="feedback" style="display:none">Lorem ipsum tincidunt leo vehicula bibendum, sapien aenean neque vitae.</span>
                         </div>
-                        <span class="feedback" style="display:none">Lorem ipsum tincidunt leo vehicula bibendum, sapien aenean neque vitae.</span>
-                    </div>
 
+                    </div>
                 </div>
                 
                 <div class="field-box-main">
@@ -349,6 +357,50 @@
             <p>back-end:Ramon Brito</p>
             <p>front-end: Lucas Santana</p>
         </footer>
+        <script src="./JS/loadDataBase.js"></script>
+        <script src="./JS/editTargetForm.js"></script>
+        <!-- <script type="module" src="./JS/FirebaseInterfaceWeb.js"></script> -->
+        <script type="module">
+            // Import the functions you need from the SDKs you need
+            //import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
+            //import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-analytics.js";
+            //import { getFirestore } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-firestore.js"
+            // import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore.js'
+    
+            // TODO: Add SDKs for Firebase products that you want to use
+            // https://firebase.google.com/docs/web/setup#available-libraries
+          
+            // Your web app's Firebase configuration
+            // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
+            const firebaseConfig = {
+                apiKey: "AIzaSyA1y4cFpPlS_aig6g7xIH1hPOchEYXl8DU",
+                authDomain: "sardinhaprojetos.firebaseapp.com",
+                databaseURL: "https://sardinhaprojetos-default-rtdb.firebaseio.com",
+                projectId: "sardinhaprojetos",
+                storageBucket: "sardinhaprojetos.appspot.com",
+                messagingSenderId: "1051592867509",
+                appId: "1:1051592867509:web:bfef34f26a4cfd3cb688fc",
+                measurementId: "G-N8ZMRE6DD2"
+            };
+          
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            //const analytics = getAnalytics(app);
+            var db = firebase.firestore();
+            //const db = getFirestore(app);
+            db.collection("TesteSinais")
+                .get()
+                .then((querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+                        // doc.data() is never undefined for query doc snapshots
+                        console.log(doc.id, " => ", doc.data());
+                    });
+                })
+                .catch((error) => {
+                    console.log("Error getting documents: ", error);
+            });
+
+          </script>
 </body>
 </html>
