@@ -254,3 +254,6 @@ footer{
     background-color: DodgerBlue !important;
     color: #ffffff;
 }
+.seta{
+    display: none;
+}
