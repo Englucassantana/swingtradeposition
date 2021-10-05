@@ -2,10 +2,34 @@
 // TODO - [ ] Carregar todos os sinais na pagina
 // TODO - [ ] Mostar apenas o seis sinais na pagina
 
+let signal = {
+    "chartLink":"https://www.tradingview.com/x/76ZNUuZv/",
+    "firstToken":"BAL",
+    "secondToken":"USDT",
+    "pair":"BALUSDT",
+    "buyZoneMin":"24.741",
+    "buyZoneMax":"26.470",
+    "reBuyMin":"20.307",
+    "reBuyMax":"22.010",
+    "targets":[
+    27.37,
+    29.121,
+    32.17,
+    38.762,
+    48.41,
+    68.378
+    ],
+    "stoploss":24,
+    "riskLevel":"MODERADO A ALTO",
+    "advice":"Saída parcial entre os alvos 1 e 2, 50%",
+    "isStPosition":true,
+    "exchange":"kucoin",
+    "tradingDuration":"1"
+}
 
 let signals = [
     {
-        "pair":"BTCUSDD"
+        "pair":"BALUSDT"
     },
     {
         "pair":"BAKEUSDT"
@@ -123,6 +147,10 @@ function loadTitlePair(target){
     let pairSelected = document.getElementById('pair-selected');
     pairSelected = pairSelected.getElementsByTagName('span')[0];
     pairSelected.innerText = target.innerText;
+    let chartLinkPreview = document.getElementById('chartLinkPreview');
+    chartLinkPreview.innerText = signal.chartLink;
+    let buyZoneMinPreview = document.getElementById('buyZoneMinPreview');
+    buyZoneMinPreview.innerText = signal.buyZoneMin;
 }
 
 function loadSignal(event){

@@ -152,6 +152,18 @@ main{
     margin: 10px 10px;
 }
 
+.feedback{
+    padding-top: 0.6vh;
+    color: red;
+    font-size: 10px;
+}
+
+
+.feedback-suppression{
+    display: none;
+}
+
+
 input[type="text"],input[type="search"], select{
     background-color: rgba(255, 255, 255, 0.877);
     border: 0 solid black;

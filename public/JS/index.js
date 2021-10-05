@@ -296,8 +296,8 @@ function reBuyFeedback(){
 
 function targetProfit(target){
     let buyZoneMax = document.getElementById('buyZoneMax');
-    let profit = target.valueAsNumber * 100 / buyZoneMax.valueAsNumber;
-    return profit;
+    let profit = target.valueAsNumber * 100 / buyZoneMax.valueAsNumber - 100;
+    return profit.toFixed(2);
 }
 
 //TODO: A função abaixo precisa ser refatorada
@@ -352,8 +352,8 @@ function targetsContentFeedback(){
 
 function stoplossInjure(target){
     let buyZoneMax = document.getElementById('buyZoneMax');
-    let injure = target.valueAsNumber * 100 / buyZoneMax.valueAsNumber;
-    return injure;
+    let injure = (target.valueAsNumber * 100 / buyZoneMax.valueAsNumber) - 100;
+    return injure.toFixed(2);
 }
 
 function stoplossFeedback(){
@@ -362,7 +362,7 @@ function stoplossFeedback(){
     let feedback = stoplossBox.getElementsByClassName('feedback')[0];
     //TODO:avisar caso o valor do stoploss seja maior que o valor da zona de compra máxima.
     let injure = stoplossInjure(target);
-    if(injure > 100){
+    if(injure > 0){
         stoplossBox.style = 'background-color: rgb(255, 229, 229);';
         feedback.textContent = `${injure}%, o stoploss tem valor maior que a zona de compra máxima`;
         feedback.className = "feedback feedback-red";
