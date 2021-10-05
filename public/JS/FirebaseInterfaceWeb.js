@@ -12,14 +12,14 @@ import { initializeApp } from "firebase/app";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyA1y4cFpPlS_aig6g7xIH1hPOchEYXl8DU",
-  authDomain: "sardinhaprojetos.firebaseapp.com",
-  databaseURL: "https://sardinhaprojetos-default-rtdb.firebaseio.com",
-  projectId: "sardinhaprojetos",
-  storageBucket: "sardinhaprojetos.appspot.com",
+  apiKey           : "AIzaSyA1y4cFpPlS_aig6g7xIH1hPOchEYXl8DU",
+  authDomain       : "sardinhaprojetos.firebaseapp.com",
+  databaseURL      : "https://sardinhaprojetos-default-rtdb.firebaseio.com",
+  projectId        : "sardinhaprojetos",
+  storageBucket    : "sardinhaprojetos.appspot.com",
   messagingSenderId: "1051592867509",
-  appId: "1:1051592867509:web:bfef34f26a4cfd3cb688fc",
-  measurementId: "G-N8ZMRE6DD2",
+  appId            : "1:1051592867509:web:bfef34f26a4cfd3cb688fc",
+  measurementId    : "G-N8ZMRE6DD2",
 };
 
 // Initialize Firebase
@@ -27,20 +27,20 @@ const app = initializeApp(firebaseConfig);
 
 const db = getFirestore();
 
-const SignalsCollection = "Sinais";
+const SignalsCollection       = "Sinais";
 const ClosedSignalsCollection = "SinaisFechado";
 
-const StPositionSignalsCollection = "SinaisStPosition";
+const StPositionSignalsCollection       = "SinaisStPosition";
 const ClosedStPositionSignalsCollection = "SinaisStPositionFechado";
 
-const TestSignalsCollection = "TesteSinais";
-const TestClosedSignalsCollection = "TesteSinaisFechado";
-const TestStPositionSignalsCollection = "TesteSinaisStPosition";
+const TestSignalsCollection                 = "TesteSinais";
+const TestClosedSignalsCollection           = "TesteSinaisFechado";
+const TestStPositionSignalsCollection       = "TesteSinaisStPosition";
 const TestClosedStPositionSignalsCollection = "TesteSinaisStPositionFechado";
 
-let signalsCollection = SignalsCollection;
-let closedSignalsCollection = ClosedSignalsCollection;
-let signalsStPositionCollection = StPositionSignalsCollection;
+let signalsCollection                 = SignalsCollection;
+let closedSignalsCollection           = ClosedSignalsCollection;
+let signalsStPositionCollection       = StPositionSignalsCollection;
 let closedStPositionSignalsCollection = ClosedStPositionSignalsCollection;
 
 let testMode = false;
@@ -92,22 +92,22 @@ function readCollectionDocument(collectionName, documentId) {
 function buildSuccessDictionary(data) {
   return {
     status: true,
-    data: data,
+    data  : data,
   };
 }
 
 function buildErrorDictionary(errorMessage) {
   return {
     status: false,
-    error: errorMessage,
+    error : errorMessage,
   };
 }
 
 module.exports = {
-  getCollectionDocumentsIds: getCollectionDocumentsIds,
-  readCollectionDocument: readCollectionDocument,
-  SignalsCollection: SignalsCollection,
-  StPositionSignalsCollection: StPositionSignalsCollection,
-  TestSignalsCollection: TestSignalsCollection,
+  getCollectionDocumentsIds      : getCollectionDocumentsIds,
+  readCollectionDocument         : readCollectionDocument,
+  SignalsCollection              : SignalsCollection,
+  StPositionSignalsCollection    : StPositionSignalsCollection,
+  TestSignalsCollection          : TestSignalsCollection,
   TestStPositionSignalsCollection: TestStPositionSignalsCollection,
 };

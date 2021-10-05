@@ -2,7 +2,7 @@
 
 function autocomplete(inp, arr) {
     /*the autocomplete function takes two arguments,
-    the text field element and an targets of possible autocompleted values:*/
+    the text field element and an targets of possible autocompleted values: */
     var currentFocus;
     /*execute a function when someone writes in the text field:*/
     inp.addEventListener("input", function(e) {
@@ -24,7 +24,7 @@ function autocomplete(inp, arr) {
                 /*create a DIV element for each matching element:*/
                 b = document.createElement("DIV");
                 /*make the matching letters bold:*/
-                b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                b.innerHTML  = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
                 b.innerHTML += arr[i].substr(val.length);
                 /*insert a input field that will hold the current targets item's value:*/
                 b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
@@ -43,17 +43,17 @@ function autocomplete(inp, arr) {
     });
     /*execute a function presses a key on the keyboard:*/
     inp.addEventListener("keydown", function(e) {
-        var x = document.getElementById(this.id + "autocomplete-list");
-        if (x) x = x.getElementsByTagName("div");
+        var x     = document.getElementById(this.id + "autocomplete-list");
+        if  (x) x = x.getElementsByTagName("div");
         if (e.keyCode == 40) {
             /*If the arrow DOWN key is pressed,
-            increase the currentFocus variable:*/
+            increase the currentFocus variable: */
             currentFocus++;
             /*and and make the current item more visible:*/
             addActive(x);
         } else if (e.keyCode == 38) { //up
             /*If the arrow UP key is pressed,
-            decrease the currentFocus variable:*/
+            decrease the currentFocus variable: */
             currentFocus--;
             /*and and make the current item more visible:*/
             addActive(x);
@@ -72,7 +72,7 @@ function autocomplete(inp, arr) {
         /*start by removing the "active" class on all items:*/
         removeActive(x);
         if (currentFocus >= x.length) currentFocus = 0;
-        if (currentFocus < 0) currentFocus = (x.length - 1);
+        if (currentFocus < 0) currentFocus         = (x.length - 1);
         /*add class "autocomplete-active":*/
         x[currentFocus].classList.add("autocomplete-active");
     }
@@ -84,7 +84,7 @@ function autocomplete(inp, arr) {
     }
     function closeAllLists(elmnt) {
         /*close all autocomplete lists in the document,
-        except the one passed as an argument:*/
+        except the one passed as an argument: */
         var x = document.getElementsByClassName("autocomplete-items");
         for (var i = 0; i < x.length; i++) {
             if (elmnt != x[i] && elmnt != inp) {
@@ -101,36 +101,36 @@ function autocomplete(inp, arr) {
   
 
 function atualizarComando(){
-    let pair = document.getElementById('pair');
-    let chartLink = document.getElementById('chartLink');
-    let buyZoneMin = document.getElementById('buyZoneMin');
-    let buyZoneMax = document.getElementById('buyZoneMax');
-    let reBuyMin = document.getElementById('reBuyMin');
-    let reBuyMax = document.getElementById('reBuyMax');
-    let targets = document.getElementsByClassName('targets');
-    let stoploss = document.getElementById('stoploss');
-    let advice = document.getElementById('advice');
-    let isStPosition = document.getElementById('isStPosition');
-    let exchange = document.getElementById('exchange');
+    let pair            = document.getElementById('pair');
+    let chartLink       = document.getElementById('chartLink');
+    let buyZoneMin      = document.getElementById('buyZoneMin');
+    let buyZoneMax      = document.getElementById('buyZoneMax');
+    let reBuyMin        = document.getElementById('reBuyMin');
+    let reBuyMax        = document.getElementById('reBuyMax');
+    let targets         = document.getElementsByClassName('targets');
+    let stoploss        = document.getElementById('stoploss');
+    let advice          = document.getElementById('advice');
+    let isStPosition    = document.getElementById('isStPosition');
+    let exchange        = document.getElementById('exchange');
     let tradingDuration = document.getElementById('tradingDuration');
 
-    let targettargets=[];
+    let targettargets = [];
     for (let index = 0; index < targets.length; index++) {
         targettargets.push(targets[index].valueAsNumber);
         
     }
 
-    jsonComando.pair = pair.value;
-    jsonComando.chartLink = chartLink.value;
-    jsonComando.buyZoneMin = buyZoneMin.valueAsNumber;
-    jsonComando.buyZoneMax = buyZoneMax.valueAsNumber;
-    jsonComando.reBuyMin = reBuyMin.valueAsNumber;
-    jsonComando.reBuyMax = reBuyMax.valueAsNumber;
-    jsonComando.targets = targettargets;
-    jsonComando.stoploss = stoploss.valueAsNumber;
-    jsonComando.advice = advice.value;
-    jsonComando.isStPosition = isStPosition.value;
-    jsonComando.exchange = exchange.value;
+    jsonComando.pair            = pair.value;
+    jsonComando.chartLink       = chartLink.value;
+    jsonComando.buyZoneMin      = buyZoneMin.valueAsNumber;
+    jsonComando.buyZoneMax      = buyZoneMax.valueAsNumber;
+    jsonComando.reBuyMin        = reBuyMin.valueAsNumber;
+    jsonComando.reBuyMax        = reBuyMax.valueAsNumber;
+    jsonComando.targets         = targettargets;
+    jsonComando.stoploss        = stoploss.valueAsNumber;
+    jsonComando.advice          = advice.value;
+    jsonComando.isStPosition    = isStPosition.value;
+    jsonComando.exchange        = exchange.value;
     jsonComando.tradingDuration = tradingDuration.value;
 }
 
@@ -147,15 +147,15 @@ function validarComando(){
 }
 
 function copiarComandoParaAreaDeTransferencia(){
-    let comando = document.getElementById('comando');
-    comando.innerText = JSON.stringify(jsonComando);
+    let comando           = document.getElementById('comando');
+        comando.innerText = JSON.stringify(jsonComando);
     navigator.clipboard.writeText(JSON.stringify(jsonComando));
     alert("Comando copiado para a área de transferência");
 }
 
 function carregarValoresMaximoEMinimo(){
-    let myInput = document.getElementById("pair");
-        let precoAtualDoAtivo = 0;
+    let myInput           = document.getElementById("pair");
+    let precoAtualDoAtivo = 0;
         for (let i = 0; i < responseObject.length; i++) {
             if(responseObject[i].symbol == myInput.value){
                 precoAtualDoAtivo = responseObject[i].price;
@@ -163,10 +163,10 @@ function carregarValoresMaximoEMinimo(){
             }
         }
         if(precoAtualDoAtivo > 0){
-            let valorMinimoDeEntrada = document.getElementById("buyZoneMin");
-            valorMinimoDeEntrada.value = precoAtualDoAtivo*0.995;
-            let valorMaximoDeEntrada = document.getElementById("buyZoneMax");
-            valorMaximoDeEntrada.value = precoAtualDoAtivo*1.005;
+            let valorMinimoDeEntrada       = document.getElementById("buyZoneMin");
+                valorMinimoDeEntrada.value = precoAtualDoAtivo*0.995;
+            let valorMaximoDeEntrada       = document.getElementById("buyZoneMax");
+                valorMaximoDeEntrada.value = precoAtualDoAtivo*1.005;
             console.log(valorMaximoDeEntrada.value);
         }else{
             alert("Simbolo não relacionado na binance");
@@ -179,18 +179,18 @@ function atualizarEtiquetaDosAlvos(){
         const elementLabel = targetContent[index].getElementsByTagName('label')[0];
         console.log(elementLabel);
         elementLabel.innerText = `Alvo ${index+1}:`;
-        elementLabel.htmlFor = `alvo${index+1}`;
+        elementLabel.htmlFor   = `alvo${index+1}`;
 
-        const elementInput = targetContent[index].getElementsByTagName('input')[0];
-        elementInput.id = `alvo${index+1}`;
+        const elementInput    = targetContent[index].getElementsByTagName('input')[0];
+              elementInput.id = `alvo${index+1}`;
         console.log(elementInput);
     }
 }
 
 function pairFeedback(){
-    let target = document.getElementById('pair');
-    let pairBox = document.getElementById('pair-box');
-    let feedback = pairBox.getElementsByClassName('feedback')[0];
+    let target      = document.getElementById('pair');
+    let pairBox     = document.getElementById('pair-box');
+    let feedback    = pairBox.getElementsByClassName('feedback')[0];
     let pairConfirm = false;
     buyZoneFeedback();
     //TODO - [ ] Avisar caso o pair não esteja relacionado na binance
@@ -200,61 +200,61 @@ function pairFeedback(){
         }        
     }
     if(!pairConfirm){
-        pairBox.style = 'background-color: rgb(255, 229, 229);';
+        pairBox.style        = 'background-color: rgb(255, 229, 229);';
         feedback.textContent = 'Pair não relacionado na binance';
-        feedback.className = "feedback";        
+        feedback.className   = "feedback";
         return false;
     }
     //TODO - [ ] Caso não haja problemas de preenchimento mudar cor da estrutura para verde
-    pairBox.style = 'background-color: rgb(209, 255, 209);';
+    pairBox.style      = 'background-color: rgb(209, 255, 209);';
     feedback.className = "feedback feedback-suppression";
     return true;
 }
 
 function chartLinkFeedback(){
-    let target = event.target;
+    let target       = event.target;
     let chartLinkBox = document.getElementById('chart-link-box');
-    let feedback = chartLinkBox.getElementsByClassName('feedback')[0];
+    let feedback     = chartLinkBox.getElementsByClassName('feedback')[0];
     if(chartLink.value !=''){
         chartLinkBox.style = 'background-color: rgb(209, 255, 209);';
         feedback.className = "feedback feedback-suppression";
         return true;
     }else{
-        chartLinkBox.style = 'background-color: rgb(255, 229, 229);';
+        chartLinkBox.style   = 'background-color: rgb(255, 229, 229);';
         feedback.textContent = 'Preencher campo!';
-        feedback.className = "feedback";        
+        feedback.className   = "feedback";
         return false;
     }
 }
 
 function buyZoneFeedback(){
     targetsContentFeedback();
-    let buyZoneMax = document.getElementById('buyZoneMax');
-    let buyZoneMin = document.getElementById('buyZoneMin');
+    let buyZoneMax         = document.getElementById('buyZoneMax');
+    let buyZoneMin         = document.getElementById('buyZoneMin');
     let buyZoneMinFeedback = document.getElementById('buyZoneMinFeedback');
     let buyZoneMaxFeedback = document.getElementById('buyZoneMaxFeedback');
-    let buyZoneBox = buyZone.parentNode;
+    let buyZoneBox         = buyZone.parentNode;
     if(buyZoneMin.value ==''){
-        buyZoneBox.style = 'background-color: rgb(255, 229, 229);';
-        buyZoneMinFeedback .textContent = 'Preencher campo!';
-        buyZoneMinFeedback .className = "feedback";
+                           buyZoneBox.style = 'background-color: rgb(255, 229, 229);';
+        buyZoneMinFeedback .textContent     = 'Preencher campo!';
+        buyZoneMinFeedback .className       = "feedback";
         return false
     }
     if(buyZoneMin.value > buyZoneMax.value){
-        buyZoneBox.style = 'background-color: rgb(255, 229, 229);';
-        buyZoneMinFeedback .textContent = 'O valor do campo de zona mínima de compra é maior que o valor de zona de compra máxima';
-        buyZoneMinFeedback .className = "feedback";
+                           buyZoneBox.style = 'background-color: rgb(255, 229, 229);';
+        buyZoneMinFeedback .textContent     = 'O valor do campo de zona mínima de compra é maior que o valor de zona de compra máxima';
+        buyZoneMinFeedback .className       = "feedback";
         return false
     }
 
     if(buyZoneMax.value ==''){
-        buyZoneBox.style = 'background-color: rgb(255, 229, 229);';
-        buyZoneMaxFeedback .textContent = 'Preencher campo!';
-        buyZoneMaxFeedback .className = "feedback";
+                           buyZoneBox.style = 'background-color: rgb(255, 229, 229);';
+        buyZoneMaxFeedback .textContent     = 'Preencher campo!';
+        buyZoneMaxFeedback .className       = "feedback";
         return false
     }
 
-    buyZoneBox.style = 'background-color: rgb(209, 255, 209);';
+    buyZoneBox.style             = 'background-color: rgb(209, 255, 209);';
     buyZoneMinFeedback.className = "feedback feedback-suppression";
     buyZoneMaxFeedback.className = "feedback feedback-suppression";
     return true;  
@@ -262,32 +262,32 @@ function buyZoneFeedback(){
 }
 
 function reBuyFeedback(){
-    let reBuyMax = document.getElementById('reBuyMax');
-    let reBuyMin = document.getElementById('reBuyMin');
+    let reBuyMax         = document.getElementById('reBuyMax');
+    let reBuyMin         = document.getElementById('reBuyMin');
     let reBuyMinFeedback = document.getElementById('reBuyMinFeedback');
     let reBuyMaxFeedback = document.getElementById('reBuyMaxFeedback');
-    let reBuyBox = reBuy.parentNode;
+    let reBuyBox         = reBuy.parentNode;
     if(reBuyMin.value ==''){
-        reBuyBox.style = 'background-color: rgb(255, 229, 229);';
-        reBuyMinFeedback .textContent = 'Preencher campo!';
-        reBuyMinFeedback .className = "feedback";
+                         reBuyBox.style = 'background-color: rgb(255, 229, 229);';
+        reBuyMinFeedback .textContent   = 'Preencher campo!';
+        reBuyMinFeedback .className     = "feedback";
         return false
     }
     if(reBuyMin.value > reBuyMax.value){
-        reBuyBox.style = 'background-color: rgb(255, 229, 229);';
-        reBuyMinFeedback .textContent = 'O valor do campo de recompra mínima é maior que o valor de recompra máxima';
-        reBuyMinFeedback .className = "feedback";
+                         reBuyBox.style = 'background-color: rgb(255, 229, 229);';
+        reBuyMinFeedback .textContent   = 'O valor do campo de recompra mínima é maior que o valor de recompra máxima';
+        reBuyMinFeedback .className     = "feedback";
         return false
     }
 
     if(reBuyMax.value ==''){
-        reBuyBox.style = 'background-color: rgb(255, 229, 229);';
-        reBuyMaxFeedback .textContent = 'Preencher campo!';
-        reBuyMaxFeedback .className = "feedback";
+                         reBuyBox.style = 'background-color: rgb(255, 229, 229);';
+        reBuyMaxFeedback .textContent   = 'Preencher campo!';
+        reBuyMaxFeedback .className     = "feedback";
         return false
     }
 
-    reBuyBox.style = 'background-color: rgb(209, 255, 209);';
+    reBuyBox.style             = 'background-color: rgb(209, 255, 209);';
     reBuyMinFeedback.className = "feedback feedback-suppression";
     reBuyMaxFeedback.className = "feedback feedback-suppression";
     return true;  
@@ -296,51 +296,51 @@ function reBuyFeedback(){
 
 function targetProfit(target){
     let buyZoneMax = document.getElementById('buyZoneMax');
-    let profit = target.valueAsNumber * 100 / buyZoneMax.valueAsNumber - 100;
+    let profit     = target.valueAsNumber * 100 / buyZoneMax.valueAsNumber - 100;
     return profit.toFixed(2);
 }
 
 //TODO: A função abaixo precisa ser refatorada
 function targetsContentFeedback(){
-    let targets = document.getElementsByClassName('targets');
+    let targets           = document.getElementsByClassName('targets');
     let targetsContentBox = targetsContent.parentNode.parentNode;
     for (let index = 0; index < targets.length; index++) {
-        const target = targets[index];
-        let profit = targetProfit(target);
-        let feedbackContent = target.parentNode.parentNode;
-        feedbackContent = feedbackContent.getElementsByClassName('feedback-content')[0];
+        const target          = targets[index];
+        let   profit          = targetProfit(target);
+        let   feedbackContent = target.parentNode.parentNode;
+              feedbackContent = feedbackContent.getElementsByClassName('feedback-content')[0];
         //TODO: avisar caso não haja campos preenchidos
         if(target.value == ''){
-            targetsContentBox.style = 'background-color: rgb(255, 229, 229);';
+            targetsContentBox.style     = 'background-color: rgb(255, 229, 229);';
             feedbackContent.textContent = 'Preencher campo!';
-            feedbackContent.className = "feedback-content feedback-red";
+            feedbackContent.className   = "feedback-content feedback-red";
             return false;
         }else{
             feedbackContent.textContent = profit + '%';
-            feedbackContent.className = "feedback-content feedback-green";
+            feedbackContent.className   = "feedback-content feedback-green";
         }
         
-        let buyZoneMax = document.getElementById('buyZoneMax');        
+        let buyZoneMax = document.getElementById('buyZoneMax');
         //TODO: avisar caso o valor do alvo seja menor que o valor da zona de compra máxima
         if(target.valueAsNumber < buyZoneMax.valueAsNumber){
-            targetsContentBox.style = 'background-color: rgb(255, 229, 229);';
+            targetsContentBox.style     = 'background-color: rgb(255, 229, 229);';
             feedbackContent.textContent = `${profit}%, o alvo tem valor menor que a zona de compra máxima`;
-            feedbackContent.className = "feedback-content feedback-red";
+            feedbackContent.className   = "feedback-content feedback-red";
             return false;
         }else{
             feedbackContent.textContent = profit + '%';
-            feedbackContent.className = "feedback-content feedback-green";
+            feedbackContent.className   = "feedback-content feedback-green";
         }
         //TODO: avisar se o valor do alvo for menor que o valor do alvo anterior
         if( index!=0){
             if(targets[index - 1].valueAsNumber > target.valueAsNumber){
-                targetsContentBox.style = 'background-color: rgb(255, 229, 229);';
+                targetsContentBox.style     = 'background-color: rgb(255, 229, 229);';
                 feedbackContent.textContent = `${profit}%, o alvo anterior maior que esse alvo!`;
-                feedbackContent.className = "feedback-content feedback-red";
+                feedbackContent.className   = "feedback-content feedback-red";
                 return false;
             }else{
                 feedbackContent.textContent = profit + '%';
-                feedbackContent.className = "feedback-content feedback-green";
+                feedbackContent.className   = "feedback-content feedback-green";
             }
         }
 
@@ -352,58 +352,58 @@ function targetsContentFeedback(){
 
 function stoplossInjure(target){
     let buyZoneMax = document.getElementById('buyZoneMax');
-    let injure = (target.valueAsNumber * 100 / buyZoneMax.valueAsNumber) - 100;
+    let injure     = (target.valueAsNumber * 100 / buyZoneMax.valueAsNumber) - 100;
     return injure.toFixed(2);
 }
 
 function stoplossFeedback(){
-    let target = event.target;
+    let target      = event.target;
     let stoplossBox = target.parentNode.parentNode;
-    let feedback = stoplossBox.getElementsByClassName('feedback')[0];
+    let feedback    = stoplossBox.getElementsByClassName('feedback')[0];
     //TODO:avisar caso o valor do stoploss seja maior que o valor da zona de compra máxima.
     let injure = stoplossInjure(target);
     if(injure > 0){
-        stoplossBox.style = 'background-color: rgb(255, 229, 229);';
+        stoplossBox.style    = 'background-color: rgb(255, 229, 229);';
         feedback.textContent = `${injure}%, o stoploss tem valor maior que a zona de compra máxima`;
-        feedback.className = "feedback feedback-red";
+        feedback.className   = "feedback feedback-red";
         return false;
     }
     //TODO: Caso não haja problemas de preenchimento mudar cor da estrutura para verde
     //TODO: avisar a porcentagem em relação a zona máxima de compra.
     feedback.textContent = injure + '%';
-    feedback.className = "feedback feedback-green";
-    stoplossBox.style = 'background-color: rgb(209, 255, 209);';
+    feedback.className   = "feedback feedback-green";
+    stoplossBox.style    = 'background-color: rgb(209, 255, 209);';
     return true;
 }
 
 function adviceFeedback(){
-    let target = event.target;
+    let target    = event.target;
     let adviceBox = target.parentNode.parentNode;
-    let feedback =  adviceBox.getElementsByClassName('feedback')[0];
+    let feedback  = adviceBox.getElementsByClassName('feedback')[0];
     //TODO: avisar caso não haja campos preenchidos;
     if(target.value == ''){
-        adviceBox.style = 'background-color: rgb(255, 229, 229);';
+        adviceBox.style      = 'background-color: rgb(255, 229, 229);';
         feedback.textContent = 'Preencher campo!';
-        feedback.className = "feedback";
+        feedback.className   = "feedback";
         return false
     }
      //TODO: Caso não haja problemas de preenchimento mudar cor da estrutura para verde
-    adviceBox.style = 'background-color: rgb(209, 255, 209);';
+    adviceBox.style    = 'background-color: rgb(209, 255, 209);';
     feedback.className = "feedback feedback-suppression";
     return true;   
 }
 
 function exchangeFeedback(){
-    let target = event.target;
+    let target      = event.target;
     let exchangeBox = target.parentNode.parentNode;
-    let feedback =  exchangeBox.getElementsByClassName('feedback')[0];
+    let feedback    = exchangeBox.getElementsByClassName('feedback')[0];
     if(target.value == ''){
-        exchangeBox.style = 'background-color: rgb(255, 229, 229);';
+        exchangeBox.style  = 'background-color: rgb(255, 229, 229);';
         feedback.className = "feedback";
         return true;
     }
      //TODO: Caso não haja problemas de preenchimento mudar cor da estrutura para verde
-    exchangeBox.style = 'background-color: rgb(209, 255, 209);';
+    exchangeBox.style  = 'background-color: rgb(209, 255, 209);';
     feedback.className = "feedback feedback-suppression";
     return true;   
 }
@@ -475,26 +475,26 @@ geradorDeComando.addEventListener('click', function(){
 let adicionarNovoAlvo = document.getElementById("adicionar-alvo");
 adicionarNovoAlvo.addEventListener("click", ()=>{
     event.preventDefault();
-    let targetsContent = document.getElementById("targets-content");
-    let targetContent = document.getElementsByClassName("target-content");
-    let newTargetContentNumber = targetContent.length + 1;
-    let newTargetContent = document.createElement('div');
-    newTargetContent.className = "target-content"
-    let newMsg= `
-        <div class="target-input-content">
-            <label class="label-align" for="target${newTargetContentNumber}">Alvo ${newTargetContentNumber}:</label>
-            <input id="target${newTargetContentNumber}" class="targets" type="number">
-            <button class="remover-alvo">&#215</button>
-            <button class="seta">&#8595</button>
-            <button class="seta">&#8593</button>
+    let targetsContent             = document.getElementById("targets-content");
+    let targetContent              = document.getElementsByClassName("target-content");
+    let newTargetContentNumber     = targetContent.length + 1;
+    let newTargetContent           = document.createElement('div');
+        newTargetContent.className = "target-content"
+    let newMsg                     = `
+        <div    class = "target-input-content">
+        <label  class = "label-align" for                       = "target${newTargetContentNumber}">Alvo ${newTargetContentNumber}:</label>
+        <input  id    = "target${newTargetContentNumber}" class = "targets" type = "number">
+        <button class = "remover-alvo">&#215</button>
+        <button class = "seta">&#8595</button>
+        <button class = "seta">&#8593</button>
         </div>
-        <span class="feedback-content"></span>
+        <span class = "feedback-content"></span>
     `
     newTargetContent.innerHTML = newMsg;
        
     targetsContent.appendChild(newTargetContent);
     console.log(targetsContent);
-    removerAlvo = document.getElementsByClassName('remover-alvo');       
+    removerAlvo = document.getElementsByClassName('remover-alvo');
 });
 
 targetsContent.addEventListener('click', ()=>{
@@ -503,7 +503,7 @@ targetsContent.addEventListener('click', ()=>{
     let target = event.target;
     console.log(target)
     if(target.className == "remover-alvo"){
-        target = target.parentNode.parentNode;
+        target       = target.parentNode.parentNode;
         fatherTarget = target.parentNode;
         fatherTarget.removeChild(target);
         console.log("Alvo removido");
