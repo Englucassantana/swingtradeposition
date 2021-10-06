@@ -124,7 +124,7 @@ function atualizarComando(){
         targettargets.push(targets[index].valueAsNumber);
         
     }
-
+    jsonComando = {};
     jsonComando.chartLink   = chartLink.value;
     jsonComando.firstToken  = pair.value.replace('USDT','');
     jsonComando.secondToken = 'USDT';
