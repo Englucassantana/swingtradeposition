@@ -225,7 +225,7 @@ function pairFeedback(){
 }
 
 function isValidURL(string) {
-    var res = string.match(/(http(s)?:\/\/.)?(www\.)?tradingview\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
+    var res = string.match(/(https\:\/\/www\.tradingview.com\/)+(\w)+(\/\w)/g);
     return (res !== null)
 };
 
