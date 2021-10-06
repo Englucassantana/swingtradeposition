@@ -19,6 +19,20 @@ function copiarComandoParaAreaDeTransferencia(){
     alert("Comando copiado para a área de transferência");
 }
 
+function checkNewTargets(targets){
+    // @param targets  vetor com os valores dos alvos
+    // TODO - [ ] verificar se há novos alvos adicionados
+    if(signal.targets.length < targets.length){
+        for (let index = signal.targets.length; index < targets.length; index++) {
+            const target = targets[index].valueAsNumber;
+            jsonComando.newTargets.push(target);
+            
+        }
+    }
+}
+    // TODO - [ ] Verificar se há alvos removidos
+    // TODO - [ ] Verificar se há alvos editados
+
 function atualizarComando(){
     let pair            = document.getElementById('pair-selected');
     let chartLink       = document.getElementById('chartLink');
@@ -45,7 +59,8 @@ function atualizarComando(){
     jsonComando.buyZoneMax      = buyZoneMax.valueAsNumber;
     jsonComando.reBuyMin        = reBuyMin.valueAsNumber;
     jsonComando.reBuyMax        = reBuyMax.valueAsNumber;
-    jsonComando.targets         = targettargets;
+    checkNewTargets(targettargets);
+    // jsonComando.targets         = targettargets;
     jsonComando.stoploss        = stoploss.valueAsNumber;
     jsonComando.advice          = advice.value;
     jsonComando.isStPosition    = isStPosition.value;

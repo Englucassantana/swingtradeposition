@@ -99,7 +99,11 @@ function autocomplete(inp, arr) {
     });
   }
   
-
+function tradingDurationAsANumber(value){
+    if(value == "0-ST") return 0;
+    if(value == "1-ST/Position") return 1;
+    if(value == "2-Position") return 2;
+}
 function atualizarComando(){
     let pair            = document.getElementById('pair');
     let chartLink       = document.getElementById('chartLink');
@@ -109,6 +113,7 @@ function atualizarComando(){
     let reBuyMax        = document.getElementById('reBuyMax');
     let targets         = document.getElementsByClassName('targets');
     let stoploss        = document.getElementById('stoploss');
+    let levelRisk       = document.getElementById('levelRisk')
     let advice          = document.getElementById('advice');
     let isStPosition    = document.getElementById('isStPosition');
     let exchange        = document.getElementById('exchange');
@@ -120,18 +125,21 @@ function atualizarComando(){
         
     }
 
-    jsonComando.pair            = pair.value;
     jsonComando.chartLink       = chartLink.value;
+    jsonComando.firstToken      = pair.value.replace('USDT','');
+    jsonComando.secondToken     = 'USDT';    
+    jsonComando.pair            = pair.value;    
     jsonComando.buyZoneMin      = buyZoneMin.valueAsNumber;
     jsonComando.buyZoneMax      = buyZoneMax.valueAsNumber;
     jsonComando.reBuyMin        = reBuyMin.valueAsNumber;
     jsonComando.reBuyMax        = reBuyMax.valueAsNumber;
     jsonComando.targets         = targettargets;
     jsonComando.stoploss        = stoploss.valueAsNumber;
+    jsonComando.riskLevel       = levelRisk.value;
     jsonComando.advice          = advice.value;
-    jsonComando.isStPosition    = isStPosition.value;
+    jsonComando.isStPosition    = true;
     jsonComando.exchange        = exchange.value;
-    jsonComando.tradingDuration = tradingDuration.value;
+    jsonComando.tradingDuration = tradingDurationAsANumber(tradingDuration.value);
 }
 
 
@@ -235,22 +243,22 @@ function buyZoneFeedback(){
     let buyZoneMaxFeedback = document.getElementById('buyZoneMaxFeedback');
     let buyZoneBox         = buyZone.parentNode;
     if(buyZoneMin.value ==''){
-                           buyZoneBox.style = 'background-color: rgb(255, 229, 229);';
-        buyZoneMinFeedback .textContent     = 'Preencher campo!';
-        buyZoneMinFeedback .className       = "feedback";
+                                                                 buyZoneBox.style = 'background-color: rgb(255, 229, 229);';
+                                              buyZoneMinFeedback .textContent     = 'Preencher campo!';
+                                              buyZoneMinFeedback .className       = "feedback";
         return false
     }
     if(buyZoneMin.value > buyZoneMax.value){
-                           buyZoneBox.style = 'background-color: rgb(255, 229, 229);';
-        buyZoneMinFeedback .textContent     = 'O valor do campo de zona mínima de compra é maior que o valor de zona de compra máxima';
-        buyZoneMinFeedback .className       = "feedback";
+                                                                 buyZoneBox.style = 'background-color: rgb(255, 229, 229);';
+                                              buyZoneMinFeedback .textContent     = 'O valor do campo de zona mínima de compra é maior que o valor de zona de compra máxima';
+                                              buyZoneMinFeedback .className       = "feedback";
         return false
     }
 
     if(buyZoneMax.value ==''){
-                           buyZoneBox.style = 'background-color: rgb(255, 229, 229);';
-        buyZoneMaxFeedback .textContent     = 'Preencher campo!';
-        buyZoneMaxFeedback .className       = "feedback";
+                                                                 buyZoneBox.style = 'background-color: rgb(255, 229, 229);';
+                                              buyZoneMaxFeedback .textContent     = 'Preencher campo!';
+                                              buyZoneMaxFeedback .className       = "feedback";
         return false
     }
 
@@ -268,22 +276,22 @@ function reBuyFeedback(){
     let reBuyMaxFeedback = document.getElementById('reBuyMaxFeedback');
     let reBuyBox         = reBuy.parentNode;
     if(reBuyMin.value ==''){
-                         reBuyBox.style = 'background-color: rgb(255, 229, 229);';
-        reBuyMinFeedback .textContent   = 'Preencher campo!';
-        reBuyMinFeedback .className     = "feedback";
+                                                           reBuyBox.style = 'background-color: rgb(255, 229, 229);';
+                                          reBuyMinFeedback .textContent   = 'Preencher campo!';
+                                          reBuyMinFeedback .className     = "feedback";
         return false
     }
     if(reBuyMin.value > reBuyMax.value){
-                         reBuyBox.style = 'background-color: rgb(255, 229, 229);';
-        reBuyMinFeedback .textContent   = 'O valor do campo de recompra mínima é maior que o valor de recompra máxima';
-        reBuyMinFeedback .className     = "feedback";
+                                                           reBuyBox.style = 'background-color: rgb(255, 229, 229);';
+                                          reBuyMinFeedback .textContent   = 'O valor do campo de recompra mínima é maior que o valor de recompra máxima';
+                                          reBuyMinFeedback .className     = "feedback";
         return false
     }
 
     if(reBuyMax.value ==''){
-                         reBuyBox.style = 'background-color: rgb(255, 229, 229);';
-        reBuyMaxFeedback .textContent   = 'Preencher campo!';
-        reBuyMaxFeedback .className     = "feedback";
+                                                           reBuyBox.style = 'background-color: rgb(255, 229, 229);';
+                                          reBuyMaxFeedback .textContent   = 'Preencher campo!';
+                                          reBuyMaxFeedback .className     = "feedback";
         return false
     }
 
@@ -419,6 +427,15 @@ let jsonComando = {
 
 atualizarComando();
 
+function USDTSelection(listaDeSimbolos){
+    let USDTSymbols = []
+    listaDeSimbolos.forEach(element => {
+        if(element.endsWith('USDT')){
+            USDTSymbols.push(element);
+        }
+    });
+    return USDTSymbols;
+}
 //*Eventos
 xhr.onload = function () {
     if (xhr.status == 200) {
@@ -426,7 +443,9 @@ xhr.onload = function () {
         for (let i = 0; i < responseObject.length; i++) {
             listaDeSimbolos.push(responseObject[i].symbol);
         }
-        console.log(listaDeSimbolos);
+        listaDeSimbolos = USDTSelection(listaDeSimbolos);
+        console.log(`Simbolos com secondToken USDT: ${listaDeSimbolos}`);
+        //console.log(listaDeSimbolos);
         autocomplete(document.getElementById("pair"), listaDeSimbolos);
     }
   }

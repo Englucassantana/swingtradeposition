@@ -107,8 +107,8 @@ function nextSignals() {
             const span       = elSpan[index];
                   span.style = 'display:none;';
         }
-            firstShowedSignal   = lastShowedSignal +1;
-        let newLastShowedSignal = lastShowedSignal
+                firstShowedSignal   = lastShowedSignal +1;
+            let newLastShowedSignal = lastShowedSignal
         for (let index = lastShowedSignal +1; index < lastShowedSignal +1 + remanant; index++) {
             const span       = elSpan[index];
                   span.style = 'display:inline;';
@@ -144,18 +144,31 @@ function previousSignals() {
 
 
 function loadTitlePair(target){
-    let pairSelected                = document.getElementById('pair-selected');
-        pairSelected                = pairSelected.getElementsByTagName('span')[0];
-        pairSelected.innerText      = target.innerText;
-    let chartLinkPreview            = document.getElementById('chartLinkPreview');
-        chartLinkPreview.innerText  = signal.chartLink;
-    let buyZoneMinPreview           = document.getElementById('buyZoneMinPreview');
-        buyZoneMinPreview.innerText = signal.buyZoneMin;
+    let pairSelected           = document.getElementById('pair-selected');
+        pairSelected           = pairSelected.getElementsByTagName('span')[0];
+        pairSelected.innerText = target.innerText;
 }
+
+
 
 function loadSignal(event){
     let target = event.target;
     loadTitlePair(target);
+    for (const key in signal) {
+        if (signal.hasOwnProperty.call(signal, key)) {
+            const keySignal = signal[key];
+            console.log(`Chave atual do dicionário: ${keySignal}`);
+            const elSignal = document.getElementById(`${key}Preview`);
+            console.log(`Chave atual do dicionário: ${elSignal}`);
+            const elEditSignal = document.getElementById(key);
+            if(elSignal!=null) elSignal.innerText = keySignal;      
+            if(elEditSignal!=null) elEditSignal.value = keySignal      
+        }
+    }
+    // let chartLinkPreview            = document.getElementById('chartLinkPreview');
+    //     chartLinkPreview.innerText  = signal.chartLink;
+    // let buyZoneMinPreview           = document.getElementById('buyZoneMinPreview');
+    //     buyZoneMinPreview.innerText = signal.buyZoneMin;
 }
 
 
