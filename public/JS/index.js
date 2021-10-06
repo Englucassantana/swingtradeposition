@@ -125,20 +125,25 @@ function atualizarComando(){
         
     }
 
-    jsonComando.chartLink       = chartLink.value;
-    jsonComando.firstToken      = pair.value.replace('USDT','');
-    jsonComando.secondToken     = 'USDT';    
-    jsonComando.pair            = pair.value;    
-    jsonComando.buyZoneMin      = buyZoneMin.valueAsNumber;
-    jsonComando.buyZoneMax      = buyZoneMax.valueAsNumber;
-    jsonComando.reBuyMin        = reBuyMin.valueAsNumber;
-    jsonComando.reBuyMax        = reBuyMax.valueAsNumber;
-    jsonComando.targets         = targettargets;
-    jsonComando.stoploss        = stoploss.valueAsNumber;
-    jsonComando.riskLevel       = levelRisk.value;
-    jsonComando.advice          = advice.value;
-    jsonComando.isStPosition    = true;
-    jsonComando.exchange        = exchange.value;
+    jsonComando.chartLink   = chartLink.value;
+    jsonComando.firstToken  = pair.value.replace('USDT','');
+    jsonComando.secondToken = 'USDT';
+    jsonComando.pair        = pair.value;
+    jsonComando.buyZoneMin  = buyZoneMin.valueAsNumber;
+    jsonComando.buyZoneMax  = buyZoneMax.valueAsNumber;
+    jsonComando.reBuyMin    = reBuyMin.valueAsNumber;
+    jsonComando.reBuyMax    = reBuyMax.valueAsNumber;
+    jsonComando.targets     = targettargets;
+    console.log(stoploss.value);
+    if(stoploss.value){
+        jsonComando.stoploss = stoploss.valueAsNumber;
+    }
+    jsonComando.riskLevel    = levelRisk.value;
+    jsonComando.advice       = advice.value;
+    jsonComando.isStPosition = true;
+    if(exchange.value != "") {
+        jsonComando.exchange = exchange.value;
+    }
     jsonComando.tradingDuration = tradingDurationAsANumber(tradingDuration.value);
 }
 
