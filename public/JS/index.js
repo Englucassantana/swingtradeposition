@@ -224,11 +224,16 @@ function pairFeedback(){
     return true;
 }
 
+function isValidURL(string) {
+    var res = string.match(/(http(s)?:\/\/.)?(www\.)?tradingview\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
+    return (res !== null)
+};
+
 function chartLinkFeedback(){
     let target       = event.target;
     let chartLinkBox = document.getElementById('chart-link-box');
     let feedback     = chartLinkBox.getElementsByClassName('feedback')[0];
-    if(chartLink.value !=''){
+    if(chartLink.value !='' && isValidURL(chartLink.value)){
         chartLinkBox.style = 'background-color: rgb(209, 255, 209);';
         feedback.className = "feedback feedback-suppression";
         return true;
