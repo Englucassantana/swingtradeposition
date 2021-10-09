@@ -168,14 +168,14 @@
 
                 </div>
                 <div id="targets-content">
-                    <div class="field-box-main">
+                    <!-- <div class="field-box-main">
                         
                         <div class="field-box-not-editable">
 
                             <div class="target-input-box">
                                 <div class="label-input-box">
                                     <span>Alvo1</span>
-                                    <span class="input-field">0</span>
+                                    <span id="target1Preview" class="input-field">0</span>
                                 </div>
                                 <div class="btn-edit-target">
                                 </div>
@@ -208,7 +208,7 @@
                             <div class="target-input-box">
                                 <div class="label-input-box">
                                     <span>Alvo2</span>
-                                    <span class="input-field">0</span>
+                                    <span id="target2Preview" class="input-field">0</span>
                                 </div>
                                 <div class="btn-edit-target">
                                 </div>
@@ -238,7 +238,7 @@
                           <div class="target-input-box">
                               <div class="label-input-box">
                                   <span>Alvo3</span>
-                                  <span class="input-field">0</span>
+                                  <span id="target3Preview" class="input-field">0</span>
                               </div>
                               <div class="btn-edit-target">
                               </div>
@@ -272,7 +272,7 @@
                           <div class="target-input-box">
                               <div class="label-input-box">
                                   <span>Alvo4</span>
-                                  <span class="input-field">0</span>
+                                  <span id="target4Preview" class="input-field">0</span>
                               </div>
                               <div class="btn-edit-target">
                               </div>
@@ -297,7 +297,7 @@
                                   
                       </div>
 
-                    </div>
+                    </div> -->
 
                     
                 </div>
@@ -314,7 +314,7 @@
 
                 </div>
 
-                <div class="field-box-main">
+                <div class="field-box-main" style="display: none;">
 
                     <div class="field-box-not-editable group-field">
                         <span>Stoploss</span>
@@ -339,11 +339,11 @@
                     <div class="field-box-editable group-field">
                         <label for="riskLevel">Nível de risco</label>
                         <select id="riskLevel">
-                            <option>Alto</option>
-                            <option>Moderado a alto</option>            
-                            <option>Moderado</option>
-                            <option>Baixo a moderado</option>
-                            <option>Baixo</option>
+                            <option value="Alto">Alto</option>
+                            <option value="Moderado a alto">Moderado a alto</option>            
+                            <option value="Moderado">Moderado</option>
+                            <option value="Baixo a moderado">Baixo a moderado</option>
+                            <option value="Baixo">Baixo</option>
                         </select> 
                         <span class="feedback" style="display:none"></span>
                     </div>
@@ -365,7 +365,7 @@
 
                 </div>                
                 
-                <div class="field-box-main">
+                <div class="field-box-main" style="display: none;">
 
                     <div class="field-box-not-editable group-field">
                         <span>É <i>Swing trade/ Position</i>?</span>

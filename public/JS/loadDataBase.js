@@ -20,7 +20,7 @@ let signal = {
     68.378
     ],
     "stoploss"       : 24,
-    "riskLevel"      : "MODERADO A ALTO",
+    "riskLevel"      : "Moderado a alto",
     "advice"         : "Saída parcial entre os alvos 1 e 2, 50%",
     "isStPosition"   : true,
     "exchange"       : "kucoin",
@@ -149,26 +149,88 @@ function loadTitlePair(target){
         pairSelected.innerText = target.innerText;
 }
 
+function loadTargets(value, index){
+  let targetsContent = document.getElementById("targets-content");
+  let targetContent  = targetsContent.getElementsByClassName("field-box-main");
+  console.log(targetContent.length);
+  let newTargetContent           = document.createElement('div');
+      newTargetContent.className = "field-box-main"
+  let newMsg                     = `
+      <div class = "field-box-not-editable">
+        <div class="target-input-box">
+            <div class="label-input-box">
+                <span>Alvo${index+1}</span>
+                <span id="target${index+1}Preview" class="input-field">${value}</span>
+            </div>
+            <div class="btn-edit-target">
+            </div>
+        </div>     
+          
+      </div>
 
+      <div class = "field-box-editable">
+
+          <div   class = "target-input-box editable-target-box">
+          <div   class = "label-input-box">
+          <label for   = "target${index+1}">Alvo ${index+1}:</label>
+          <input id    = "target${index+1}" class = "targets" type = "number" value = "${value}">
+              </div>
+              <div    class = "btn-edit-target">
+              <button class = "remover-alvo">&#215</button>
+              <button class = "seta">&#8595</button>
+              <button class = "seta">&#8593</button>
+              </div>
+          </div>
+          <span class = "feedback" style = "display:none">Lorem ipsum tincidunt leo vehicula bibendum, sapien aenean neque vitae.</span>
+              
+      </div>
+  `
+  newTargetContent.innerHTML = newMsg;
+     
+  targetsContent.appendChild(newTargetContent);
+  console.log(targetsContent);
+  removerAlvo = document.getElementsByClassName('remover-alvo');
+}
 
 function loadSignal(event){
-    let target = event.target;
-    loadTitlePair(target);
-    for (const key in signal) {
-        if (signal.hasOwnProperty.call(signal, key)) {
-            const keySignal = signal[key];
-            console.log(`Chave atual do dicionário: ${keySignal}`);
-            const elSignal = document.getElementById(`${key}Preview`);
-            console.log(`Chave atual do dicionário: ${elSignal}`);
-            const elEditSignal = document.getElementById(key);
-            if(elSignal!=null) elSignal.innerText = keySignal;      
-            if(elEditSignal!=null) elEditSignal.value = keySignal      
+  console.log("CARREGANDO SINAIS");
+  let target = event.target;
+  loadTitlePair(target);
+  for (const key in signal) {
+      if (signal.hasOwnProperty.call(signal, key)) {
+        console.log(key);
+        const keySignal = signal[key];
+        const elSignal = document.getElementById(`${key}Preview`);
+        const elEditSignal = document.getElementById(key);
+        console.log(elEditSignal);
+        if(key == "targets"){
+          for (let index = 0; index < keySignal.length; index++) {
+            const value = keySignal[index];
+            loadTargets(value,index);
+          }              
         }
+        if(elSignal!=null) elSignal.innerText = keySignal;
+            
+        if(elEditSignal!=null){
+          if(elEditSignal.tagName == "select"){
+            let elOption = elEditSignal.getElementsByTagName('option');
+            for (const key in elOption) {
+              if (elOption.hasOwnProperty.call(elOption, key)) {
+                const element = elOption[key];
+                if(element.value == keySignal)element.selected="selected";                  
+              }
+            }
+          }else{
+            elEditSignal.value = keySignal;
+          }
+        }
+              
     }
-    // let chartLinkPreview            = document.getElementById('chartLinkPreview');
-    //     chartLinkPreview.innerText  = signal.chartLink;
-    // let buyZoneMinPreview           = document.getElementById('buyZoneMinPreview');
-    //     buyZoneMinPreview.innerText = signal.buyZoneMin;
+  }
+  // let chartLinkPreview            = document.getElementById('chartLinkPreview');
+  //     chartLinkPreview.innerText  = signal.chartLink;
+  // let buyZoneMinPreview           = document.getElementById('buyZoneMinPreview');
+  //     buyZoneMinPreview.innerText = signal.buyZoneMin;
 }
 
 
