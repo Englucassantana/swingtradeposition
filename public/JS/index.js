@@ -124,7 +124,7 @@ function atualizarComando(){
         targettargets.push(targets[index].valueAsNumber);
         
     }
-    jsonComando = {};
+    jsonComando             = {};
     jsonComando.chartLink   = chartLink.value;
     jsonComando.firstToken  = pair.value.replace('USDT','');
     jsonComando.secondToken = 'USDT';
@@ -226,7 +226,7 @@ function pairFeedback(){
 
 function isValidURL(string) {
     var res = string.match(/(https\:\/\/www\.tradingview.com\/)+(\w)+(\/\w)/g);
-    return (res !== null)
+    return (res !== null);
 };
 
 function chartLinkFeedback(){
@@ -252,24 +252,24 @@ function buyZoneFeedback(){
     let buyZoneMinFeedback = document.getElementById('buyZoneMinFeedback');
     let buyZoneMaxFeedback = document.getElementById('buyZoneMaxFeedback');
     let buyZoneBox         = buyZone.parentNode;
-    if(buyZoneMin.value ==''){
-                                                                 buyZoneBox.style = 'background-color: rgb(255, 229, 229);';
-                                              buyZoneMinFeedback .textContent     = 'Preencher campo!';
-                                              buyZoneMinFeedback .className       = "feedback";
-        return false
+    if(buyZoneMin.value == ''){
+      buyZoneBox.style = 'background-color: rgb(255, 229, 229);';
+      buyZoneMinFeedback .textContent     = 'Preencher campo!';
+      buyZoneMinFeedback .className       = "feedback";
+      return false;
     }
     if(buyZoneMin.value > buyZoneMax.value){
-                                                                 buyZoneBox.style = 'background-color: rgb(255, 229, 229);';
-                                              buyZoneMinFeedback .textContent     = 'O valor do campo de zona mínima de compra é maior que o valor de zona de compra máxima';
-                                              buyZoneMinFeedback .className       = "feedback";
-        return false
+      buyZoneBox.style = 'background-color: rgb(255, 229, 229);';
+      buyZoneMinFeedback .textContent     = 'O valor do campo de zona mínima de compra é maior que o valor de zona de compra máxima';
+      buyZoneMinFeedback .className       = "feedback";
+      return false;
     }
 
-    if(buyZoneMax.value ==''){
-                                                                 buyZoneBox.style = 'background-color: rgb(255, 229, 229);';
-                                              buyZoneMaxFeedback .textContent     = 'Preencher campo!';
-                                              buyZoneMaxFeedback .className       = "feedback";
-        return false
+    if(buyZoneMax.value == ''){
+      buyZoneBox.style = 'background-color: rgb(255, 229, 229);';
+      buyZoneMaxFeedback .textContent     = 'Preencher campo!';
+      buyZoneMaxFeedback .className       = "feedback";
+      return false;
     }
 
     buyZoneBox.style             = 'background-color: rgb(209, 255, 209);';
@@ -286,22 +286,22 @@ function reBuyFeedback(){
     let reBuyMaxFeedback = document.getElementById('reBuyMaxFeedback');
     let reBuyBox         = reBuy.parentNode;
     if(reBuyMin.value ==''){
-                                                           reBuyBox.style = 'background-color: rgb(255, 229, 229);';
-                                          reBuyMinFeedback .textContent   = 'Preencher campo!';
-                                          reBuyMinFeedback .className     = "feedback";
+                                                                                             reBuyBox.style = 'background-color: rgb(255, 229, 229);';
+                                                                            reBuyMinFeedback .textContent   = 'Preencher campo!';
+                                                                            reBuyMinFeedback .className     = "feedback";
         return false
     }
     if(reBuyMin.value > reBuyMax.value){
-                                                           reBuyBox.style = 'background-color: rgb(255, 229, 229);';
-                                          reBuyMinFeedback .textContent   = 'O valor do campo de recompra mínima é maior que o valor de recompra máxima';
-                                          reBuyMinFeedback .className     = "feedback";
+                                                                                             reBuyBox.style = 'background-color: rgb(255, 229, 229);';
+                                                                            reBuyMinFeedback .textContent   = 'O valor do campo de recompra mínima é maior que o valor de recompra máxima';
+                                                                            reBuyMinFeedback .className     = "feedback";
         return false
     }
 
     if(reBuyMax.value ==''){
-                                                           reBuyBox.style = 'background-color: rgb(255, 229, 229);';
-                                          reBuyMaxFeedback .textContent   = 'Preencher campo!';
-                                          reBuyMaxFeedback .className     = "feedback";
+                                                                                             reBuyBox.style = 'background-color: rgb(255, 229, 229);';
+                                                                            reBuyMaxFeedback .textContent   = 'Preencher campo!';
+                                                                            reBuyMaxFeedback .className     = "feedback";
         return false
     }
 

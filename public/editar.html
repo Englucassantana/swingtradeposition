@@ -125,13 +125,13 @@
 
                                 <div class="rebuy-min-field">
                                     <span>Recompra mínima</span>
-                                    <span class="input-field">0</span>
+                                    <span id="reBuyMaxPreview" class="input-field">0</span>
                                     
                                 </div>
 
                                 <div class="rebuy-max-field">
                                     <span>Recompra máxima</span>
-                                    <span class="input-field">0</span>
+                                    <span id="reBuyMinPreview" class="input-field">0</span>
 
                                 </div>
 
@@ -231,6 +231,75 @@
                         </div>
 
                     </div>
+                    <div class="field-box-main">
+                        
+                      <div class="field-box-not-editable">
+
+                          <div class="target-input-box">
+                              <div class="label-input-box">
+                                  <span>Alvo3</span>
+                                  <span class="input-field">0</span>
+                              </div>
+                              <div class="btn-edit-target">
+                              </div>
+                          </div>
+
+                      </div>
+
+                      <div class="field-box-editable">  
+
+                          <div class="target-input-box editable-target-box">
+                              <div class="label-input-box">
+                                  <label for="target3">Alvo 3:</label>
+                                  <input id="target3" class="targets" type="number">
+                              </div>
+                              <div class="btn-edit-target">
+                                  <button class="remover-alvo">&#215</button>
+                                  <button class="seta">&#8595</button>
+                                  <button class="seta">&#8593</button>
+                              </div>
+                          </div>
+                          <span class="feedback"></span>
+                                  
+                      </div>
+
+                    </div>
+
+                    <div class="field-box-main">
+                        
+                      <div class="field-box-not-editable">
+
+                          <div class="target-input-box">
+                              <div class="label-input-box">
+                                  <span>Alvo4</span>
+                                  <span class="input-field">0</span>
+                              </div>
+                              <div class="btn-edit-target">
+                              </div>
+                          </div>
+
+                      </div>
+
+                      <div class="field-box-editable">  
+
+                          <div class="target-input-box editable-target-box">
+                              <div class="label-input-box">
+                                  <label for="target4">Alvo 4:</label>
+                                  <input id="target4" class="targets" type="number">
+                              </div>
+                              <div class="btn-edit-target">
+                                  <button class="remover-alvo">&#215</button>
+                                  <button class="seta">&#8595</button>
+                                  <button class="seta">&#8593</button>
+                              </div>
+                          </div>
+                          <span class="feedback"></span>
+                                  
+                      </div>
+
+                    </div>
+
+                    
                 </div>
                 
                 <div class="field-box-main">
@@ -264,12 +333,12 @@
 
                     <div class="field-box-not-editable group-field">
                         <span>Nível de risco</span>
-                        <span class="input-field">0</span>
+                        <span id="riskLevelPreview" class="input-field">0</span>
                     </div>
 
                     <div class="field-box-editable group-field">
                         <label for="riskLevel">Nível de risco</label>
-                        <select id="levelRisk">
+                        <select id="riskLevel">
                             <option>Alto</option>
                             <option>Moderado a alto</option>            
                             <option>Moderado</option>
@@ -285,7 +354,7 @@
 
                     <div class="field-box-not-editable group-field">
                         <span>Conselho</span>
-                        <span class="input-field">0</span>
+                        <span id="advicePreview" class="input-field">0</span>
                     </div>
 
                     <div class="field-box-editable group-field">
@@ -318,7 +387,7 @@
                     
                     <div class="field-box-not-editable group-field">
                         <span>Duração do <i>trade</i>:</span>
-                        <span class="input-field">0</span>
+                        <span id= "tradingDurationPreview" class="input-field">0</span>
                     </div>
 
                     <div class="field-box-editable group-field">
@@ -336,7 +405,7 @@
 
                     <div class="field-box-not-editable group-field">
                         <span>Exchange</span>
-                        <span class="input-field">0</span>
+                        <span id= "exchangePreview" class="input-field">0</span>
                     </div>
 
                     <div class="field-box-editable group-field">

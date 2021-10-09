@@ -1,6 +1,6 @@
 
 // TODO - [ ] Carregar todos os sinais na pagina
-// TODO - [ ] Mostar apenas o seis sinais na pagina
+// TODO - [ ] Mostrar apenas o seis sinais na pagina
 
 let signal = {
     "chartLink"  : "https://www.tradingview.com/x/76ZNUuZv/",
@@ -54,7 +54,7 @@ let signals = [
     }
 ]
 
-let signalAmout        = signals.length;
+let signalAmount        = signals.length;
 let maxShowedSignal    = 6;
 let firstShowedSignal  = -1;
 let lastShowedSignal   = -1;
