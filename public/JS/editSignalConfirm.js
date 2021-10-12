@@ -19,14 +19,31 @@ function copiarComandoParaAreaDeTransferencia(){
     alert("Comando copiado para a área de transferência");
 }
 
+function checkNewChartLink(oldChartLink, newChartLink){
+  if(oldChartLink != newChartLink){
+    return true;
+  }else{
+    return false;
+  }
+}
+
 function checkNewTargets(targets){
     // @param targets  vetor com os valores dos alvos
     // TODO - [ ] verificar se há novos alvos adicionados
+    console.log(`O sinal salvo tem ${signal.targets.length} alvos e o novo tem ${targets.length} alvos`);
+    signal.targets.forEach((value,index) => {
+      if(value != targets[index]){
+        jsonComando.commandType = "editTargets";
+        jsonComando.newTargets.push(targets[index]);
+        jsonComando.targetsChangedIndexes.push(index);
+      }      
+    });
     if(signal.targets.length < targets.length){
+      jsonComando.commandType = "addTargets";
         for (let index = signal.targets.length; index < targets.length; index++) {
-            const target = targets[index].valueAsNumber;
-            jsonComando.newTargets.push(target);
-            
+            const target = targets[index];
+            console.log(`O valor do alvo ${index+1} é igual a: ${target}`);
+            jsonComando.newTargets.push(target);                        
         }
     }
 }
@@ -52,13 +69,21 @@ function atualizarComando(){
         targettargets.push(targets[index].valueAsNumber);
         
     }
-
+    jsonComando      = {};
     jsonComando.pair            = pair.getElementsByTagName('span')[0].value;
-    jsonComando.chartLink       = chartLink.value;
+    
+    if(checkNewChartLink(signal.chartLink,chartLink.value)){
+      jsonComando.NewChartLink = chartLink.value;
+    }      
+    else{
+      jsonComando.ChartLink = chartLink.value;
+    }
     jsonComando.buyZoneMin      = buyZoneMin.valueAsNumber;
     jsonComando.buyZoneMax      = buyZoneMax.valueAsNumber;
     jsonComando.reBuyMin        = reBuyMin.valueAsNumber;
     jsonComando.reBuyMax        = reBuyMax.valueAsNumber;
+    jsonComando.newTargets = [];
+    jsonComando.targetsChangedIndexes = [];
     checkNewTargets(targettargets);
     // jsonComando.targets         = targettargets;
     jsonComando.stoploss        = stoploss.valueAsNumber;
