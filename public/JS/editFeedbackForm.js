@@ -83,7 +83,9 @@ function reBuyFeedback(){
 
 function targetProfit(target){
     let buyZoneMax = document.getElementById('buyZoneMax');
-    let profit     = target.valueAsNumber * 100 / buyZoneMax.valueAsNumber;
+    let buyZoneMin = document.getElementById('buyZoneMin');
+    let buyZoneMean = (buyZoneMax.valueAsNumber + buyZoneMin.valueAsNumber)/2;
+    let profit     = target.valueAsNumber * 100 / buyZoneMean;
     return profit;
 }
 
@@ -110,8 +112,10 @@ function targetsContentFeedback(){
         }
         
         let buyZoneMax = document.getElementById('buyZoneMax');
+        let buyZoneMin = document.getElementById('buyZoneMin');
+        let buyZoneMean = (buyZoneMax.valueAsNumber + buyZoneMin.valueAsNumber)/2;
         //TODO: avisar caso o valor do alvo seja menor que o valor da zona de compra máxima
-        if(target.valueAsNumber < buyZoneMax.valueAsNumber){
+        if(target.valueAsNumber < buyZoneMean){
             feedback.textContent = `${profit}%, o alvo tem valor menor que a zona de compra máxima`;
             feedback.className   = "feedback";
             feedback.style       = '';

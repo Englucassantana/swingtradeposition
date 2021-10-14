@@ -118,11 +118,25 @@ h1{
     border-bottom: 1px solid rgb(239, 239, 239);
 }
 
+
 main{
     padding: 5px;
 }
 
-#form-box{
+.tab{
+  display: inline;
+  border:1px solid gray;
+  margin-left: 2px;
+  cursor: pointer;
+  background-color: rgb(173, 184, 184)
+}
+
+.tab:hover{
+  background-color: rgb(249, 249, 249);
+}
+
+
+#addNewTargetsForm{
     display: flex;
     flex-direction: column;
     box-shadow: 0px 0px 10px gray;
