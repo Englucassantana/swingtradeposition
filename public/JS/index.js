@@ -316,11 +316,11 @@ function targetProfit(target){
     let buyZoneMax = document.getElementById('buyZoneMax');
     let buyZoneMin = document.getElementById('buyZoneMin');
     let buyZoneMean = (buyZoneMax.valueAsNumber + buyZoneMin.valueAsNumber)/2;
-    let profit     = target.valueAsNumber * 100 / buyZoneMean;
+    let profit     = (target.valueAsNumber * 100 / buyZoneMean) - 100;
     return profit.toFixed(2);
 }
 
-//TODO: A função abaixo precisa ser refatorada
+
 function targetsContentFeedback(){
     let targets           = document.getElementsByClassName('targets');
     let targetsContentBox = targetsContent.parentNode.parentNode;
@@ -340,13 +340,10 @@ function targetsContentFeedback(){
             feedbackContent.className   = "feedback-content feedback-green";
         }
         
-        let buyZoneMax = document.getElementById('buyZoneMax');
-        let buyZoneMin = document.getElementById('buyZoneMin');
-        let buyZoneMean = (buyZoneMax.valueAsNumber + buyZoneMin.valueAsNumber)/2;
         //TODO: avisar caso o valor do alvo seja menor que o valor da zona de compra máxima
-        if(target.valueAsNumber < buyZoneMean){
+        if(profit < 0){
             targetsContentBox.style     = 'background-color: rgb(255, 229, 229);';
-            feedbackContent.textContent = `${profit}%, o alvo tem valor menor que a zona de compra máxima`;
+            feedbackContent.textContent = `${profit}%, o alvo tem valor menor que a média entre as zonas de compra`;
             feedbackContent.className   = "feedback-content feedback-red";
             return false;
         }else{
