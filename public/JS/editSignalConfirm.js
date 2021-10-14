@@ -1,6 +1,7 @@
 //Atribuição
 let geradorDeComando = document.getElementById('confirm-btn');
 let jsonComando      = {};
+
 //Function
 function validarComando(){
     return chartLinkFeedback() &
@@ -47,8 +48,6 @@ function checkNewTargets(targets){
         }
     }
 }
-    // TODO - [ ] Verificar se há alvos removidos
-    // TODO - [ ] Verificar se há alvos editados
 
 function atualizarComando(){
     let pair            = document.getElementById('pair-selected');
