@@ -196,9 +196,4 @@ function exchangeFeedback(){
 
 //Events
 chartLink.addEventListener('input',chartLinkFeedback,false);
-buyZone.addEventListener('input',buyZoneFeedback,false);
-reBuy.addEventListener('input',reBuyFeedback,false);
 targetsContent.addEventListener('input', targetsContentFeedback,false);
-stoploss.addEventListener('input', stoplossFeedback, false);
-advice.addEventListener('input',adviceFeedback, false);
-exchange.addEventListener('input',exchangeFeedback,false);
