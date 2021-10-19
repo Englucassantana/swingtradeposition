@@ -164,11 +164,10 @@ function loadTargets(value, index){
             </div>
             <div class="btn-edit-target">
             </div>
-        </div>     
-          
+        </div>
       </div>
 
-      <div class = "field-box-editable">
+      <div class = "field-box-editable editable-target" style = "display:none">
           <div   class = "target-input-box editable-target-box">
             <div   class = "label-input-box">
               <label for   = "target${index+1}">Alvo ${index+1}:</label>
@@ -176,6 +175,17 @@ function loadTargets(value, index){
             </div>
           </div>
           <span class = "feedback" style = "display:none">Lorem ipsum tincidunt leo vehicula bibendum, sapien aenean neque vitae.</span>
+      </div>
+
+      <div class = "field-box-editable add-new-target">
+        <div class="target-input-box">
+            <div class="label-input-box">
+                <span>Alvo${index+1}</span>
+                <span id="target${index+1}Preview" class="input-field">${value}</span>
+            </div>
+            <div class="btn-edit-target">
+            </div>
+        </div>
       </div>
   `
   newTargetContent.innerHTML = newMsg;

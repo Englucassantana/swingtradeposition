@@ -2,13 +2,37 @@
 let tabs = document.getElementById("tabs");
 //Function
 function showAddNewTargetsForm(){
-  const addNewTargetsForm = document.getElementById('addNewTargetsForm');
-  addNewTargetsForm.style = "";
+  const addNewTargetsForm = document.getElementsByClassName('add-new-target');
+  const editTargetsValues = document.getElementsByClassName('editable-target');
+  for (const key in addNewTargetsForm) {
+    if (Object.hasOwnProperty.call(addNewTargetsForm, key)) {
+      const element = addNewTargetsForm[key];
+      element.style = "";      
+    }
+  }
+  for (const key in editTargetsValues) {
+    if (Object.hasOwnProperty.call(editTargetsValues, key)) {
+      const element = editTargetsValues[key];
+      element.style = "display:none";  
+    }
+  }
 }
 
 function showEditTargetsForm(){
-  const addNewTargetsForm = document.getElementById('addNewTargetsForm');
-  addNewTargetsForm.style = "display:none";
+  const addNewTargetsForm = document.getElementsByClassName('add-new-target');
+  const editTargetsValues = document.getElementsByClassName('editable-target');
+  for (const key in addNewTargetsForm) {
+    if (Object.hasOwnProperty.call(addNewTargetsForm, key)) {
+      const element = addNewTargetsForm[key];
+      element.style = "display:none";     
+    }
+  }
+  for (const key in editTargetsValues) {
+    if (Object.hasOwnProperty.call(editTargetsValues, key)) {
+      const element = editTargetsValues[key];
+      element.style = "";  
+    }
+  }
 }
 
 function selectTab(event){

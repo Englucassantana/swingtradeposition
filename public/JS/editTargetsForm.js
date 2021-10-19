@@ -12,12 +12,12 @@ function addNewTarget(event){
     let newTargetContent           = document.createElement('div');
         newTargetContent.className = "field-box-main"
     let newMsg                     = `
-        <div class = "field-box-not-editable">
+        <div class = "field-box-not-editable add-new-target" >
 
             
         </div>
 
-        <div class = "field-box-editable">
+        <div class = "field-box-editable add-new-target">
 
             <div   class = "target-input-box editable-target-box">
             <div   class = "label-input-box">
