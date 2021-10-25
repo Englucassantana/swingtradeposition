@@ -151,8 +151,6 @@ function loadTitlePair(target){
 
 function loadTargets(value, index){
   let targetsContent = document.getElementById("targets-content");
-  let targetContent  = targetsContent.getElementsByClassName("field-box-main");
-  console.log(targetContent.length);
   let newTargetContent           = document.createElement('div');
       newTargetContent.className = "field-box-main"
   let newMsg                     = `
@@ -199,6 +197,8 @@ function loadSignal(event){
   console.log("CARREGANDO SINAIS");
   let target = event.target;
   loadTitlePair(target);
+  let targetsContent = document.getElementById("targets-content");
+  targetsContent.innerHTML = '';
   for (const key in signal) {
       if (signal.hasOwnProperty.call(signal, key)) {
         console.log(key);
@@ -230,6 +230,7 @@ function loadSignal(event){
               
     }
   }
+  showAddNewTargetsForm();
   // let chartLinkPreview            = document.getElementById('chartLinkPreview');
   //     chartLinkPreview.innerText  = signal.chartLink;
   // let buyZoneMinPreview           = document.getElementById('buyZoneMinPreview');

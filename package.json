@@ -3,5 +3,23 @@
     "bootstrap-icons": "^1.5.0",
     "firebase": "^9.1.1",
     "jquery": "^3.6.0"
-  }
+  },
+  "name": "swingtradeposition",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Englucassantana/swingtradeposition.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Englucassantana/swingtradeposition/issues"
+  },
+  "homepage": "https://github.com/Englucassantana/swingtradeposition#readme",
+  "description": ""
 }

@@ -4,6 +4,11 @@ let tabs = document.getElementById("tabs");
 function showAddNewTargetsForm(){
   const addNewTargetsForm = document.getElementsByClassName('add-new-target');
   const editTargetsValues = document.getElementsByClassName('editable-target');
+  const tabEditTargets = document.getElementById('tabEditTargets');
+  tabEditTargets.className = 'tab-button';
+  const tabAddNewTargets = document.getElementById('tabAddNewTargets');
+  tabAddNewTargets.className = 'tab-button-active';
+
   for (const key in addNewTargetsForm) {
     if (Object.hasOwnProperty.call(addNewTargetsForm, key)) {
       const element = addNewTargetsForm[key];
@@ -21,6 +26,10 @@ function showAddNewTargetsForm(){
 function showEditTargetsForm(){
   const addNewTargetsForm = document.getElementsByClassName('add-new-target');
   const editTargetsValues = document.getElementsByClassName('editable-target');
+  const tabAddNewTargets = document.getElementById('tabAddNewTargets');
+  tabAddNewTargets.className = 'tab-button';
+  const tabEditTargets = document.getElementById('tabEditTargets');
+  tabEditTargets.className = 'tab-button-active';
   for (const key in addNewTargetsForm) {
     if (Object.hasOwnProperty.call(addNewTargetsForm, key)) {
       const element = addNewTargetsForm[key];
