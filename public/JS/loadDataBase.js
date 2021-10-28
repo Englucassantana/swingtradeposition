@@ -61,7 +61,6 @@ let lastShowedSignal   = -1;
 let previousButtonList = document.getElementById('previousButtonList');
 let nextButtonList     = document.getElementById('nextButtonList');
 
-
 function getSignal(){
 
 }
@@ -141,8 +140,6 @@ function previousSignals() {
     console.log(`O ultimo sinal mostrado é o: ${lastShowedSignal}`);    
 }
 
-
-
 function loadTitlePair(target){
     let pairSelected           = document.getElementById('pair-selected');
         pairSelected           = pairSelected.getElementsByTagName('span')[0];
@@ -172,7 +169,7 @@ function loadTargets(value, index){
               <input id    = "target${index+1}" class = "targets" type = "number" value = "${value}">
             </div>
           </div>
-          <span class = "feedback" style = "display:none">Lorem ipsum tincidunt leo vehicula bibendum, sapien aenean neque vitae.</span>
+          <span class = "feedback" style = "display:none"></span>
       </div>
 
       <div class = "field-box-editable add-new-target">
@@ -236,7 +233,6 @@ function loadSignal(event){
   // let buyZoneMinPreview           = document.getElementById('buyZoneMinPreview');
   //     buyZoneMinPreview.innerText = signal.buyZoneMin;
 }
-
 
 getSignal();
 showSignal(signals);
