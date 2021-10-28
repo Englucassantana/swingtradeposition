@@ -94,7 +94,7 @@ function targetsContentFeedback(){
 
     for (let index = 0; index < targets.length; index++) {
         const target   = targets[index];
-        let   profit   = targetProfit(target);
+        // let   profit   = targetProfit(target);
         let   feedback = target.parentNode.parentNode.parentNode;
         console.log(feedback);
         feedback = feedback.getElementsByClassName('feedback')[0];
@@ -106,22 +106,7 @@ function targetsContentFeedback(){
             feedback.style       = '';
             return false;
         }else{
-            feedback.textContent = profit + '%';
-            feedback.className   = "feedback";
-            feedback.style       = 'color:green';
-        }
-        
-        let buyZoneMax = document.getElementById('buyZoneMax');
-        let buyZoneMin = document.getElementById('buyZoneMin');
-        let buyZoneMean = (buyZoneMax.valueAsNumber + buyZoneMin.valueAsNumber)/2;
-        //TODO: avisar caso o valor do alvo seja menor que o valor da zona de compra máxima
-        if(target.valueAsNumber < buyZoneMean){
-            feedback.textContent = `${profit}%, o alvo tem valor menor que a zona de compra máxima`;
-            feedback.className   = "feedback";
-            feedback.style       = '';
-            return false;
-        }else{
-            feedback.textContent = profit + '%';
+            // feedback.textContent = profit + '%';
             feedback.className   = "feedback";
             feedback.style       = 'color:green';
         }
@@ -129,12 +114,12 @@ function targetsContentFeedback(){
         if( index!=0){
             if(targets[index - 1].valueAsNumber > target.valueAsNumber){
 
-                feedback.textContent = `${profit}%, o alvo anterior maior que esse alvo!`;
+                feedback.textContent = `O alvo anterior maior que esse alvo!`;
                 feedback.className   = "feedback";
                 feedback.style       = '';
                 return false;
             }else{
-                feedback.textContent = profit + '%';
+                feedback.textContent = '';
                 feedback.className   = "feedback";
                 feedback.style       = 'color:green';
             }
