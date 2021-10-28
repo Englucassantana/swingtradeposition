@@ -1,22 +1,18 @@
-//Atribuição
-let geradorDeComando = document.getElementById('confirm-btn');
-let jsonComando      = {};
+//Properties
+const $confirmButton = $('.confirm-btn');
+
+let JSONCommand      = {};
 
 //Function
 function validarComando(){
     return chartLinkFeedback() &
-        buyZoneFeedback() &
-        reBuyFeedback() &
-        targetsContentFeedback() &
-        stoplossFeedback() &
-        adviceFeedback() &
-        exchangeFeedback();
+        targetsContentFeedback();
 }
 
 function copiarComandoParaAreaDeTransferencia(){
     let comando           = document.getElementById('comando');
-        comando.innerText = JSON.stringify(jsonComando);
-    navigator.clipboard.writeText(JSON.stringify(jsonComando));
+        comando.innerText = JSON.stringify(JSONCommand, null, 4);
+    navigator.clipboard.writeText(JSON.stringify(JSONCommand));
     alert("Comando copiado para a área de transferência");
 }
 
@@ -34,68 +30,77 @@ function checkNewTargets(targets){
     console.log(`O sinal salvo tem ${signal.targets.length} alvos e o novo tem ${targets.length} alvos`);
     signal.targets.forEach((value,index) => {
       if(value != targets[index]){
-        jsonComando.commandType = "editTargets";
-        jsonComando.newTargets.push(targets[index]);
-        jsonComando.targetsChangedIndexes.push(index);
+        JSONCommand.commandType = "editTargets";
+        JSONCommand.newTargets.push(targets[index]);
+        JSONCommand.targetsChangedIndexes.push(index);
       }      
     });
     if(signal.targets.length < targets.length){
-      jsonComando.commandType = "addTargets";
+      JSONCommand.commandType = "addTargets";
         for (let index = signal.targets.length; index < targets.length; index++) {
             const target = targets[index];
             console.log(`O valor do alvo ${index+1} é igual a: ${target}`);
-            jsonComando.newTargets.push(target);                        
+            JSONCommand.newTargets.push(target);                        
         }
     }
 }
 
-function atualizarComando(){
-    let pair            = document.getElementById('pair-selected');
-    let chartLink       = document.getElementById('chartLink');
-    let buyZoneMin      = document.getElementById('buyZoneMin');
-    let buyZoneMax      = document.getElementById('buyZoneMax');
-    let reBuyMin        = document.getElementById('reBuyMin');
-    let reBuyMax        = document.getElementById('reBuyMax');
-    let targets         = document.getElementsByClassName('targets');
-    let stoploss        = document.getElementById('stoploss');
-    let advice          = document.getElementById('advice');
-    let isStPosition    = document.getElementById('isStPosition');
-    let exchange        = document.getElementById('exchange');
-    let tradingDuration = document.getElementById('tradingDuration');
+function updateCommandWhenAddNewTarget(){
+  const $pair          = $('#pair-selected span')[0].textContent;
+  const $chartLink     = $('#chartLink')[0].value;
+  const $inputNewTargets = $('.new-targets');
+  const $inputTargets = $('.targets');
+  JSONCommand = {};  
+  JSONCommand.commandType = 'addTargets';
+  let   newTargets       = [];
+  
+  $inputNewTargets.each(function() {
+    newTargets.push(this.valueAsNumber);
+  });
 
-    let targettargets = [];
-    for (let index = 0; index < targets.length; index++) {
-        targettargets.push(targets[index].valueAsNumber);
-        
-    }
-    jsonComando      = {};
-    jsonComando.pair            = pair.getElementsByTagName('span')[0].value;
-    
-    if(checkNewChartLink(signal.chartLink,chartLink.value)){
-      jsonComando.NewChartLink = chartLink.value;
-    }      
-    else{
-      jsonComando.ChartLink = chartLink.value;
-    }
-    jsonComando.buyZoneMin      = buyZoneMin.valueAsNumber;
-    jsonComando.buyZoneMax      = buyZoneMax.valueAsNumber;
-    jsonComando.reBuyMin        = reBuyMin.valueAsNumber;
-    jsonComando.reBuyMax        = reBuyMax.valueAsNumber;
-    jsonComando.newTargets = [];
-    jsonComando.targetsChangedIndexes = [];
-    checkNewTargets(targettargets);
-    // jsonComando.targets         = targettargets;
-    jsonComando.stoploss        = stoploss.valueAsNumber;
-    jsonComando.advice          = advice.value;
-    jsonComando.isStPosition    = isStPosition.value;
-    jsonComando.exchange        = exchange.value;
-    jsonComando.tradingDuration = tradingDuration.value;
+  JSONCommand.pair = $pair;
+  
+  if(checkNewChartLink(signal.chartLink,$chartLink)){
+    JSONCommand.NewChartLink = $chartLink;
+  }      
+  else{
+    JSONCommand.ChartLink = $chartLink;
+  }
+
+  JSONCommand.newTargets = newTargets;
 }
 
-function comandGenerator(){
+function updateCommandWhenEditTarget(){
+  const $pair          = $('#pair-selected span')[0].textContent;
+  const $chartLink     = $('#chartLink')[0].value;
+  const $inputTargets = $('.targets:not(.new-targets)');
+  JSONCommand = {};
+  JSONCommand.commandType = 'editTargets';
+  JSONCommand.targetsChangedIndexes = [];
+  JSONCommand.newTargets = [];
+  $inputTargets.each(function(i){
+    const target = this.valueAsNumber;
+    if ( target != signal.targets[i]) {
+      JSONCommand.newTargets.push(target);
+      JSONCommand.targetsChangedIndexes.push(i); 
+    }
+  });
+}
+
+function updateCommand(){
+  const $idTabButtonActive = $('.tab-button-active').attr('id');
+  if ($idTabButtonActive == 'tabEditTargets') {
+    updateCommandWhenEditTarget();
+  } else {
+    updateCommandWhenAddNewTarget();
+  }
+ 
+}
+
+function commandGenerator(){
     console.log('GERANDO COMANDO...');
     event.preventDefault();
-    atualizarComando();
+    updateCommand();
     if(validarComando()){        
         copiarComandoParaAreaDeTransferencia();
     }else{
@@ -105,4 +110,4 @@ function comandGenerator(){
 }
 
 //Evento
-geradorDeComando.addEventListener('click', comandGenerator, false);
+$confirmButton.on('click', commandGenerator);
