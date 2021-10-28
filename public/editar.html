@@ -7,6 +7,7 @@
     <title>Swing Trade ou Position</title>
     <link href="./CSS/reset.css" type="text/css" rel="stylesheet"/>
     <link href="./CSS/editar.css" type="text/css" rel="stylesheet"/>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
     <!-- <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script> -->
 </head>
@@ -95,16 +96,18 @@
             <div class="add-new-target" style="display: none;">
               <button id="confirm-btn-add-new-target" class="confirm-btn">Confirmar adição de alvos do sinal</button>
             </div>
-            <span id="comando"></span>
+            <pre><code id="comando" class="language-javascript"></code></pre>
         </main>
         <footer>
             <p>back-end:Ramon Brito</p>
             <p>front-end: Lucas Santana</p>
         </footer>
+        <script src="./JS/jquery-3.6.0.min.js"></script>
         <script src="./JS/loadDataBase.js"></script>
         <script src="./JS/editTargetsForm.js"></script>
         <script src="./JS/editFeedbackForm.js"></script>
         <script src="./JS/editSignalConfirm.js"></script>
         <script src="./JS/editSelectionTab.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
 </body>
 </html>

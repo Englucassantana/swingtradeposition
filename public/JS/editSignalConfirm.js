@@ -46,20 +46,14 @@ function checkNewTargets(targets){
 }
 
 function updateCommandWhenAddNewTarget(){
-  const $pair          = $('#pair-selected span')[0].textContent;
-  const $chartLink     = $('#chartLink')[0].value;
+  const $pair            = $('#pair-selected span')[0].textContent;
+  const $chartLink       = $('#chartLink')[0].value;
   const $inputNewTargets = $('.new-targets');
-  const $inputTargets = $('.targets');
-  JSONCommand = {};  
-  JSONCommand.commandType = 'addTargets';
-  let   newTargets       = [];
-  
-  $inputNewTargets.each(function() {
-    newTargets.push(this.valueAsNumber);
-  });
+  const $inputTargets    = $('.targets');
 
-  JSONCommand.pair = $pair;
-  
+  JSONCommand             = {};
+  JSONCommand.commandType = 'addTargets';
+
   if(checkNewChartLink(signal.chartLink,$chartLink)){
     JSONCommand.NewChartLink = $chartLink;
   }      
@@ -67,7 +61,12 @@ function updateCommandWhenAddNewTarget(){
     JSONCommand.ChartLink = $chartLink;
   }
 
-  JSONCommand.newTargets = newTargets;
+  JSONCommand.pair = $pair;
+
+  JSONCommand.newTargets = [];
+  $inputNewTargets.each(function() {
+    JSONCommand.newTargets.push(this.valueAsNumber);
+  });
 }
 
 function updateCommandWhenEditTarget(){
@@ -76,8 +75,18 @@ function updateCommandWhenEditTarget(){
   const $inputTargets = $('.targets:not(.new-targets)');
   JSONCommand = {};
   JSONCommand.commandType = 'editTargets';
-  JSONCommand.targetsChangedIndexes = [];
+
+  if(checkNewChartLink(signal.chartLink,$chartLink)){
+    JSONCommand.NewChartLink = $chartLink;
+  }      
+  else{
+    JSONCommand.ChartLink = $chartLink;
+  }
+
+  JSONCommand.pair = $pair;
   JSONCommand.newTargets = [];
+  JSONCommand.targetsChangedIndexes = [];
+  
   $inputTargets.each(function(i){
     const target = this.valueAsNumber;
     if ( target != signal.targets[i]) {
