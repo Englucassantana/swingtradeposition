@@ -22,7 +22,7 @@ function addNewTarget(event){
             <div   class = "target-input-box editable-target-box">
             <div   class = "label-input-box">
             <label for   = "target${newTargetContentNumber}">Alvo ${newTargetContentNumber}:</label>
-            <input id    = "target${newTargetContentNumber}" class = "targets" type = "number">
+            <input id    = "target${newTargetContentNumber}" class = "targets new-targets" type = "number">
                 </div>
                 <div    class = "btn-edit-target">
                 <button class = "remover-alvo">&#215</button>
