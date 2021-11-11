@@ -1,83 +1,24 @@
-
-// TODO - [ ] Carregar todos os sinais na pagina
-// TODO - [ ] Mostrar apenas o seis sinais na pagina
-
-let signal = {
-    "chartLink"  : "https://www.tradingview.com/x/76ZNUuZv/",
-    "firstToken" : "BAL",
-    "secondToken": "USDT",
-    "pair"       : "BALUSDT",
-    "buyZoneMin" : "24.741",
-    "buyZoneMax" : "26.470",
-    "reBuyMin"   : "20.307",
-    "reBuyMax"   : "22.010",
-    "targets"    : [
-    27.37,
-    29.121,
-    32.17,
-    38.762,
-    48.41,
-    68.378
-    ],
-    "stoploss"       : 24,
-    "riskLevel"      : "Moderado a alto",
-    "advice"         : "Saída parcial entre os alvos 1 e 2, 50%",
-    "isStPosition"   : true,
-    "exchange"       : "kucoin",
-    "tradingDuration": "1"
-}
-
-let signals = [
-    {
-        "pair": "BALUSDT"
-    },
-    {
-        "pair": "BAKEUSDT"
-    },
-    {
-        "pair": "FTMUSDT"
-    },
-    {
-        "pair": "FXSBUSD"
-    },
-    {
-        "pair": "THETAUSDT"
-    },
-    {
-        "pair": "RTRERTE"
-    },
-    {
-        "pair": "ASDGGDF"
-    },
-    {
-        "pair": "ZXCVCVBVCX"
-    }
-]
-
-let signalAmount        = signals.length;
-let maxShowedSignal    = 6;
+let signalAmount        = pairList.length;
+const maxShowedSignal    = 6;
 let firstShowedSignal  = -1;
 let lastShowedSignal   = -1;
 let previousButtonList = document.getElementById('previousButtonList');
 let nextButtonList     = document.getElementById('nextButtonList');
 
-function getSignal(){
+function showPairList(pairList) {
+    if(pairList.length){
+        pairList.forEach(pair => {
+            const pairSelection     = document.getElementById('pair-selection');
+            const newSpan           = document.createElement('span');
 
-}
-
-function listSignals(signals) {
-    if(signals.length){
-        signals.forEach(signal => {
-            let pairSelection     = document.getElementById('pair-selection');
-            let newSpan           = document.createElement('span');
-                newSpan.innerText = signal.pair;
+            newSpan.innerText = pair;
             pairSelection.appendChild(newSpan);       
         });
     }
 }
 
 function showSignal(signals){
-    listSignals(signals);
+    showPairList(signals);
     let pairSelection = document.getElementById('pair-selection');
     let elSpan        = pairSelection.getElementsByTagName('span');
     if(elSpan.length){
@@ -97,26 +38,39 @@ function showSignal(signals){
 }
 
 function nextSignals() {
-    let pairSelection = document.getElementById('pair-selection');
-    let elSpan        = pairSelection.getElementsByTagName('span');
-    let remanant      = elSpan.length - lastShowedSignal - 1;
-    console.log(`A sobra de sinais é: ${remanant}`);
-    if(remanant){        
+    const pairSelection = document.getElementById('pair-selection');
+    const elSpan        = pairSelection.getElementsByTagName('span');
+    const remnant      = elSpan.length - lastShowedSignal - 1;
+
+    if(remnant){        
         for (let index = firstShowedSignal; index <= lastShowedSignal; index++) {
-            const span       = elSpan[index];
-                  span.style = 'display:none;';
+          const span       = elSpan[index];
+
+          span.style = 'display:none;';
         }
-                firstShowedSignal   = lastShowedSignal +1;
-            let newLastShowedSignal = lastShowedSignal
-        for (let index = lastShowedSignal +1; index < lastShowedSignal +1 + remanant; index++) {
-            const span       = elSpan[index];
-                  span.style = 'display:inline;';
+        firstShowedSignal   = lastShowedSignal +1;
+
+        let newLastShowedSignal = lastShowedSignal;
+
+        if(remnant < maxShowedSignal){
+          for (let index = lastShowedSignal +1; index < lastShowedSignal +1 + remnant; index++) {
+            const span = elSpan[index];
+
+            span.style = 'display:inline;';
             newLastShowedSignal++;        
+          }
+        }else{
+          for (let index = lastShowedSignal +1; index < lastShowedSignal +1 + maxShowedSignal; index++) {
+            const span = elSpan[index];
+
+            span.style = 'display:inline;';
+            newLastShowedSignal++;        
+          }
         }
+        
+
         lastShowedSignal = newLastShowedSignal;
-    }
-    console.log(`O primeiro sinal mostrado é o: ${firstShowedSignal}`);
-    console.log(`O ultimo sinal mostrado é o: ${lastShowedSignal}`);    
+    } 
 }
 
 function previousSignals() {
@@ -234,8 +188,7 @@ function loadSignal(event){
   //     buyZoneMinPreview.innerText = signal.buyZoneMin;
 }
 
-getSignal();
-showSignal(signals);
+showSignal(pairList.data);
 previousButtonList.addEventListener('click', previousSignals,false);
 nextButtonList.addEventListener('click', nextSignals, false);
 let pairSelectionSpan = document.getElementById('pair-selection');
