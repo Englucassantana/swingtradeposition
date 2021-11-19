@@ -77,6 +77,5 @@ function checkTargetButtons(event){
 
 
 //Eventos
-
 adicionarNovoAlvo.addEventListener('click',addNewTarget,false);
 targetsContent.addEventListener('click',checkTargetButtons,false);

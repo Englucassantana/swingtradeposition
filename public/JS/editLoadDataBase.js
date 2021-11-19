@@ -1,5 +1,5 @@
 //*PROPERTIES
-let signal;
+let signal ;
 let pairList = {
   status: false,
   data  : []
@@ -12,10 +12,12 @@ let firstShowedSignal = -1;
 const previousButtonId = 'previousButtonList';
 const nextButtonId     = 'nextButtonList';
 const pairListFrameId  = 'pair-selection';
+const targetsContentId = 'targets-content';
 
 const previousButton = document.getElementById(previousButtonId);
 const nextButton     = document.getElementById(nextButtonId);
 const pairListFrame  = document.getElementById(pairListFrameId);
+
 
 let xhr = new XMLHttpRequest();
 
@@ -134,15 +136,62 @@ function getSignal(event) {
   return false;
 }
 
+
 function loadTitlePair(){
   const pairSelected = document.getElementById('pair-selected');
+  const elSpan       = pairSelected.getElementsByTagName('span')[0];
+  elSpan.innerText = signal.pair
+}
 
-  pairSelected           = pairSelected.getElementsByTagName('span')[0];
-  pairSelected.innerText = signal.pair
+function prepareHtmlForTarget(target,i) {
+  const targetHtmlString =
+  `
+    <div class = "field-box-not-editable">
+      <div class="target-input-box">
+          <div class="label-input-box">
+              <span>Alvo${i + 1}</span>
+              <span id="target${i + 1}Preview" class="input-field">${target}</span>
+          </div>
+          <div class="btn-edit-target">
+          </div>
+      </div>
+    </div>
+
+    <div class = "field-box-editable editable-target" >
+        <div   class = "target-input-box editable-target-box">
+          <div   class = "label-input-box">
+            <label for   = "target${i + 1}">Alvo ${i + 1}:</label>
+            <input id    = "target${i +1 }" class = "targets" type = "number" value = "${target}">
+          </div>
+        </div>
+        <span class = "feedback" style = "display:none"></span>
+    </div>
+  `;
+  return targetHtmlString;
+}
+
+function showTarget(targetHtmlString,targetsContentId) {
+  let targetsContent   = document.getElementById(targetsContentId);
+  let newTargetContent = document.createElement('div');
+
+  newTargetContent.className = "field-box-main"
+  newTargetContent.innerHTML = targetHtmlString;
+     
+  targetsContent.appendChild(newTargetContent);
+  console.log(targetsContent);
+  removerAlvo = document.getElementsByClassName('remover-alvo');
+}
+
+function showTargets(targets,targetsContentId){
+  targets.forEach((target,i) => {
+    const targetHtmlString = prepareHtmlForTarget(target,i);
+    showTarget(targetHtmlString,targetsContentId);
+  });
 }
 
 function showSignal(event) {
-  loadPairList();
+  loadTitlePair();
+  showTargets(signal.targets, targetsContentId);
 }
 
 //*EVENTS
@@ -162,3 +211,35 @@ pairListFrame.addEventListener('click', function (event) {
 //*CODE
 xhr.open('GET', 'http://ec2-3-129-60-43.us-east-2.compute.amazonaws.com:10313/stposition/signals/',true);
 xhr.send(null);
+
+//*Teste
+signal = {
+  "chartLink"  : "https://www.tradingview.com/x/76ZNUuZv/",
+  "firstToken" : "BAL",
+  "secondToken": "USDT",
+  "pair"       : "BALUSDT",
+  "buyZoneMin" : "24.741",
+  "buyZoneMax" : "26.470",
+  "reBuyMin"   : "20.307",
+  "reBuyMax"   : "22.010",
+  "targets"    : [
+  27.37,
+  29.121,
+  32.17,
+  38.762,
+  48.41,
+  68.378
+  ],
+  "stoploss"       : 24,
+  "riskLevel"      : "Moderado a alto",
+  "advice"         : "Saída parcial entre os alvos 1 e 2, 50%",
+  "isStPosition"   : true,
+  "exchange"       : "kucoin",
+  "tradingDuration": "1"
+}
+
+pairList = {"status":true,"data":["1INCHUSDT","ADAUSDT","ALPHAUSDT","AXSUSDT","BANDUSDT","CHRUSDT","DYDXUSDT","ETHUSDT","FETUSDT","GRTUSDT","HBARUSDT","ICXUSDT","INJUSDT","ONEUSDT","RSRUSDT","SNXUSDT","UNFIUSDT","XTZUSDT","ZILUSDT","KSMUSDT","UNIUSDT","LINKUSDT","COMPUSDT","MANAUSDT"]}
+
+loadPairList(pairList.data,pairListFrame);
+showPairList(pairListFrame);
+showSignal();
