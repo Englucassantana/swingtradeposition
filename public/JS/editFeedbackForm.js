@@ -1,8 +1,6 @@
 //Atributos
 let chartLink = document.getElementById('chartLink');
 
-
-
 //Function
 function chartLinkFeedback(){
     let chartLinkBox = document.getElementById('chart-link-box');
@@ -16,7 +14,6 @@ function chartLinkFeedback(){
         return false;
     }
 }
-
 
 function targetProfit(target){
     let buyZoneMax = document.getElementById('buyZoneMax');
@@ -67,5 +64,13 @@ function targetsContentFeedback(){
 }
 
 //Events
-chartLink.addEventListener('input',chartLinkFeedback,false);
-targetsContent.addEventListener('input', targetsContentFeedback,false);
+chartLink.addEventListener('input', function () {
+  chartLinkFeedback();
+  setStyleToConfirmButton();
+}
+,false);
+
+targetsContent.addEventListener('input', function(){
+  targetsContentFeedback();
+  setStyleToConfirmButton();
+},false);
