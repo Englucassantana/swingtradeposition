@@ -62,7 +62,6 @@ function removeTarget(target){
     for (let index = 0; index < 4; index++) {
         fieldBoxMain = fieldBoxMain.parentNode;
     }
-    console.log
     targetsContent.removeChild(fieldBoxMain);
     console.log("Alvo removido");
 }
@@ -77,5 +76,9 @@ function checkTargetButtons(event){
 
 
 //Eventos
-adicionarNovoAlvo.addEventListener('click',addNewTarget,false);
+adicionarNovoAlvo.addEventListener('click',function(){
+  addNewTarget(event);
+  setStyleToConfirmButton();
+},false);
+
 targetsContent.addEventListener('click',checkTargetButtons,false);

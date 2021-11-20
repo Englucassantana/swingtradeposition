@@ -1,5 +1,11 @@
 //Properties
-const $confirmButton = $('.confirm-btn');
+const $confirmButton = $('#confirm-btn');
+
+const fieldIds = {
+  pairId:'#pair',
+  chartLink:'#chartLink',
+};
+const targetClassName = '.targets'
 
 let JSONCommand      = {};
 
@@ -45,71 +51,24 @@ function checkNewTargets(targets){
     }
 }
 
-function updateCommandWhenAddNewTarget(){
-  const $pair            = $('#pair-selected span')[0].textContent;
-  const $chartLink       = $('#chartLink')[0].value;
-  const $inputNewTargets = $('.new-targets');
-  const $inputTargets    = $('.targets');
+function updateCommand(fieldIds, targetClassName){
+  const pair = $(fieldIds.pairId).text();
+  const chartLink = $(fieldIds.chartLink).val();
+  const $targets = $(targetClassName);
+  let targets = [];
+ $targets.each(function () {
+  targets.push($(this).val());
+ });
 
-  JSONCommand             = {};
-  JSONCommand.commandType = 'addTargets';
-
-  if(checkNewChartLink(signal.chartLink,$chartLink)){
-    JSONCommand.NewChartLink = $chartLink;
-  }      
-  else{
-    JSONCommand.ChartLink = $chartLink;
-  }
-
-  JSONCommand.pair = $pair;
-
-  JSONCommand.newTargets = [];
-  $inputNewTargets.each(function() {
-    JSONCommand.newTargets.push(this.valueAsNumber);
-  });
-}
-
-function updateCommandWhenEditTarget(){
-  const $pair          = $('#pair-selected span')[0].textContent;
-  const $chartLink     = $('#chartLink')[0].value;
-  const $inputTargets = $('.targets:not(.new-targets)');
-  JSONCommand = {};
-  JSONCommand.commandType = 'editTargets';
-
-  if(checkNewChartLink(signal.chartLink,$chartLink)){
-    JSONCommand.NewChartLink = $chartLink;
-  }      
-  else{
-    JSONCommand.ChartLink = $chartLink;
-  }
-
-  JSONCommand.pair = $pair;
-  JSONCommand.newTargets = [];
-  JSONCommand.targetsChangedIndexes = [];
-  
-  $inputTargets.each(function(i){
-    const target = this.valueAsNumber;
-    if ( target != signal.targets[i]) {
-      JSONCommand.newTargets.push(target);
-      JSONCommand.targetsChangedIndexes.push(i); 
-    }
-  });
-}
-
-function updateCommand(){
-  const $idTabButtonActive = $('.tab-button-active').attr('id');
-  if ($idTabButtonActive == 'tabEditTargets') {
-    updateCommandWhenEditTarget();
-  } else {
-    updateCommandWhenAddNewTarget();
-  }
- 
+ JSONCommand.pair = pair;
+ JSONCommand.chartLink = chartLink;
+ JSONCommand.targets = targets;
 }
 
 function commandGenerator(){
     console.log('GERANDO COMANDO...');
     event.preventDefault();
-    updateCommand();
+    updateCommand(fieldIds, targetClassName);
     if(validarComando()){        
         copiarComandoParaAreaDeTransferencia();
     }else{
@@ -118,5 +77,14 @@ function commandGenerator(){
     console.log(validarComando());
 }
 
+function setStyleToConfirmButton() {
+  if (validarComando() == true) {
+    $confirmButton.removeAttr('disabled');
+  } else {
+    $confirmButton.attr('disabled',true);
+  }
+}
+
 //Evento
 $confirmButton.on('click', commandGenerator);
+window.addEventListener('DOMContentLoaded',setStyleToConfirmButton);

@@ -9,6 +9,9 @@ let maxShowedSignal   = 6;
 let lastShowedSignal  = -1;
 let firstShowedSignal = -1;
 
+let method = 'GET'
+let url = 'http://ec2-18-188-141-215.us-east-2.compute.amazonaws.com:10313/stposition/signals/';
+
 const previousButtonId = 'previousButtonList';
 const nextButtonId     = 'nextButtonList';
 const pairListFrameId  = 'pair-selection';
@@ -121,53 +124,81 @@ function getSignal(event) {
 
   if(elSpan.tagName.toUpperCase() == 'SPAN'){
     let   xhr      = new XMLHttpRequest();
-    const url      = `http://ec2-3-129-60-43.us-east-2.compute.amazonaws.com:10313/stposition/signals/pair?pair=${pairName}`
     const pairName = elSpan.innerText;
+    const url      = `http://ec2-18-188-141-215.us-east-2.compute.amazonaws.com:10313/stposition/signals/pair?pair=${pairName}`
 
     xhr.onload = function (){
       if(xhr.status === 200){
-        signal = JSON.parse(xhr.responseText);   
+        signal = JSON.parse(xhr.responseText);
+        showSignal(event);  
       }
     }
     xhr.open('GET', url , true);
     xhr.send(null);
-    return true;
+    
   }
-  return false;
 }
-
 
 function loadTitlePair(){
   const pairSelected = document.getElementById('pair-selected');
   const elSpan       = pairSelected.getElementsByTagName('span')[0];
-  elSpan.innerText = signal.pair
+  elSpan.innerText = signal.data.pair;
 }
 
-function prepareHtmlForTarget(target,i) {
-  const targetHtmlString =
-  `
-    <div class = "field-box-not-editable">
-      <div class="target-input-box">
-          <div class="label-input-box">
-              <span>Alvo${i + 1}</span>
-              <span id="target${i + 1}Preview" class="input-field">${target}</span>
-          </div>
-          <div class="btn-edit-target">
-          </div>
-      </div>
-    </div>
-
-    <div class = "field-box-editable editable-target" >
-        <div   class = "target-input-box editable-target-box">
-          <div   class = "label-input-box">
-            <label for   = "target${i + 1}">Alvo ${i + 1}:</label>
-            <input id    = "target${i +1 }" class = "targets" type = "number" value = "${target}">
+function prepareHtmlForTarget(target,targetReached,i) {
+  if (targetReached) {
+    const targetHtmlString =
+      `
+        <div class = "field-box-not-editable">
+          <div class="target-input-box">
+              <div class="label-input-box">
+                  <span>Alvo${i + 1}</span>
+                  <span id="target${i + 1}Preview" class="input-field">${target}</span>
+              </div>
+              <div class="btn-edit-target">
+              </div>
           </div>
         </div>
-        <span class = "feedback" style = "display:none"></span>
-    </div>
-  `;
-  return targetHtmlString;
+
+        <div class = "field-box-editable editable-target" >
+            <div   class = "target-input-box editable-target-box">
+              <div   class = "label-input-box">
+                <label for   = "target${i + 1}">Alvo ${i + 1}:</label>
+                <input id    = "target${i +1 }" class = "targets" type = "number" value = "${target}" disabled>
+              </div>
+            </div>
+            <span class = "feedback" style = "display:none"></span>
+        </div>
+      `;
+    return targetHtmlString;
+  } else {
+    const targetHtmlString =
+      `
+        <div class = "field-box-not-editable">
+          <div class="target-input-box">
+              <div class="label-input-box">
+                  <span>Alvo${i + 1}</span>
+                  <span id="target${i + 1}Preview" class="input-field">${target}</span>
+              </div>
+              <div class="btn-edit-target">
+              </div>
+          </div>
+        </div>
+
+        <div class = "field-box-editable editable-target" >
+            <div   class = "target-input-box editable-target-box">
+              <div   class = "label-input-box">
+                <label for   = "target${i + 1}">Alvo ${i + 1}:</label>
+                <input id    = "target${i +1 }" class = "targets" type = "number" value = "${target}">
+              </div>
+            </div>
+            <span class = "feedback" style = "display:none"></span>
+        </div>
+      `;
+    return targetHtmlString;
+  }
+  
+  
 }
 
 function showTarget(targetHtmlString,targetsContentId) {
@@ -182,16 +213,22 @@ function showTarget(targetHtmlString,targetsContentId) {
   removerAlvo = document.getElementsByClassName('remover-alvo');
 }
 
-function showTargets(targets,targetsContentId){
+function removeOldTargets(targetsContentId) {
+  const targetsContent = document.getElementById(targetsContentId);
+  targetsContent.innerHTML = '';
+}
+
+function showTargets(targets,targetsReached,targetsContentId){
+  removeOldTargets(targetsContentId);
   targets.forEach((target,i) => {
-    const targetHtmlString = prepareHtmlForTarget(target,i);
+    const targetHtmlString = prepareHtmlForTarget(target,targetsReached[i],i);
     showTarget(targetHtmlString,targetsContentId);
   });
 }
 
 function showSignal(event) {
   loadTitlePair();
-  showTargets(signal.targets, targetsContentId);
+  showTargets(signal.data.targets, signal.data.targetsReached, targetsContentId);
 }
 
 //*EVENTS
@@ -209,5 +246,5 @@ pairListFrame.addEventListener('click', function (event) {
 });
 
 //*CODE
-xhr.open('GET', 'http://ec2-3-129-60-43.us-east-2.compute.amazonaws.com:10313/stposition/signals/',true);
+xhr.open(method, url,true);
 xhr.send(null);

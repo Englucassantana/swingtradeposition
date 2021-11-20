@@ -235,9 +235,12 @@ fieldset{
     padding-top: 5px;
 }
 
+
 .confirm-btn{
   width: 100%;
 }
+
+
 
 .confirm-btn, #adicionar-alvo,.btn-slide-pair-list{
   box-shadow: 2px 2px #000000;
@@ -253,6 +256,14 @@ fieldset{
   color: white;
 }
 
+.confirm-btn:disabled{
+  box-shadow: 0px 0px #000000;
+  border: 1px solid black;
+  cursor: default; 
+  background-color: rgb(194, 194, 194);
+  font-size: var(--button-df-size); 
+  color: var(--button-df-font-color);
+}
 .confirm-btn:focus{
   box-shadow: 0px 0px #000000;
 }
