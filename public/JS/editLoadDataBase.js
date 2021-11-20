@@ -128,7 +128,9 @@ function getSignal(event) {
     xhr.onload = function (){
       if(xhr.status === 200){
         signal = JSON.parse(xhr.responseText);
-        showSignal(event);  
+        showSignal(event);
+        chartLinkFeedback();
+        targetsContentFeedback();  
       }
     }
     xhr.open('GET', url , true);

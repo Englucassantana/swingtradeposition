@@ -1,18 +1,28 @@
 //Atributos
 let chartLink = document.getElementById('chartLink');
+const chartLinkPreview = document.getElementById('chartLinkPreview');
 
 //Function
 function chartLinkFeedback(){
     let chartLinkBox = document.getElementById('chart-link-box');
     let feedback     = chartLinkBox.getElementsByClassName('feedback')[0];
+    
     if(chartLink.value !=''){
         feedback.className = "feedback feedback-suppression";
-        return true;
     }else{
         feedback.textContent = 'Preencher campo!';
         feedback.className   = "feedback";
         return false;
     }
+    
+    if (chartLink.value!=chartLinkPreview.textContent) {
+      feedback.className = "feedback feedback-suppression";
+    } else {
+      feedback.textContent = 'Modifique o chart link';
+      feedback.className   = "feedback";
+      return false;
+    }
+    return true;
 }
 
 function targetProfit(target){
