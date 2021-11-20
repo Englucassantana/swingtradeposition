@@ -7,7 +7,6 @@ function addNewTarget(event){
     event.preventDefault();
     let targetsContent = document.getElementById("targets-content");
     let targetContent  = targetsContent.getElementsByClassName("field-box-main");
-    console.log(targetContent.length);
     let newTargetContentNumber     = targetContent.length + 1;
     let newTargetContent           = document.createElement('div');
         newTargetContent.className = "field-box-main"
@@ -37,19 +36,15 @@ function addNewTarget(event){
     newTargetContent.innerHTML = newMsg;
        
     targetsContent.appendChild(newTargetContent);
-    console.log(targetsContent);
     removerAlvo = document.getElementsByClassName('remover-alvo');
 }
 
 function updateTargetLabel(){
     let editableTargetBox = document.getElementsByClassName('editable-target-box');
-    console.log(editableTargetBox);
     for (let index = 0; index < editableTargetBox.length; index++) {
         const elEditableTargetBox = editableTargetBox[index];
         let   labelInputBox       = elEditableTargetBox.getElementsByClassName('label-input-box')[0];
-        console.log(labelInputBox);
         let elLabel = labelInputBox.getElementsByTagName('label')[0];
-        console.log(elLabel);
             elLabel.htmlFor   = `target${index + 1}`;
             elLabel.innerText = `Alvo ${index + 1}:`;
         let elInput           = labelInputBox.getElementsByTagName('input')[0];

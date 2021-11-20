@@ -28,11 +28,8 @@ function targetsContentFeedback(){
 
     for (let index = 0; index < targets.length; index++) {
         const target   = targets[index];
-        // let   profit   = targetProfit(target);
         let   feedback = target.parentNode.parentNode.parentNode;
-        console.log(feedback);
         feedback = feedback.getElementsByClassName('feedback')[0];
-        console.log(feedback);
         //TODO: avisar caso não haja campos preenchidos
         if(target.value == ''){
             feedback.textContent = 'Preencher campo!';
@@ -40,7 +37,6 @@ function targetsContentFeedback(){
             feedback.style       = '';
             return false;
         }else{
-            // feedback.textContent = profit + '%';
             feedback.className   = "feedback";
             feedback.style       = 'color:green';
         }

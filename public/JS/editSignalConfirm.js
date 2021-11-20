@@ -74,7 +74,6 @@ function commandGenerator(){
     }else{
         alert("Reveja o preenchimento dos campos");
     }
-    console.log(validarComando());
 }
 
 function setStyleToConfirmButton() {

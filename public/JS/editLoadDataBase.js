@@ -114,9 +114,7 @@ function previousPairs() {
           newFirstShowedSignal--;        
         }
         firstShowedSignal = newFirstShowedSignal;
-    }
-    console.log(`O primeiro sinal mostrado é o: ${firstShowedSignal}`);
-    console.log(`O ultimo sinal mostrado é o: ${lastShowedSignal}`);    
+    }   
 }
 
 function getSignal(event) {
@@ -209,7 +207,6 @@ function showTarget(targetHtmlString,targetsContentId) {
   newTargetContent.innerHTML = targetHtmlString;
      
   targetsContent.appendChild(newTargetContent);
-  console.log(targetsContent);
   removerAlvo = document.getElementsByClassName('remover-alvo');
 }
 

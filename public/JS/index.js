@@ -97,7 +97,7 @@ function autocomplete(inp, arr) {
         closeAllLists(e.target);
         pairFeedback();
     });
-  }
+}
   
 function tradingDurationAsANumber(value){
     if(value == "0-ST") return 0;
@@ -146,8 +146,6 @@ function atualizarComando(){
     }
     jsonComando.tradingDuration = tradingDurationAsANumber(tradingDuration.value);
 }
-
-
 function validarComando(){
     return pairFeedback() &
         chartLinkFeedback() &
@@ -447,6 +445,7 @@ function USDTSelection(listaDeSimbolos){
     });
     return USDTSymbols;
 }
+
 //*Eventos
 xhr.onload = function () {
     if (xhr.status == 200) {
@@ -500,7 +499,6 @@ geradorDeComando.addEventListener('click', function(){
     }
     console.log(validarComando());
 }, false);
-
 
 let adicionarNovoAlvo = document.getElementById("adicionar-alvo");
 adicionarNovoAlvo.addEventListener("click", ()=>{
