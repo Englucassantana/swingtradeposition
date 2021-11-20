@@ -223,8 +223,17 @@ function showTargets(targets,targetsReached,targetsContentId){
   });
 }
 
+function showChartLink(chartLink,chartLinkId,chartLinkPreviewId) {
+  const $elChartLink = $(chartLinkId);
+  const $elChartLinkPreviewId = $(chartLinkPreviewId);
+  $elChartLink.val(chartLink);
+  $elChartLinkPreviewId.text(chartLink);
+  console.log("teste") ;
+}
+
 function showSignal(event) {
   loadTitlePair();
+  showChartLink(signal.data.chartLink, fieldIds.chartLink,fieldIds.chartLinkPreviewId);
   showTargets(signal.data.targets, signal.data.targetsReached, targetsContentId);
 }
 
@@ -239,7 +248,7 @@ xhr.onload = function (){
 nextButton.addEventListener('click', nextPairs);
 previousButton.addEventListener('click', previousPairs);
 pairListFrame.addEventListener('click', function (event) {
-  if(getSignal(event)) showSignal(event);
+  getSignal(event);
 });
 
 //*CODE

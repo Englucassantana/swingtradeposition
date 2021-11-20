@@ -4,6 +4,7 @@ const $confirmButton = $('#confirm-btn');
 const fieldIds = {
   pairId:'#pair',
   chartLink:'#chartLink',
+  chartLinkPreviewId: '#chartLinkPreview'
 };
 const targetClassName = '.targets'
 
