@@ -61,6 +61,7 @@ function updateCommand(fieldIds, targetClassName){
   targets.push($(this).val());
  });
 
+ JSONCommand.commandType = "signalEdition"
  JSONCommand.pair = pair;
  JSONCommand.chartLink = chartLink;
  JSONCommand.targets = targets;
