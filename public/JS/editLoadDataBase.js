@@ -10,7 +10,7 @@ let lastShowedSignal  = -1;
 let firstShowedSignal = -1;
 
 let method = 'GET'
-let url = 'http://ec2-18-188-141-215.us-east-2.compute.amazonaws.com:10313/stposition/signals/';
+let url = 'https://ec2-18-188-141-215.us-east-2.compute.amazonaws.com:10313/stposition/signals/';
 
 const previousButtonId = 'previousButtonList';
 const nextButtonId     = 'nextButtonList';
@@ -123,7 +123,7 @@ function getSignal(event) {
   if(elSpan.tagName.toUpperCase() == 'SPAN'){
     let   xhr      = new XMLHttpRequest();
     const pairName = elSpan.innerText;
-    const url      = `http://ec2-18-188-141-215.us-east-2.compute.amazonaws.com:10313/stposition/signals/pair?pair=${pairName}`
+    const url      = `https://ec2-18-188-141-215.us-east-2.compute.amazonaws.com:10313/stposition/signals/pair?pair=${pairName}`
 
     xhr.onload = function (){
       if(xhr.status === 200){
