@@ -52,9 +52,9 @@ function targetsContentFeedback(){
         }
         //TODO: avisar se o valor do alvo for menor que o valor do alvo anterior
         if( index!=0){
-            if(targets[index - 1].valueAsNumber > target.valueAsNumber){
+            if(targets[index - 1].valueAsNumber >= target.valueAsNumber){
 
-                feedback.textContent = `O alvo anterior maior que esse alvo!`;
+                feedback.textContent = `O alvo anterior é maior ou igual a esse alvo!`;
                 feedback.className   = "feedback";
                 feedback.style       = '';
                 return false;
