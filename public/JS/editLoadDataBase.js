@@ -5,118 +5,18 @@ let pairList = {
   data  : []
 };
 
-let maxShowedSignal   = 6;
-let lastShowedSignal  = -1;
-let firstShowedSignal = -1;
-
 let method = 'GET'
 let url = 'https://ec2-18-188-141-215.us-east-2.compute.amazonaws.com:10313/stposition/signals/';
 
-const previousButtonId = 'previousButtonList';
-const nextButtonId     = 'nextButtonList';
 const pairListFrameId  = 'pair-selection';
 const targetsContentId = 'targets-content';
 
-const previousButton = document.getElementById(previousButtonId);
-const nextButton     = document.getElementById(nextButtonId);
 const pairListFrame  = document.getElementById(pairListFrameId);
 
 
 let xhr = new XMLHttpRequest();
 
 //*FUNCTIONS
-function loadPairList(pairList, pairListFrame) {
-
-
-  if(pairList.length) {
-    pairList.forEach(pair => {            
-      const newSpan = document.createElement('span');
-
-      newSpan.innerText = pair;
-      pairListFrame.appendChild(newSpan);       
-    });
-  }
-}
-
-function showPairList(pairListFrame) {
-  
-  let elSpan = pairListFrame.getElementsByTagName('span');
-
-  if(elSpan.length) {
-      firstShowedSignal = 0;
-
-      for (let index = 0; index < maxShowedSignal; index++) {
-        const span = elSpan[index];
-
-        span.style = 'display:inline';
-        lastShowedSignal++;
-      }
-
-      for (let index = 6; index < elSpan.length; index++) {
-        const span = elSpan[index];
-
-        span.style = 'display:none';
-      }
-  }  
-}
-
-function nextPairs() {
-  const pairListFrame = document.getElementById('pair-selection');
-
-  const elSpan  = pairListFrame.getElementsByTagName('span');
-  const remnant = elSpan.length - lastShowedSignal - 1;
-
-  if(remnant){        
-      for (let index = firstShowedSignal; index <= lastShowedSignal; index++) {
-        const span = elSpan[index];
-
-        span.style = 'display:none;';
-      }
-      firstShowedSignal = lastShowedSignal +1;
-
-      let newLastShowedSignal = lastShowedSignal;
-
-      if(remnant < maxShowedSignal){
-        for (let index = lastShowedSignal +1; index < lastShowedSignal +1 + remnant; index++) {
-          const span = elSpan[index];
-
-          span.style = 'display:inline;';
-          newLastShowedSignal++;        
-        }
-      }else{
-        for (let index = lastShowedSignal +1; index < lastShowedSignal +1 + maxShowedSignal; index++) {
-          const span = elSpan[index];
-
-          span.style = 'display:inline;';
-          newLastShowedSignal++;        
-        }
-      }
-      
-
-      lastShowedSignal = newLastShowedSignal;
-  } 
-}
-
-function previousPairs() {
-    const pairListFrame = document.getElementById('pair-selection');
-    const elSpan        = pairListFrame.getElementsByTagName('span');
-
-    if(firstShowedSignal){        
-        for (let index = firstShowedSignal; index <= lastShowedSignal; index++) {
-          const span       = elSpan[index];
-          span.style = 'display:none;';
-        }
-        lastShowedSignal     = firstShowedSignal - 1;
-        newFirstShowedSignal = firstShowedSignal;
-        for (let index = lastShowedSignal; index >= firstShowedSignal - maxShowedSignal; index--) {
-          const span       = elSpan[index];
-          span.style = 'display:inline;';
-          newFirstShowedSignal--;        
-        }
-        firstShowedSignal = newFirstShowedSignal;
-    }   
-}
-
 function getSignal(event) {
   const elSpan = event.target;
 
@@ -243,12 +143,10 @@ function showSignal(event) {
 xhr.onload = function (){
   if(xhr.status === 200){
     pairList = JSON.parse(xhr.responseText);
-    loadPairList(pairList.data,pairListFrame)
-    showPairList(pairListFrame);      
+    buildSlider(pairList.data,'#pair-selection');    
   }
 }
-nextButton.addEventListener('click', nextPairs);
-previousButton.addEventListener('click', previousPairs);
+
 pairListFrame.addEventListener('click', function (event) {
   getSignal(event);
 });

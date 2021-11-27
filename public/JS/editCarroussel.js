@@ -1,3 +1,6 @@
+const $prevButton = $('#previousButtonList');
+const $nextButton     = $('#nextButtonList');
+
 function getSlidesAmount(pairList) {
   let slideAmount;
 
@@ -11,8 +14,8 @@ function getSlidesAmount(pairList) {
   return slideAmount;
 }
 
-function createNewSlide(idSlider) {
-  const $slider = $(idSlider);
+function createNewSlide(sliderId) {
+  const $slider = $(sliderId);
   const newSlideElement = "<div class = 'slide disable'></div>"
   $slider.append(newSlideElement);
   return $('.slide:last');
@@ -67,23 +70,21 @@ function showPrevSlide(slideClassNameActive) {
   }
 }
 
-const $nextButton     = $('#nextButtonList');
+function buildSlider(pairList,sliderId) {
+  const slidesAmount = getSlidesAmount(pairList);
+  const $slider = $(sliderId);
+  for (let index = 0; index < slidesAmount; index++) {
+    const $slideElement = createNewSlide(sliderId);
+    const slideContent = getPairsForSlide(pairList,index);
+    setPairsOnSlide(slideContent,$slideElement);
+  }
+  showPairs($slider.children().eq(0));
+}
 
 $nextButton.on('click', function () {
   showNextSlide('.active');  
 });
 
-const $prevButton = $('#previousButtonList');
 $prevButton.on('click',function () {
   showPrevSlide('.active');  
 });
-
-let pairList = {"status":true,"data":["1INCHUSDT","ADAUSDT","ALPHAUSDT","AXSUSDT","BANDUSDT","CHRUSDT","DYDXUSDT","ETHUSDT","FETUSDT","GRTUSDT","HBARUSDT","ICXUSDT","INJUSDT","ONEUSDT","RSRUSDT","SNXUSDT","UNFIUSDT","XTZUSDT","ZILUSDT","KSMUSDT","UNIUSDT","LINKUSDT","COMPUSDT","MANAUSDT", "TESTE"]}
-
-const slidesAmount = getSlidesAmount(pairList.data);
-const $slideElement = createNewSlide('#pair-selection');
-const slideContent = getPairsForSlide(pairList.data,0)
-setPairsOnSlide(slideContent,$slideElement);
-showPairs($slideElement);
-setPairsOnSlide(getPairsForSlide(pairList.data,6),createNewSlide('#pair-selection'));
-setPairsOnSlide(getPairsForSlide(pairList.data,12),createNewSlide('#pair-selection'));
