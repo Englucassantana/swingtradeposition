@@ -6,7 +6,7 @@ let pairList = {
 };
 
 let method = 'GET'
-let url = 'https://ec2-18-188-141-215.us-east-2.compute.amazonaws.com:10313/stposition/signals/';
+let url = 'https://ec2-18-222-226-84.us-east-2.compute.amazonaws.com:10313/stposition/signals';
 
 const pairListFrameId  = 'pair-selection';
 const targetsContentId = 'targets-content';
@@ -23,7 +23,7 @@ function getSignal(event) {
   if(elSpan.tagName.toUpperCase() == 'SPAN'){
     let   xhr      = new XMLHttpRequest();
     const pairName = elSpan.innerText;
-    const url      = `https://ec2-18-188-141-215.us-east-2.compute.amazonaws.com:10313/stposition/signals/pair?pair=${pairName}`
+    const url      = `https://ec2-18-222-226-84.us-east-2.compute.amazonaws.com:10313/stposition/signals/pair?pair=${pairName}`
 
     xhr.onload = function (){
       if(xhr.status === 200){
