@@ -41,7 +41,9 @@ function getSignal(event) {
 function loadTitlePair(){
   const pairSelected = document.getElementById('pair-selected');
   const elSpan       = pairSelected.getElementsByTagName('span')[0];
+  const suspensionButton = document.getElementById('suspension-btn');
   elSpan.innerText = signal.data.pair;
+  suspensionButton.removeAttribute('disabled');
 }
 
 function prepareHtmlForTarget(target,targetReached,i) {
