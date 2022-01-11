@@ -78,6 +78,25 @@ h1{
     margin    : 0px 10px 5px 10px;
 }
 
+.slide.active{
+    display        : flex;
+    position       : sticky;
+    justify-content: space-between;
+    flex-wrap      : wrap;
+  }
+  
+.slide.disable{
+    display :none;
+}   
+  
+.slide span{
+    width     : 220px;
+    padding   : 5px 10px 0px 10px;
+    text-align: center;
+    border    : 1px solid gray;
+    margin    : 0px 10px 5px 10px;
+}
+
 #pair-selection span:hover{
     cursor          : pointer;
     border          : 1px solid black;
@@ -250,7 +269,12 @@ fieldset{
   color: white;
 }
 
-.confirm-btn:disabled{
+#suspension-btn:hover{
+    box-shadow: 3px 3px #fb0303;
+    color: white;
+}
+
+.confirm-btn:disabled, #suspension-btn:disabled{
   box-shadow: 0px 0px #000000;
   border: 1px solid black;
   cursor: default; 
@@ -258,16 +282,32 @@ fieldset{
   font-size: var(--button-df-size); 
   color: var(--button-df-font-color);
 }
+
 .confirm-btn:focus{
   box-shadow: 0px 0px #000000;
 }
 
+#panel, .confirm-btn-content, #suspension-btn-content{
+    margin-bottom: 15px;
+}
+
+#suspension-btn{
+    width: 100%;
+    box-shadow: 2px 2px #fb0303;
+    background-color: rgb(253, 150, 150);
+    border: 1px solid rgb(255, 0, 0);
+    cursor: pointer; 
+    font-size: var(--button-df-size); 
+    color: var(--button-df-font-color);
+}
+
+
 pre code {
-  background-color: #eee;
+  background-color: rgb(247, 246, 243);
   border: 1px solid #999;
   display: block;
   padding: 20px;
-  color: red;
+  color: rgb(98, 98, 98);
   font-family: 'Courier New', Courier, monospace;
 }
 
