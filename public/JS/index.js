@@ -204,6 +204,7 @@ function pairFeedback(){
     let pairBox     = document.getElementById('pair-box');
     let feedback    = pairBox.getElementsByClassName('feedback')[0];
     let pairConfirm = false;
+    let rewriteConfirm = true;
     buyZoneFeedback();
     //TODO - [ ] Avisar caso o pair não esteja relacionado na binance
     for (let index = 0; index < listaDeSimbolos.length; index++) {
@@ -217,6 +218,21 @@ function pairFeedback(){
         feedback.className   = "feedback";
         return false;
     }
+
+    pairList.data.forEach(pair =>{
+      if (pair == target.value.toUpperCase()){
+        rewriteConfirm = false;
+      }
+    });
+
+    if(!rewriteConfirm){
+    pairBox.style        = 'background-color: rgb(255, 248, 225);';
+    feedback.textContent = 'O pair será rescrito';
+    feedback.className   = "feedback";
+    alert("Cuidado! O sinal já está ativo. Se continuar o sinal será sobrescrito.");
+    return false;
+  }
+    
     //TODO - [ ] Caso não haja problemas de preenchimento mudar cor da estrutura para verde
     pairBox.style      = 'background-color: rgb(209, 255, 209);';
     feedback.className = "feedback feedback-suppression";
@@ -456,13 +472,24 @@ xhr.onload = function () {
         }
         listaDeSimbolos = USDTSelection(listaDeSimbolos);
         console.log(`Simbolos com secondToken USDT: ${listaDeSimbolos}`);
-        //console.log(listaDeSimbolos);
         autocomplete(document.getElementById("pair"), listaDeSimbolos);
     }
   }
 xhr.open('GET', "https://api.binance.com/api/v3/ticker/price", true);
-// xhr.open('GET',"https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT", true);
 xhr.send(null);
+
+let xhr2 = new XMLHttpRequest();
+let pairList = {};
+let method = 'GET'
+let url = 'https://ec2-18-191-20-190.us-east-2.compute.amazonaws.com:10313/stposition/signals';
+xhr2.onload = () =>{
+  if(xhr2.status == 200){
+    console.log(xhr2.responseText);
+    pairList = JSON.parse(xhr2.responseText);
+  }
+}
+xhr2.open(method, url);
+xhr2.send(null);
 
 let pair = document.getElementById('pair');
 pair.addEventListener('input',pairFeedback,false);
@@ -539,4 +566,3 @@ targetsContent.addEventListener('click', ()=>{
         atualizarEtiquetaDosAlvos();
     }
 });
-
