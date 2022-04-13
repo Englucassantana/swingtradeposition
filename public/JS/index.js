@@ -229,8 +229,8 @@ function pairFeedback(){
     pairBox.style        = 'background-color: rgb(255, 248, 225);';
     feedback.textContent = 'O pair será rescrito';
     feedback.className   = "feedback";
-    alert("Cuidado! O sinal já está ativo. Se continuar o sinal será sobrescrito.");
-    return false;
+    feedback.textContent != 'O pair será rescrito' && alert("Cuidado! O sinal já está ativo. Se continuar o sinal será sobrescrito.");
+    return true;
   }
     
     //TODO - [ ] Caso não haja problemas de preenchimento mudar cor da estrutura para verde
